@@ -9,9 +9,9 @@ $client = new rabbitMQClient("testRabbitMQ.ini","testServer");
 
 $request = array();
 $request['type'] = "login";
-$request['username'] = $argv[1];
-$request['password'] = $argv[2];
-$request['message'] = "HI";
+$request['username'] = shaiddy; //$arg[1];
+$request['password'] = 123456; //$argv[2];
+$request['message'] = "Finally I am in!";
 $response = $client->send_request($request);
 //$response = $client->publish($request);
 

@@ -26,26 +26,26 @@ public function validateLogin($username,$password)
 	while ($row = $response->fetch_assoc())
 	{
 		//verifying user existance
-		print "Verifying if user $un is in database...\n\n";
+		print "\n\nVerifying if user $un is in database...\n";
 		if ($row["username"] == $un)
 		{
-			print "$un is in database.\n";
+			print "$un is in database.";
 			
 		}
 		else
 		{
-			print "$un is not in database.\n";
+			print "$un is not in database.";
 		}
 
 
-		echo "passwords did not match for $username".PHP_EOL;
-		echo "checking password for $username".PHP_EOL;
+		//echo "passwords did not match for $username".PHP_EOL;
+		echo "\n\nChecking password for $username...".PHP_EOL;
 		if ($row["password"] == $pw)
 		{
-			echo "passwords match for $username".PHP_EOL;
+			echo "Password match for $username".PHP_EOL;
 			return 1;// password match
 		}
-		echo "passwords did not match for $username".PHP_EOL;
+		echo "Password did not match for $username".PHP_EOL;
 	}
 	return 0;//no users matched username
 }

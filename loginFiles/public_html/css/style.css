@@ -59,8 +59,18 @@ a.hiddenanchor{
 	padding-bottom: 30px;
 }
 /** For the moment only webkit supports the background-clip:text; */
-#wrapper h1{
-    background: -webkit-repeating-linear-gradient(-45deg,
+#wrapper #company {
+    background: -webkit-repeating-linear-gradient(-45deg, rgb(224, 29, 29) ,
+		rgb(171, 46, 46) 20px,
+		rgb(162, 49, 49) 20px,
+		rgb(173, 18, 18) 40px,
+		rgb(247, 86, 86) 40px);
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+	}
+
+#wrapper .titles{
+  background: -webkit-repeating-linear-gradient(-45deg,
 	rgb(18, 83, 93) ,
 	rgb(18, 83, 93) 20px,
 	rgb(64, 111, 118) 20px,
@@ -69,7 +79,7 @@ a.hiddenanchor{
 	-webkit-text-fill-color: transparent;
 	-webkit-background-clip: text;
 }
-#wrapper h1:after{
+#wrapper .titles:after{
 	content: ' ';
 	display: block;
 	width: 100%;
@@ -93,6 +103,8 @@ a.hiddenanchor{
 	color: rgb(64, 92, 96);
 	position: relative;
 }
+
+
 
 /**** advanced input styling ****/
 /* placeholder */

@@ -26,7 +26,7 @@ public function validateLogin($username,$password)
 	$statement = "select * from testTable where username = '$un'";
 	$response = $this->logindb->query($statement);
 	
-	print "\n\nChecking...\n\n";
+	print "\n\nChecking...\n";
 
 	while ($row = $response->fetch_assoc())
 	{
@@ -55,9 +55,7 @@ public function validateLogin($username,$password)
 		echo "Password did not match for $username".PHP_EOL;
 	}
 	
-	echo "Sorry, $un and $pw are not in database.\n" 
-	print "Please wait a moment to try again...";
-
+	echo "Sorry, $un and $pw are not in database. \n Please wait a moment to try again...";
 	return 0;//no users matched username
 }
 }

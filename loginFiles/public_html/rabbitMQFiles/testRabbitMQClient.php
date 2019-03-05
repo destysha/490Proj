@@ -30,3 +30,22 @@
 		return $response;
 
 	}
+
+function register ( $username, $password  )
+	{
+		$request2 = array();
+		$request2['type'] = "register";
+		$request2['username'] = $username;
+		$request2['password'] = $password;
+		//$request2['message'] = $answer;
+
+		$client = new rabbitMQClient("testRabbitMQ.ini","testServer");
+		$response = $client->send_request($request2);
+		
+
+		echo "client received response: ".PHP_EOL;
+
+		
+		return $response;
+
+	}

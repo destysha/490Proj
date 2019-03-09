@@ -6,7 +6,7 @@ private $logindb;
 
 	public function __construct()
 	{//open _construct bracket
-		$this->logindb = new mysqli("192.168.0.16","user1","user1pass","test");
+		$this->logindb = new mysqli("localhost","user1","user1pass","test");
 
 		if($this->logindb->connect_errno !=0)
 		{//open if bracket
@@ -23,7 +23,8 @@ private $logindb;
 		$pass = $this->logindb->real_escape_string($password);
 		$statement = "SELECT * FROM testTable WHERE username = '$uname' and password = '$pass' ";
 		$response = $this->logindb->query($statement);
-
+		
+		echo "testing validateLogin".PHP_EOL;
 		while ( $row = $response->fetch_assoc() )
 		{//open while loop bracket
 			echo "checking if user $uname is in the database...\n";

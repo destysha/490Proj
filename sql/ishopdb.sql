@@ -40,7 +40,4 @@ CREATE TABLE IF NOT EXISTS 'businessInv' (
 	FORGEIN KEY (grp_id) REFERENCES inventory(grp_id)
 );
 
-LOAD DATA INFILE '/api/Grocery_UPC_Database.csv'
-INTO TABLE discounts
-FIELDS TERMINATED BY ',' ENCLOSED BY '"'
-LINES TERMINATED BY '\n';
+LOAD DATA INFILE '/api/Grocery_UPC_Database.csv' replace INTO TABLE inventory FIELDS TERMINATED BY ',' ENCLOSED BY '"' LINES TERMINATED BY '\n';

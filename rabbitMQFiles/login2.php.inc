@@ -23,8 +23,7 @@ private $logindb;
 		$pass = $this->logindb->real_escape_string($password);
 		$statement = "SELECT * FROM testTable WHERE username = '$uname' and password = '$pass' ";
 		$response = $this->logindb->query($statement);
-		
-		echo "testing validateLogin".PHP_EOL;
+		echo "testing validateLogin ".PHP_EOL;
 		while ( $row = $response->fetch_assoc() )
 		{//open while loop bracket
 			echo "checking if user $uname is in the database...\n";
@@ -54,16 +53,20 @@ private $logindb;
 	}//close validateLogin bracket
 
 	
-	public function validateRegister($username,$password)
+	public function validateRegister($username,$street,$city,$state,$email,$password)
 	{//open bracket  validateRegister
 		$uname = $this->logindb->real_escape_string($username);
+		$st=$this->logindb->real_escape_string($street);
+		$ct=$this->logindb->real_escape_string($city);
+		$stt=$this->logindb->real_escape_string($state);
+		$mail=$this->logindb->real_escape_string($email);
 		$pass = $this->logindb->real_escape_string($password);
 		$statement = "SELECT * FROM testTable WHERE username = '$uname' ";
 		$response = $this->logindb->query($statement);
 
 		if ( $response->num_rows == 0) //account doesnt exit, let them make one
 		{//open if statement
-			$statement = "INSERT INTO testTable (username,password) VALUES('$uname','$pass') ";
+			$statement = "INSERT INTO testTable (username,street,city,state,email,password) VALUES('$uname','$st','$ct','$stt','$mail','$pass') ";
 			$this->logindb->query($statement) or die ($this->logindb->error);
 			echo"Account created Successfully".PHP_EOL;
 			return 1;

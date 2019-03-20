@@ -8,17 +8,21 @@
 	$password = $_POST['password'];
 	$response = login ( $username, $password );
 	
-	
+	$logs = array();
+
 	#successful login
 	if ( $response != false ) 
 	{
-		header  ( 'location:../loginOK.html' );
-		require("successF.php");
+		array_push($logs,$username,$password) ;
+	header  ( 'location:../loginOK.html' );
+	require("successF.php");
+		
 	}
 	
 	else
 	{
-		header  ( 'location:../index.html' );
+		array_push($logs,$username,$password);
+		header  ( 'location:../index.php' );
 		require("errorF.php");
 	}
 ?>

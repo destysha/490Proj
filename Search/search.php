@@ -1,5 +1,7 @@
 <?php
 include_once('dbconnect.php');
+
+/*
  $dbcon = mysqli_select_db($conn,$DBNAME);
 
  if ( !$conn ) {
@@ -9,7 +11,8 @@ include_once('dbconnect.php');
  if ( !$dbcon ) {
   die("Database Connection failed : " . mysqli_error());
  }
-
+*/
+ echo "$login";
 
 if(isset($_POST['search'])){
 	$q = $_POST['q'];

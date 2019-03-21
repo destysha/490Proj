@@ -1,1 +1,19 @@
 Logged in unsuccessful for user1  Tuesday 5th of March 2019 07:53:16 PM 
+Array Logged in successfulArray Logged in successfulArray Logged in successful Wednesday 20th of March 2019 04:49:13 PM
+newuser2 Logged in successful Wednesday 20th of March 2019 04:51:45 PM
+newuser2 Logged in successfulwith Password:newuser2pass
+Wednesday 20th of March 2019 04:58:36 PM
+Wednesday 20th of March 2019 05:00:53 PMUser:newuser2 Logged in successful with Password:newuser2pass
+Wednesday 20th of March 2019 05:01:59 PM
+User:newuser2 Logged in successful with Password:newuser2pass
+Wednesday 20th of March 2019 05:08:22 PMSuccessful log in for User:newuser2 with Password:newuser2pass
+Wednesday 20th of March 2019 05:09:38 PM
+Successful log in for User:newuser2 with Password:newuser2pass
+Wednesday 20th of March 2019 05:29:34 PM
+Unsuccessful login for User:newuser2 With Password:o
+Wednesday 20th of March 2019 05:31:04 PM
+Unsuccessful login for User:newuser2 With Password:wrongpass
+*Wednesday 20th of March 2019 05:33:26 PM
+Unsuccessful login for User:newuser2 Using Password:wrongpas2
+* Wednesday 20th of March 2019 05:35:01 PM
+Successful log in for User:newuser2 with Password:newuser2pass

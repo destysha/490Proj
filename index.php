@@ -85,7 +85,7 @@
                                     <input id="citysignup" name="citysignup"  type="text" required="required" placeholder="Newark"/>
                                 </p>
 				<p>
-                                    <label for="statesignup" class="uname"> State </label>
+                                    <label for="statesignup" class="uname"> State </label><br>
                                     <select id="statesignup" name="statesignup" required="required" />
 	<option value="empty" selected>Pick One</option>
 	<option value="AL">AL</option>

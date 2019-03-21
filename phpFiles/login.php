@@ -12,7 +12,7 @@
 	#successful login
 	if ( $response != false ) 
 	{
-		header  ( 'location:../userInterface/index.html' );
+		header  ( 'location:../loginOK.html' );
 		require("successF.php");
 	}
 	

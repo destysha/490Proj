@@ -3,22 +3,38 @@
 	#contains login client function
 	require ('../rabbitMQFiles/testRabbitMQClient.php'); 
 	
+	//will hold values for logging 
+	$logs = array();
 	
-	$username = $_POST['username'];
-	$password = $_POST['password'];
-	$response = login ( $username, $password );
-	
-	
-	#successful login
-	if ( $response != false ) 
+	//check if user entered correctly, by clicking submit button
+	if(isset($_POST['submit']))
 	{
-		header  ( 'location:../userInterface/index.html' );
-		require("successF.php");
-	}
-	
+		//get user input and send info to Client.php
+		$username = $_POST['username'];
+        	$password = $_POST['password'];
+        	$response = login ( $username, $password );
+		
+		//login successful or not?
+		//log result
+		 if ( $response != false ) //username and pass match
+        	 {
+                	array_push($logs,$username,$password) ;
+       			header  ( 'location:../userInterface/index.html' );
+        		require("successF.inc.php");
+        	 }
+		 else //username and pass no match
+        	 {
+                	array_push($logs,$username,$password);
+                	header  ( 'location:../index.php?login=error' );
+                	require("errorF.inc.php");
+			exit();
+        	 }
+	}	
+	//user did not click submit in form
 	else
 	{
-		header  ( 'location:../index.html' );
-		require("errorF.php");
+                header  ( 'location:../index.php?login=nosubmit' );
+		exit();
 	}
+
 ?>

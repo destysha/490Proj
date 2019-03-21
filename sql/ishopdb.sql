@@ -25,14 +25,14 @@ CREATE TABLE IF NOT EXISTS business (
 
 /*Create the "iShop inventory" table if it doesn't already exist on the machine*/
 CREATE TABLE IF NOT EXISTS inventory (
-	grp_id int NOT NULL PRIMARY KEY,
-	upc14 int(14) NOT NULL,
-	upc12 int(12) NOT NULL,
+	grp_id int(255) NOT NULL PRIMARY KEY,
+	upc14 int(255) NOT NULL,
+	upc12 int(255) NOT NULL,
 	brand varchar(255) NOT NULL,
 	name varchar(255) NOT NULL	
 );
 /*Create the "Inventory for Business" table if it doesn't already exist on the machine*/
-CREATE TABLE IF NOT EXISTS businessInv 
+CREATE TABLE IF NOT EXISTS businessInv (
 	qty int(255),
 	businessID int(100) NOT NULL,
 	grp_id int(255) NOT NULL,

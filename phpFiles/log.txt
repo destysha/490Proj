@@ -63,3 +63,15 @@ Successfully Registered User:user1 with Email:user1@email.com and Password:user1
 Successful log in for User:user1 with Password:user1pass
 * Thursday 21st of March 2019 02:19:27 PM
 Successful log in for User:user1 with Password:user1pass
+* Thursday 21st of March 2019 03:10:57 PM
+Successful log in for User:user1 with Password:user1pass
+* Thursday 21st of March 2019 03:54:27 PM
+Successful log in for User:user1 with Password:user1pass
+* Thursday 21st of March 2019 03:57:30 PM
+Successful log in for User:user1 with Password:user1pass
+* Thursday 21st of March 2019 04:01:46 PM
+Successful log in for User:user1 with Password:user1pass
+* Thursday 21st of March 2019 04:36:42 PM
+Successful log in for User:user1 with Password:user1pass
+* Thursday 21st of March 2019 09:49:16 PM
+Successful log in for User:user1 with Password:user1pass

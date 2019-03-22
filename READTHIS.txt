@@ -1,0 +1,36 @@
+Haris Nasir
+3/22/19 04:07:02
+
+This branch15 is testing use
+What did i do?
+	I made a new database in local machine called
+		SampleShop
+	In there i have 2 tables:
+	businessInv - users inventory with just 3 fields
+			Product  Brand  Quantity
+	ishopInv - ishops inventory of All Products and All Brands (sample)
+		2 fields	Product  Brand
+
+How this works?
+	Once the user logs in from main page
+	They are redirected to the UI page (userinterface/index.php)
+	There they have the Main menu where they can click to go see their Inventory
+		Their inventory is a list connected to the database 
+		The list is reading the fields off of the table in db.
+		They can view their Inventory and click a button IF they want to update 
+		their inventory.
+	They button redirects them to the ishopInv.php 
+	this page has a table that is ALSO being read from the db.
+	
+	AT THE MOMENT i chose the easiest way to get the user to insert a product into their own inventory which is by making them fill out a form after viewing the table of options.
+	Yes this is not the most ideal way but the main part is :
+		*Get a user to SEE a list of option of product and brand 
+		*Get a user to update their inventory based off this list
+		*Cross reference their inventory with API and send Alerts
+	Part 1 and 2 is done with this easy unefficient way BUT it is good for now.
+
+	WHAT IS LEFT TO DO:
+		*cross reference businessInv with API for recalls
+		*alert user if there is any match
+		*allow user to delete off of their inventory
+	I think that's about it unless im missing something plz remind me.

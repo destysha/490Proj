@@ -44,7 +44,7 @@ body, html {
   font-family: monospace;
   color: white;
   font-size: 18px;
-  padding: 30px 10px;
+  padding: 40px 10px;
   margin: auto;
   text-align: center;
 }
@@ -65,16 +65,21 @@ body, html {
 }
 
 #navInfo{
-  padding: 10px 15px;
+  padding: 10px 15px !important;
 }
 
 #companyInfo{
-  padding: 35px 0;
+  padding: 35px 0 !important;
+}
+
+#buinv{
+  padding: 0 !important;
 }
 
 .navInfoTitle{
   color: white;
-  font-size: 14px;
+  font-size: 14px !important;
+  margin: 12px 0;
 }
 
 .navInfoData{
@@ -88,7 +93,7 @@ body, html {
 }
 #logoutButnD {
   position: absolute;
-  bottom: 0;
+  bottom: 15px;
   width: 150px;
   left: 45px;
 }
@@ -104,8 +109,15 @@ body, html {
 }
 #logoiShopD{
   position: absolute;
-  bottom: 15px;
+  bottom: 55px;
   width: 150px;
+  left: 50px;
+}
+}
+.logoiShopD {
+  position: absolute;
+  bottom: 0px;
+  width: 80px;
   left: 50px;
 }
 
@@ -316,6 +328,27 @@ body, html {
   right: 0;
 }
 /***************************************************************/
+
+
+/************************** INVENTORY **************************/
+#addDelBtn{
+  color:white;
+}
+.cellMod{
+  padding: 20px;
+  width: 150px;
+}
+#row{
+  padding-left: 30px;
+}
+.recall{
+  color: red !important;
+}
+/***************************************************************/
+
+
+
+
 
 
 @media screen and (min-width: 800px){

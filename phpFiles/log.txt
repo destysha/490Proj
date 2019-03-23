@@ -75,3 +75,5 @@ Successful log in for User:user1 with Password:user1pass
 Successful log in for User:user1 with Password:user1pass
 * Thursday 21st of March 2019 09:49:16 PM
 Successful log in for User:user1 with Password:user1pass
+* Friday 22nd of March 2019 04:43:47 PM
+Successful log in for User:user1 with Password:user1pass

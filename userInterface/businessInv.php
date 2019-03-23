@@ -1,3 +1,21 @@
+<?php 
+	include('delete.php'); 
+
+//get table to updated
+	if(isset($_GET['edit'])){
+	  $id = $_GET['edit'];
+	  
+	  $edit_state=true;	
+	  $rec = mysqli_query($conn,"SELECT * FROM businessInv WHERE id=$id ");
+	  $record = mysqli_fetch_array($rec);
+	 
+	  $product = $record['product'];
+	  $brand = $record['brand'];
+	  $qty = $record['qty'];
+	  $id = $record['id'];
+	}
+
+?>
 <!DOCTYPE html>
 <html>
   <head>
@@ -118,6 +136,71 @@
    		<button class="myButton" onclick="location.href='ishopInv.php';">Update Inventory</button>
 		</div>
 		
+<br><br>
+<h1>Table With Delete Option</h1><br><br>
+<?php  if(isset($_SESSION['msg'])): ?>
+	<div class="msg">
+	  <?php
+	  echo $_SESSION['msg'];
+	  unset($_SESSION['msg']);
+	  ?>
+	</div>
+<?php endif ?>
+
+<!--NEW TABLE WITH DELETE OPTION: ATTEMPT #1 -->
+	  <div class="del-table">
+	    <table class="fixed_header">
+		<thead>
+		  <tr>
+			<th>Del_Product</th>
+			<th>Del_Brand</th>
+			<th>Del_Qty</th>
+			<th>Del_Action</th>
+		  </tr>
+		</thead>
+		<tbody>
+		  <?php while ($row = mysqli_fetch_array($list)) { ?>
+			<tr>
+			   <td><?php echo $row['product']; ?></td>
+			   <td><?php echo $row['brand']; ?></td>
+			   <td><?php echo $row['qty']; ?></td>
+			   <td>
+                                <a href="businessInv.php?edit=<?php echo $row['id'];  ?>">Edit</a>
+                           </td>
+			   <td>
+                                <a href="#">Delete</a>
+                           </td>
+			</tr>
+		  <?php } ?>
+		</tbody>
+	    </table>
+		<br><br><br>
+		<h1>FIll Out Form</h1>
+
+		<form method="post" action="delete.php" class="updateForm">
+		<input type="hidden" name="id" value="<?php echo $id;  ?>">
+		  <div>
+		    <label>Product</label>
+		     <input type="text" name="product" value="<?php echo $product; ?>">
+		  </div>
+		  <div>
+                    <label>Brand</label>
+                      <input type="text" name="brand" value="<?php echo $brand; ?>">
+                  </div>
+		  <div>
+                    <label>Qty</label>
+                      <input type="text" name="qty" value="<?php echo $qty; ?>">
+                  </div>
+
+		  <div>
+	              <?php  if ($edit_state == false): ?>
+			<button class="myButton" type="submit" name="save">Save</button>
+		      <?php  else: ?>
+			<button class="myButton" type="submit" name="update">Update</button>
+		      <?php  endif?>
+                  </div>
+		</form>
+	  </div>		
         </section>
       </div> //these 2 div's are right under opening body tag
     </div>

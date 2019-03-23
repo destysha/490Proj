@@ -35,6 +35,17 @@
 		$_SESSION['msg'] = " You updated successfully";
 		header('location:businessInv.php');
 	}
+
+	//delete row
+	if(isset($_GET['del']))
+	{
+		$id = $_GET['del'];
+		mysqli_query($conn,"DELETE FROM businessInv WHERE id=$id");
+		$_SESSION['msg'] = " Deleted Row ";
+                header('location:businessInv.php');
+
+	}	
+
 	//get info  from database table to display what user inserted
 	$list = mysqli_query($conn,"SELECT * FROM businessInv");
 ?>

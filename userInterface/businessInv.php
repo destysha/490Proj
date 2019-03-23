@@ -168,7 +168,7 @@
                                 <a href="businessInv.php?edit=<?php echo $row['id'];  ?>">Edit</a>
                            </td>
 			   <td>
-                                <a href="#">Delete</a>
+                                <a href="delete.php?del=<?php echo $row['id'];?>">Delete</a>
                            </td>
 			</tr>
 		  <?php } ?>

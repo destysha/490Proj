@@ -6,7 +6,7 @@ private $logindb;
 
 	public function __construct()
 	{//open _construct bracket
-		$this->logindb = new mysqli("localhost","user1","user1pass","test");
+		$this->logindb = new mysqli("localhost","user1","user1pass","ishopdb");
 
 		if($this->logindb->connect_errno !=0)
 		{//open if bracket
@@ -21,7 +21,7 @@ private $logindb;
 	{//open validateLogin bracket
 		$uname = $this->logindb->real_escape_string($username);
 		$pass = $this->logindb->real_escape_string($password);
-		$statement = "SELECT * FROM testTable WHERE username = '$uname' and password = '$pass' ";
+		$statement = "SELECT * FROM business WHERE username = '$uname' and password = '$pass' ";
 		$response = $this->logindb->query($statement);
 		echo "testing validateLogin ".PHP_EOL;
 		while ( $row = $response->fetch_assoc() )
@@ -53,20 +53,22 @@ private $logindb;
 	}//close validateLogin bracket
 
 	
-	public function validateRegister($username,$street,$city,$state,$email,$password)
+	public function validateRegister($username,$bzname,$street,$city,$state,$zipcode,$email,$password)
 	{//open bracket  validateRegister
 		$uname = $this->logindb->real_escape_string($username);
+		$businessName = $this->logindb->real_escape_string($bzname);
 		$st=$this->logindb->real_escape_string($street);
 		$ct=$this->logindb->real_escape_string($city);
 		$stt=$this->logindb->real_escape_string($state);
+		$zip = $this->logindb->real_escape_string($zipcode);
 		$mail=$this->logindb->real_escape_string($email);
 		$pass = $this->logindb->real_escape_string($password);
-		$statement = "SELECT * FROM testTable WHERE username = '$uname' ";
+		$statement = "SELECT * FROM business WHERE username = '$uname' ";
 		$response = $this->logindb->query($statement);
 
 		if ( $response->num_rows == 0) //account doesnt exit, let them make one
 		{//open if statement
-			$statement = "INSERT INTO testTable (username,street,city,state,email,password) VALUES('$uname','$st','$ct','$stt','$mail','$pass') ";
+			$statement = "INSERT INTO business (username,bzname,street,city,state,zipcode,email,password) VALUES('$uname','$businessName','$st','$ct','$stt','$zip','$mail','$pass') ";
 			$this->logindb->query($statement) or die ($this->logindb->error);
 			echo"Account created Successfully".PHP_EOL;
 			return 1;

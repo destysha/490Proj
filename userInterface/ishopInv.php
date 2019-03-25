@@ -64,7 +64,9 @@
             </article>
           </section>
           <section class="logoutButnC">
-            <a href="#"><img src="images/logout.png" title="logoutBtn" alt="logoutBtn" id="logoutButnD"></a>
+            <a href="../phpFiles/logout.php">
+	        <img src="images/logout.png" title="logoutBtn" alt="logoutBtn" id="logoutButnD">
+	    </a>
           </section>
           <section class="logoiShopC">
             <img src="images/ishop.png" title="iShopLogo" alt="iShopLogo" id="logoiShopD">

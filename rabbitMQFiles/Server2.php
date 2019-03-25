@@ -15,11 +15,18 @@ function doLogin($username,$password)
 }	
 
 
-function doRegister($username,$street,$city,$state,$email,$password)
+function doRegister($username,$bzname,$street,$city,$state,$zipcode,$email,$password)
 {
 	$register = new loginDB();
-	return $register->validateRegister($username,$street,$city,$state,$email,$password);
+	return $register->validateRegister($username,$bzname,$street,$city,$state,$zipcode,$email,$password);
 }
+
+function doInventory()
+	{
+	   $inventory = new loginDB();
+	   return $inventory->validateInventory();
+
+	}
 
 function requestProcessor($request)
 {
@@ -35,9 +42,11 @@ function requestProcessor($request)
     	case "login":
       		return doLogin($request['username'],$request['password']);
 	case "register":
-		return doRegister($request['username'],$request['street'],$request['city'],$request['state'],$request['email'],$request['password']);
+		return doRegister($request['username'],$request['bzname'],$request['street'],$request['city'],$request['state'],$request['zipcode'],$request['email'],$request['password']);
 	case "validate_session":
 		return doValidate($request['sessionId']);
+	case "ishop":
+		return doInventory();
 	}
 	return array("returnCode" =>'0', 'message'=>"Server received request and processed");
 }

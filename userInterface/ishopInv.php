@@ -1,5 +1,6 @@
 <?php
 	include (" php/connectDB.php ");
+	include (" getIshop.inc.php");
 ?>
 
 <!DOCTYPE html>
@@ -75,44 +76,24 @@
         <!--                            MAIN CONTENT                         -->
         <section id="main">
           <div class="nameInContent">
-            <h1> <a href="index.html"><img src="images/ishop.png" width="200px"> </a> </h1>
+            <h1> <a href="index.php"><img src="images/ishop.png" width="200px"> </a> </h1>
           </div>
 
-          <div class="table100 ver3 m-b-110">
-            <div class="table100-head">
-              <table>
-                <thead>
-                  <tr class="row100 head">
-                    <th class="cellMod">ADD</th>
-                    <th class="cellMod">NAME</th>
-                    <th class="cellMod">BRAND</th>
-                    <th class="cellMod">UPC14</th>
-                  </tr>
-                </thead>
-              </table>
-            </div>
-
-            <div class="table100-body js-pscroll">
-              <table>
-                <tbody>
-                  <tr class="row100 body">
-                    <td class="cellMod" id="row"><button id="addDelBtn"><i class="fa fa-plus"></i></button></td>
-                    <td class="cellMod" id="row">Rice</td>
-                    <td class="cellMod" id="row">Jasmine</td>
-                    <td class="cellMod" id="row">5755858678</td>
-                  </tr>
-
-                  <tr class="row100 body">
-                    <td class="cellMod" id="row"><button id="addDelBtn"><i class="fa fa-plus"></i></button></td>
-                    <td class="cellMod" id="row">Rice</td>
-                    <td class="cellMod" id="row">Jasmine</td>
-                    <td class="cellMod" id="row">5755858678</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-
+       <h1>ISHOP INVENTORY FROM DB </h1>
+           <table class="fixed_header">
+                <tr>
+                  <th>PRODUCT</th>
+                  <th>BRAND</th>
+                </tr>
+                   <?php
+                        while ($row = $response->fetch_assoc())
+                        {
+                                echo "<tr><td>".$row["name"]."</td><td>".$row["brand"]."</td></tr>";
+                        }
+                        echo "</table>";
+                        ?>
+           </table>
+       
 
         </section>
 

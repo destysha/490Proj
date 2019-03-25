@@ -27,7 +27,7 @@
 			<div id="login" class="animate form">
                             <form  action="phpFiles/login.php" method="POST" autocomplete="on">
 
-                                <h1 id="company">iShop Online Store</h1>
+                                <h1 id="company">iShop Online Store Haris</h1>
                                 <h1 class="titles">Log in</h1>
 			<!--Error messages go here-->
 			<?php
@@ -76,6 +76,11 @@
                                     <label for="usernamesignup" class="uname" data-icon="u">Your username</label>
                                     <input id="usernamesignup" name="usernamesignup" required="required" type="text" placeholder="mysuperusername690" />
                                 </p>
+				<p>
+                                    <label for="bznamesignup" class="uname" data-icon="u">Business Name</label>
+                                    <input id="bznamesignup" name="bznamesignup" required="required" type="text" placeholder="Business Name" />
+                                </p>
+
 				<p>
                                     <label for="streetsignup" class="uname" data-icon="e" > Your Street Address</label>
                                     <input id="streetsignup" name="streetsignup" type="text" required="required" placeholder="123 Central ave"/>
@@ -141,6 +146,11 @@
 	<option value="WY">WY</option>
 </select>	
                                 </p>
+				<p>
+                                    <label for="zipcodesignup" class="uname" data-icon="u">Zipcode</label>
+                                    <input id="zipcodesignup" name="zipcodesignup" required="required" type="text" placeholder="Zipcode" />
+                                </p>
+
   				<p>
                                     <label for="emailsignup" class="youmail" data-icon="e" > Your email</label>
                                     <input id="emailsignup" name="emailsignup" required="required" type="email" placeholder="mysupermail@mail.com"/>

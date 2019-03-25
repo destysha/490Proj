@@ -6,7 +6,7 @@
 	  $id = $_GET['edit'];
 	  
 	  $edit_state=true;	
-	  $rec = mysqli_query($conn,"SELECT * FROM businessInv WHERE id=$id ");
+	  $rec = mysqli_query($conn,"SELECT * FROM bzinventory WHERE id=$id ");
 	  $record = mysqli_fetch_array($rec);
 	 
 	  $product = $record['product'];
@@ -110,12 +110,12 @@
 			  <th>QTY</th>
                         </tr>
 			<?php
-			$conn = mysqli_connect("localhost","user1","user1pass","SampleShop");
+		$conn = mysqli_connect("localhost","user1","user1pass","ishop");
 			if($conn->connect_error)
 			{
 				die("connection error:".$conn->connect_error);
 			}
-			$sql = "SELECT * FROM businessInv";
+			$sql = "SELECT * FROM businessinv";
 			$result = $conn->query($sql);
 
 			if($result->num_rows > 0)
@@ -155,7 +155,7 @@
 			<th>Del_Product</th>
 			<th>Del_Brand</th>
 			<th>Del_Qty</th>
-			<th>Del_Action</th>
+			<th colspan="2">Del_Action</th>
 		  </tr>
 		</thead>
 		<tbody>

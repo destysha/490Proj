@@ -7,13 +7,15 @@ require('../rabbitMQFiles/testRabbitMQClient.php');
 $logs = array();
 
 $username = $_POST['usernamesignup'];
+$bzname = $_POST['bznamesignup'];
 $street = $_POST['streetsignup']; 
 $city = $_POST['citysignup'];
 $state = $_POST['statesignup'];
+$zipcode = $_POST['zipcodesignup'];
 $email = $_POST['emailsignup'];
 $password1 = $_POST['passwordsignup'];
 $password = $_POST['passwordsignup_confirm'];
-$response = register($username,$street,$city,$state,$email,$password);
+$response = register($username,$bzname,$street,$city,$state,$zipcode,$email,$password);
 	//make a logging funtion for this
 	if ( $password1 != $password)
 	{

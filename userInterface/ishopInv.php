@@ -124,12 +124,12 @@
                           <th>BRAND</th>
                         </tr>
                         <?php
-                        $conn = mysqli_connect("localhost","user1","user1pass","SampleShop");
+                  $conn = mysqli_connect("localhost","user1","user1pass","ishop");
                         if($conn->connect_error)
                         {
                                 die("connection error:".$conn->connect_error);
                         }
-                        $sql = "SELECT * FROM ishopInv";
+                        $sql = "SELECT product,brand FROM inventory";
                         $result = $conn->query($sql);
 
                         if($result->num_rows > 0)
@@ -153,6 +153,8 @@
 	
 	<div>
 		<form class="updateForm" id="updateForm" action="updateInv.php" method="POST">
+		<label for="user">User Name</label>
+                <input type="text" name="user" id="user"placeholder="User Name" />
 		<label for="product">Product</label>
 		<input type="text" name="product" id="product"placeholder="Product" />
 		<label for="brand">Brand</label>

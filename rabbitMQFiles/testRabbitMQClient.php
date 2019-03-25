@@ -31,14 +31,16 @@
 
 	}
 
-function register ( $username,$street,$city,$state,$email,$password  )
+function register ( $username,$bzname,$street,$city,$state,$zipcode,$email,$password  )
 	{
 		$request2 = array();
 		$request2['type'] = "register";
 		$request2['username'] = $username;
+		$request2['bzname']=$bzname;
 		$request2['street'] = $street;
 		$request2['city'] = $city;
 		$request2['state'] = $state;
+		$request2['zipcode']=$zipcode;
 		$request2['email'] = $email;
 		$request2['password'] = $password;
 		//$request2['message'] = $answer;

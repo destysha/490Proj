@@ -91,9 +91,8 @@
       </div>
       <!--                               END OF MAIN CONTENT                 -->
 
-      <!-- The Modal -->
+      <!-- The Map Modal -->
       <div id="myModal" class="modal">
-
         <!-- Modal content -->
         <div class="modal-content">
           <span class="close">&times;</span>
@@ -104,7 +103,19 @@
               width="100%" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
           </section>
         </div>
+      </div>
+	    
+      <!-- The widget modal -->
+      <div id="wModal" class="wmodal">
+        <!-- Widget Modal content -->
+        <div class="wmodal-content">
+          <span class="wclose">&times;</span>
+          <p class="pFR">Food Safety Notification Recalls</p>
 
+          <div class="wContent">
+            <!--<iframe src="https://www.foodsafety.gov/recalls/widget/widget.html" width="167" height="380" alt="Food Safety Widget" title="Food Safety Widget" frameborder="0">&nbsp;</iframe>-->
+          </div>
+        </div>
       </div>
 
     </div>

@@ -13,29 +13,29 @@ USE ishop;
 
 /*Create the "business" table if it doesn't already exist on the machine*/
 CREATE TABLE IF NOT EXISTS business (
-	businessID int(100) NOT NULL UNIQUE, 
+	businessID varchar(100) NOT NULL UNIQUE, 
 	companyName varchar(255) NOT NULL,
 	companyLocation varchar(255) NOT NULL,
 	email varchar(255) NOT NULL UNIQUE,
 	zip varchar(255) NOT NULL,
   	password varchar(255) NOT NULL,
-	last_modified int(11) NOT NULL,
+	last_modified varchar(11) NOT NULL,
 	active boolean
 );
 
 /*Create the "iShop inventory" table if it doesn't already exist on the machine*/
 CREATE TABLE IF NOT EXISTS inventory (
-	grp_id int(255) NOT NULL PRIMARY KEY,
-	upc14 int(255) NOT NULL,
-	upc12 int(255) NOT NULL,
+	grp_id varchar(255) NOT NULL PRIMARY KEY,
+	upc14 varchar(255) NOT NULL,
+	upc12 varchar(255) NOT NULL,
 	brand varchar(255) NOT NULL,
 	name varchar(255) NOT NULL	
 );
 /*Create the "Inventory for Business" table if it doesn't already exist on the machine*/
 CREATE TABLE IF NOT EXISTS businessInv (
-	qty int(255),
-	businessID int(100) NOT NULL,
-	grp_id int(255) NOT NULL,
+	qty varchar(255),
+	businessID varchar(100) NOT NULL,
+	grp_id varchar(255) NOT NULL,
 	CONSTRAINT FOREIGN KEY fk_busid(businessID) REFERENCES business(businessID),
 	CONSTRAINT FOREIGN KEY fk_grpid(grp_id) REFERENCES inventory(grp_id)
 );

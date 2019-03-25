@@ -114,12 +114,36 @@
               </table>
             </div>
           </div>
-
-
         </section>
-
       </div>
     </div>
+   
+      <!-- The Map Modal -->
+      <div id="myModal" class="modal">
+        <!-- Modal content -->
+        <div class="modal-content">
+          <span class="close">&times;</span>
+          <p>LOCALIZER</p>
+
+          <section class="contact_map">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3014.4529525156877!2d-74.17745888503858!3d40.92773907930902!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c2fdb3b53a8603%3A0x7bf5fca607743ad6!2s100+N+5th+St%2C+Paterson%2C+NJ+07522!5e0!3m2!1sen!2s!4v1542240288675"
+              width="100%" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+          </section>
+        </div>
+      </div>
+	    
+      <!-- The widget modal -->
+      <div id="wModal" class="wmodal">
+        <!-- Widget Modal content -->
+        <div class="wmodal-content">
+          <span class="wclose">&times;</span>
+          <p class="pFR">Food Safety Notification Recalls</p>
+
+          <div class="wContent">
+            <!--<iframe src="https://www.foodsafety.gov/recalls/widget/widget.html" width="167" height="380" alt="Food Safety Widget" title="Food Safety Widget" frameborder="0">&nbsp;</iframe>-->
+          </div>
+        </div>
+      </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script src="js/main.js"></script>

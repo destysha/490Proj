@@ -1,0 +1,28 @@
+CREATE TABLE json(
+    classification varchar(255) NOT NULL,
+    center_classification_date varchar(255) NOT NULL, 
+    report_date varchar(255) NOT NULL,
+    postal_code varchar(255) NOT NULL,
+    termination_date varchar(255) NOT NULL,
+    recall_initiation_date varchar(255) NOT NULL,
+    recall_number varchar(255) NOT NULL,
+    city varchar(255) NOT NULL,
+    more_code_infor varchar(255) NOT NULL,
+    event_id varchar(255) NOT NULL,
+    distribution_pattern varchar(255) NOT NULL,
+    openfda varchar(255) NOT NULL,
+    recalling_firm varchar(255) NOT NULL, 
+    voluntary_mandated varchar(255) NOT NULL,
+    state varchar(255) NOT NULL,
+    reason_for_recall varchar(255) NOT NULL,
+    initial_firm_notification varchar(255) NOT NULL,
+    status varchar(255) NOT NULL,
+    product_type varchar(255) NOT NULL,
+    country varchar(255) NOT NULL,
+    product_description varchar(255) NOT NULL,
+    code_info varchar(255) NOT NULL,
+    address_1 varchar(255) NOT NULL,
+    address_2 varchar(255) NOT NULL,
+    product_quantity varchar(255) NOT NULL
+    );
+

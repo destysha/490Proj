@@ -1,11 +1,31 @@
 <?php
+	session_start();
+	$username = $_SESSION["username"];
+
 	include (" php/connectDB.php ");
+	include('delete.php');
+	
+	//get table to updated
+        if(isset($_GET['edit'])){
+          $id = $_GET['edit'];
+
+          $edit_state=true;
+          $rec = mysqli_query($conn,"SELECT * FROM businessinv WHERE id=$id ");
+          $record = mysqli_fetch_array($rec);
+
+          $product = $record['product'];
+          $brand = $record['brand'];
+          $qty = $record['qty'];
+          $id = $record['id'];
+        }
+
+
 ?>
 
 <!DOCTYPE html>
 <html>
   <head>
-    <title> <?php echo $bzname; ?> | Inventory </title>
+    <title> <?php echo $username; ?> | Inventory </title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="css/main.css">
   <!--===============================================================================================-->
@@ -22,7 +42,9 @@
   	<link rel="stylesheet" type="text/css" href="vendor/perfect-scrollbar/perfect-scrollbar.css">
   <!--===============================================================================================-->
   	<link rel="stylesheet" type="text/css" href="css/util.css">
-  	<link rel="stylesheet" type="text/css" href="css/inventory.css">
+	<link rel="stylesheet" type="text/css" href="css/inventory.css">
+	<link rel="stylesheet" type="text/css" href="tablestyle.css">
+
   <!--===============================================================================================-->
   </head>
 
@@ -50,13 +72,15 @@
           </div>
           <section id="navInfo">
             <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-            <button class="button" style="vertical-align:middle"><span>Inventory </span></button>
+            <a href="businessInv.php" class="buinv">
+                <button class="button" style="vertical-align:middle"><span>Inventory </span></button>
+            </a>
 
             <article id="companyInfo">
               <h2 class="navInfoTitle"> Business ID: </h2>
                 <h3 class="navInfoData"> <?php echo $bzid; ?> </h3>
               <h2 class="navInfoTitle"> Company Address: </h2>
-                <h3 class="navInfoData"> <?php echo "$street $city, $state $zipcode"; ?>, NJ 07522 </h3>
+                <h3 class="navInfoData"> <?php echo "$street $city, $state $zipcode"; ?> </h3>
               <h2 class="navInfoTitle"> Email: </h2>
                 <h3 class="navInfoData"> <?php echo $email; ?> </h3>
               <!--<h2 class="navInfoTitle"> Last Login: </h2>
@@ -79,49 +103,110 @@
             <h1> BUSINESS NAME </h1>
           </div>
 
-                <div class="table100 ver3 m-b-110">
-                  <div class="table100-head">
-                    <table>
-                      <thead>
-                        <tr class="row100 head">
-                          <th class="cellMod">DELETE</th>
-                          <th class="cellMod">UPDATE</th>
-                          <th class="cellMod">NAME</th>
-                          <th class="cellMod">BRAND</th>
-                          <th class="cellMod">QTY</th>
-                          <th class="cellMod">UPC14</th>
-                          <th class="cellMod">RECALL</th>
+		//user inventory list
+		 <div class ="inventory" class="animate form">
+                <h1>TABLE OF BUSINESS FROM DB </h1>
+                <br>
+                    <table class="fixed_header">
+                        <tr>
+                          <th>PRODUCT</th>
+                          <th>BRAND</th>
+                          <th>QTY</th>
                         </tr>
-                      </thead>
-                    </table>
+                        <?php
+                        $conn = mysqli_connect("localhost","user1","user1pass","ishopdb");
+                        if($conn->connect_error)
+                        {
+                                die("connection error:".$conn->connect_error);
+                        }
+                        $sql = "SELECT * FROM businessinv";
+                        $result = $conn->query($sql);
+
+                        if($result->num_rows > 0)
+                         {
+                        while ($row = $result->fetch_assoc())
+                        {
+                                echo "<tr><td>".$row["product"]."</td><td>".$row["brand"]."</td><td>".$row["qty"]."</td></tr>";
+                        }
+                        echo "</table>";
+                } //end if for each row
+                else
+                {
+                        echo "no results in table";
+                }
+                $conn->close();
+                        ?>
+                    </table><br><br>
+                <button class="myButton" onclick="location.href='ishopInv.php';">Update Inventory</button>
+		</div>
+
+	<br><br>
+<h1>Table With Delete Option</h1><br><br>
+<?php  if(isset($_SESSION['msg'])): ?>
+        <div class="msg">
+          <?php
+          echo $_SESSION['msg'];
+          unset($_SESSION['msg']);
+          ?>
+        </div>
+<?php endif ?>
+
+<!--NEW TABLE WITH DELETE OPTION: ATTEMPT #1 -->
+          <div class="del-table">
+            <table class="fixed_header">
+                <thead>
+                  <tr>
+                        <th>Del_Product</th>
+                        <th>Del_Brand</th>
+                        <th>Del_Qty</th>
+                        <th>Del_Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <?php while ($row = mysqli_fetch_array($list)) { ?>
+                        <tr>
+                           <td><?php echo $row['product']; ?></td>
+                           <td><?php echo $row['brand']; ?></td>
+                           <td><?php echo $row['qty']; ?></td>
+                           <td>
+                                <a href="businessInv.php?edit=<?php echo $row['id'];  ?>">Edit</a>
+                           </td>
+                           <td>
+                                <a href="delete.php?del=<?php echo $row['id'];?>">Delete</a>
+                           </td>
+                        </tr>
+                  <?php } ?>
+                </tbody>
+            </table>
+                <br><br><br>
+                <h1>FIll Out Form</h1>
+
+                <form method="post" action="delete.php" class="updateForm">
+                <input type="hidden" name="id" value="<?php echo $id;  ?>">
+                  <div>
+                    <label>Product</label>
+                     <input type="text" name="product" value="<?php echo $product; ?>">
+                  </div>
+                  <div>
+                    <label>Brand</label>
+                      <input type="text" name="brand" value="<?php echo $brand; ?>">
+                  </div>
+                  <div>
+                    <label>Qty</label>
+                      <input type="text" name="qty" value="<?php echo $qty; ?>">
                   </div>
 
-                  <div class="table100-body js-pscroll">
-                    <table>
-                      <tbody>
-                        <tr class="row100 body">
-                          <td class="cellMod" id="row"><button id="addDelBtn"><i class="fa fa-trash"></i></button></td>
-                          <td class="cellMod" id="row"><button id="addDelBtn"><i class="fa fa-pencil-square-o"></i></button></td>
-                          <td class="cellMod" id="row">Rice</td>
-                          <td class="cellMod" id="row">Jasmine</td>
-                          <td class="cellMod" id="row">2</td>
-                          <td class="cellMod" id="row">5755858678</td>
-                          <td class="cellMod recall" id="row">RECALL</td>
-                        </tr>
-
-                        <tr class="row100 body">
-                          <td class="cellMod" id="row"><button id="addDelBtn"><i class="fa fa-trash"></i></button></td>
-                          <td class="cellMod" id="row"><button id="addDelBtn"><i class="fa fa-pencil-square-o"></i></button></td>
-                          <td class="cellMod" id="row">Rice</td>
-                          <td class="cellMod" id="row">Jasmine</td>
-                          <td class="cellMod" id="row">2</td>
-                          <td class="cellMod" id="row">5755858678</td>
-                          <td class="cellMod recall" id="row"></td>
-                        </tr>
-                      </tbody>
-                    </table>
+                  <div>
+                      <?php  if ($edit_state == false): ?>
+                        <button class="myButton" type="submit" name="save">Save</button>
+                      <?php  else: ?>
+                        <button class="myButton" type="submit" name="update">Update</button>
+                      <?php  endif?>
                   </div>
-                </div>
+                </form>
+          </div>		
+
+
         </section>
       </div>
     </div>

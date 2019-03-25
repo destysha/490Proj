@@ -76,7 +76,7 @@
               </button>
             </div>
             <div>
-              <button class="bttn">
+              <button class="bttn"
                 <a href="ishopInv.php">
                   <img src="images/add-remove.png">
                 </a>

@@ -22,7 +22,9 @@
   	<link rel="stylesheet" type="text/css" href="vendor/perfect-scrollbar/perfect-scrollbar.css">
   <!--===============================================================================================-->
   	<link rel="stylesheet" type="text/css" href="css/util.css">
-  	<link rel="stylesheet" type="text/css" href="css/inventory.css">
+	<link rel="stylesheet" type="text/css" href="css/inventory.css">
+	<link rel="stylesheet" type="text/css" href="tablestyle.css">
+
   <!--===============================================================================================-->
   </head>
 
@@ -50,13 +52,16 @@
           </div>
           <section id="navInfo">
             <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-            <button class="button" style="vertical-align:middle"><span>Inventory </span></button>
+            <a href="businessInv.php" class="buinv">
+                <button class="button" style="vertical-align:middle"><span>Inventory </span></button>
+            </a>
+
 
             <article id="companyInfo">
               <h2 class="navInfoTitle"> Business ID: </h2>
                 <h3 class="navInfoData"> <?php echo $bzid; ?> </h3>
               <h2 class="navInfoTitle"> Company Address: </h2>
-                <h3 class="navInfoData"> <?php echo "$street $city, $state $zipcode"; ?>, NJ 07522 </h3>
+                <h3 class="navInfoData"> <?php echo "$street $city, $state $zipcode"; ?></h3>
               <h2 class="navInfoTitle"> Email: </h2>
                 <h3 class="navInfoData"> <?php echo $email; ?> </h3>
               <!--<h2 class="navInfoTitle"> Last Login: </h2>
@@ -77,43 +82,58 @@
         <!--                            MAIN CONTENT                         -->
         <section id="main">
           <div class="nameInContent">
-            <h1> <a href="index.html"><img src="images/ishop.png" width="200px"> </a> </h1>
+            <h1> <a href="index.php"><img src="images/ishop.png" width="200px"> </a> </h1>
           </div>
 
-          <div class="table100 ver3 m-b-110">
-            <div class="table100-head">
-              <table>
-                <thead>
-                  <tr class="row100 head">
-                    <th class="cellMod">ADD</th>
-                    <th class="cellMod">NAME</th>
-                    <th class="cellMod">BRAND</th>
-                    <th class="cellMod">UPC14</th>
-                  </tr>
-                </thead>
-              </table>
-            </div>
+	<h1>ISHOP INVENTORY FROM DB </h1>
+                    <table class="fixed_header">
+                        <tr>
+                          <th>PRODUCT</th>
+                          <th>BRAND</th>
+                        </tr>
+                        <?php
+                        $conn = mysqli_connect("localhost","user1","user1pass","ishopdb");
+                        if($conn->connect_error)
+                        {
+                                die("connection error:".$conn->connect_error);
+                        }
+                        $sql = "SELECT * FROM inventory";
+                        $result = $conn->query($sql);
 
-            <div class="table100-body js-pscroll">
-              <table>
-                <tbody>
-                  <tr class="row100 body">
-                    <td class="cellMod" id="row"><button id="addDelBtn"><i class="fa fa-plus"></i></button></td>
-                    <td class="cellMod" id="row">Rice</td>
-                    <td class="cellMod" id="row">Jasmine</td>
-                    <td class="cellMod" id="row">5755858678</td>
-                  </tr>
+                        if($result->num_rows > 0)
+                         {
+                        while ($row = $result->fetch_assoc())
+                        {
+                                echo "<tr><td>".$row["name"]."</td><td>".$row["brand"]."</td></tr>";
+                        }
+                        echo "</table>";
+                } //end if for each row
+                else
+                {
+                        echo "no results in table";
+                }
+                $conn->close();
+                        ?>
+                    </table>
+        <br><br>
 
-                  <tr class="row100 body">
-                    <td class="cellMod" id="row"><button id="addDelBtn"><i class="fa fa-plus"></i></button></td>
-                    <td class="cellMod" id="row">Rice</td>
-                    <td class="cellMod" id="row">Jasmine</td>
-                    <td class="cellMod" id="row">5755858678</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
+                echo"<SCRIPT>alert($_GET['msg']);</SCRIPT>";
+
+        <div>
+                <form class="updateForm" id="updateForm" action="updateInv.php" method="POST">
+                <label for="product">Product</label>
+                <input type="text" name="product" id="product"placeholder="Product" />
+                <label for="brand">Brand</label>
+                <input type="text" name="brand" id="brand"placeholder="Brand" />
+                <label for="qty">Quantity</label>
+                <input type="text" name="qty" id="quantity"placeholder="Quantity" />
+                <input class="myButton"type="submit" name="submit-update" value="Update" onclick= "return chk()">
+                </form><br>
+        </div>
+        <p id="msg"></p>
+        <button class ="myButton" onclick="location.href='businessInv.php';">Back to Your Inventory</button>        
+
+
         </section>
       </div>
     </div>

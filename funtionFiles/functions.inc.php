@@ -27,7 +27,7 @@ function deleteRow($businessID, $grp_id){
 
 } 
 
-function notification($email $product){
+function notification($email, $product){
 	global $db;
 	$pull2 = "SELECT * FROM inventory";
 	$pull = "SELECT * FROM json";

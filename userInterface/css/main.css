@@ -103,6 +103,7 @@ body, html {
   margin-left: auto;
   margin-right: auto;
 }
+
 #logoiShopD{
   position: absolute;
   bottom: 55px;
@@ -110,7 +111,7 @@ body, html {
   left: 50px;
 height:100px;
 }
-}
+
 .logoiShopD {
   position: absolute;
   bottom: 0px;

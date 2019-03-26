@@ -82,7 +82,7 @@ private $logindb;
 
 
 function notification($email, $product, $subject, $header, $output){
-        $pull2 = "SELECT businessinv.*, business.businessid ";
+        $pull2 = "SELECT businessinv.*, business.businessid FROM businessinv LEFT OUTER JOIN business ON businessinv.businessid = business.businessid";
         $pull = "SELECT * FROM json";
         $val = mysqli_query($ishopdb, $pull, $pull2) or die (mysqli_error($ishopdb));
         $num = mysqli_num_row($val);

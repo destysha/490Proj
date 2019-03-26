@@ -77,8 +77,8 @@
           <section id="navInfo">
             <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
             <button class="button" style="vertical-align:middle">
-              <a href="businessInv.html">
-                <span>Inventory </span>
+              <a href="businessInv.php">
+                <span id="invSpan">Inventory </span>
               </a>
               </button>
 

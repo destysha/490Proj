@@ -108,7 +108,7 @@
         <!--                            MAIN CONTENT                         -->
         <section id="main">
           <div class="nameInContent">
-            <h1> <a href="index.php"><img src="images/ishop.png" class="logoiShopD" width="200px"> </a> </h1>
+            <h1> <a href="index.php"><img src="images/ishop.png" width="200px"> </a> </h1>
           </div>
 
      	  <!--

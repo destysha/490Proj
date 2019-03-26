@@ -72,8 +72,7 @@
 
         <div id="mySidenav" class="sidenav">
           <div class="busName">
-            <!-- TO BE CHANGED USING PHP FROM SESSION -->
-            <h1> BUSINESS NAME </h1>
+          <h1> <?php $bzname; ?> </h1>
           </div>
           <section id="navInfo">
             <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
@@ -95,7 +94,7 @@
             </article>
           </section>
           <section class="logoutButnC">
-            <a href="#"><img src="images/logout.png" title="logoutBtn" alt="logoutBtn" id="logoutButnD"></a>
+            <a href="../phpFiles/logout.php"><img src="images/logout.png" title="logoutBtn" alt="logoutBtn" id="logoutButnD"></a>
           </section>
           <section class="logoiShopC">
             <a href="index.php"><img src="images/ishop.png" id="logoiShopD"> </a>

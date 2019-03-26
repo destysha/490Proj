@@ -56,12 +56,12 @@
     <div class="bgimg">
       <div class="insidebg">
 
-        <div id="topNav-container">
+       <div id="topNav-container">
           <span id="navToggle" onclick="openNav()">&#9776;</span>
 
           <span id="right-notification">
             <a href="#" class="notification">
-              <button class="button">
+              <button class="button" id="bWidget">
                 <span>Notifications </span>
               </button>
               <span class="badge">3</span>
@@ -100,7 +100,20 @@
             <a href="index.php"><img src="images/ishop.png" id="logoiShopD"> </a>
           </section>
         </div>
+	      
+      <!-- The widget modal -->
+      <div id="wModal" class="wmodal">
+        <!-- Widget Modal content -->
+        <div class="wmodal-content">
+          <span class="wclose">&times;</span>
+          <p class="pFR">Food Safety Notification Recalls</p>
 
+          <div class="wContent">
+            <!--<iframe src="https://www.foodsafety.gov/recalls/widget/widget.html" width="167" height="380" alt="Food Safety Widget" title="Food Safety Widget" frameborder="0">&nbsp;</iframe>-->
+          </div>
+        </div>
+      </div>
+	
 
 
 

@@ -60,4 +60,36 @@ function notification($email, $product){
 	}
 }
 
+/* Pre Mailer Function
+
+$output = “ “;
+
+
+//Recalls should be added to output var
+
+//if statements should be here
+
+
+    //SEND OUTPUT TO EMAIL//
+    $subject = “You have new recalls!";
+    $headers = ‘From: ishopforbusiness@gmail.com' . "\r\n" .
+               'Reply-To: ishopforbusiness@gmail.com' . "\r\n" .
+               'X-Mailer: PHP/' . phpversion();
+
+    $output .= recall variable
+
+
+    $output .= "<br><br>Thank you for being an important piece at iShop for Business!<br>";
+
+    // Always set content-type when sending HTML email
+    $headers .= "MIME-Version: 1.0" . "\r\n";
+    $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";;
+
+
+    mail(“business mail goes here", $subject, $output, $headers);
+
+
+ */
+
+
 ?>

@@ -77,11 +77,13 @@
           </div>
           <section id="navInfo">
             <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-            <button class="button" style="vertical-align:middle">
-              <a href="businessInv.php">
-                <span id="invSpan">Inventory </span>
-              </a>
-            </button>
+          <a href="businessInv.php">
+	     <button class="button" style="vertical-align:middle">
+	        <span id="invSpan">Inventory </span> 
+	     </button>
+	  </a>
+            
+           
 
             <article id="companyInfo">
               <h2 class="navInfoTitle"> Business ID: </h2>

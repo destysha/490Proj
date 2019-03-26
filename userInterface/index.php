@@ -1,6 +1,6 @@
 <?php
 	session_start();
-	include (' php/connectDB.php ');
+	include ("php/connectDB.php");
 	$username = $_SESSION ["username"];
 	$bzname   = $_SESSION ["bzname"];
         $bID      = $_SESSION ["bID"];

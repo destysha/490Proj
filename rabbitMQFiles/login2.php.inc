@@ -6,7 +6,7 @@ private $logindb;
 
 	public function __construct()
 	{//open _construct bracket
-		$this->logindb = new mysqli("localhost","user1","user1pass","ishop");
+		$this->logindb = new mysqli("localhost","user1","user1pass","ishopdb");
 
 		if($this->logindb->connect_errno !=0)
 		{//open if bracket

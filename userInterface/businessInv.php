@@ -6,7 +6,7 @@
 	  $id = $_GET['edit'];
 	  
 	  $edit_state=true;	
-	  $rec = mysqli_query($conn,"SELECT * FROM bzinventory WHERE id=$id ");
+	  $rec = mysqli_query($conn,"SELECT * FROM businessinv WHERE id=$id ");
 	  $record = mysqli_fetch_array($rec);
 	 
 	  $product = $record['product'];
@@ -110,7 +110,7 @@
 			  <th>QTY</th>
                         </tr>
 			<?php
-		$conn = mysqli_connect("localhost","user1","user1pass","ishop");
+		$conn = mysqli_connect("localhost","user1","user1pass","ishopdb");
 			if($conn->connect_error)
 			{
 				die("connection error:".$conn->connect_error);

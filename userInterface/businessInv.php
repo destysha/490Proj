@@ -17,7 +17,7 @@
 	  $id = $_GET['edit'];
 	  
 	  $edit_state=true;	
-	  $rec = mysqli_query($conn,"SELECT * FROM businessinv WHERE id=$id ");
+	  $rec = mysqli_query($conn,"SELECT * FROM businessinv WHERE id=$id AND businessID =$bID");
 	  $record = mysqli_fetch_array($rec);
 		
 	  $product = $record['product'];
@@ -137,7 +137,7 @@
 			{
 				die("connection error:".$conn->connect_error);
 			}
-			$sql = "SELECT * FROM businessinv";
+			$sql = "SELECT * FROM businessinv WHERE businessID = $bID";
 			$result = $conn->query($sql);
 
 			if($result->num_rows > 0)

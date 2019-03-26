@@ -1,5 +1,15 @@
 <?php
-	include (" php/connectDB.php ");
+	session_start();
+	include ("php/connectDB.php");
+	$username = $_SESSION ["username"];
+	$bzname   = $_SESSION ["bzname"];
+        $bID      = $_SESSION ["bID"];
+        $street   = $_SESSION ["street"];
+        $city     = $_SESSION ["city"];
+        $zc       = $_SESSION ["zipcode"];
+        $state    = $_SESSION ["state"];
+        $email    = $_SESSION ["email"];
+	
 ?>
 
 <!DOCTYPE html>
@@ -68,16 +78,16 @@
           <section id="navInfo">
             <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
             <button class="button" style="vertical-align:middle">
-              <a href="businessInv.php">
+              <a href="ishopInv.php">
                 <span>Inventory </span>
               </a>
             </button>
 
- 	    <article id="companyInfo">
+            <article id="companyInfo">
               <h2 class="navInfoTitle"> Business ID: </h2>
-                <h3 class="navInfoData"> <?php echo $bzid; ?> </h3>
+                <h3 class="navInfoData"> <?php echo "BU00$bID"; ?> </h3>
               <h2 class="navInfoTitle"> Company Address: </h2>
-                <h3 class="navInfoData"> <?php echo "$street $city, $state $zipcode"; ?></h3>
+                <h3 class="navInfoData"> <?php echo "$street $city, $state $zc"; ?></h3>
               <h2 class="navInfoTitle"> Email: </h2>
                 <h3 class="navInfoData"> <?php echo $email; ?> </h3>
               <!--<h2 class="navInfoTitle"> Last Login: </h2>
@@ -126,7 +136,7 @@
                           <th>BRAND</th>
                         </tr>
                         <?php
-                  $conn = mysqli_connect("localhost","user1","user1pass","ishopdb");
+                  	$conn = mysqli_connect("localhost","user1","user1pass","ishopdb");
                         if($conn->connect_error)
                         {
                                 die("connection error:".$conn->connect_error);

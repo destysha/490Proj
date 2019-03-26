@@ -114,7 +114,7 @@
           </div>
 
      	 
-                  <div class="table100-body js-pscroll">
+                  <!--<div class="table100-body js-pscroll">
                     <table>
                       <tbody>
 			 <tr class="row100 body">
@@ -129,7 +129,7 @@
                     </table>
                   </div>
                 </div>
-		<h1>ISHOP INVENTORY FROM DB </h1>
+		<h1>ISHOP INVENTORY FROM DB </h1>-->
                     <table class="fixed_header">
                         <tr>
                           <th>PRODUCT</th>

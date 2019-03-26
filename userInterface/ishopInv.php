@@ -117,39 +117,14 @@
                   <div class="table100-body js-pscroll">
                     <table>
                       <tbody>
-			
-			<?php
-				$conn = mysqli_connect("localhost","user1","user1pass","ishopdb");
-				if($conn->connect_error)
-				{
-					die("connection error:".$conn->connect_error);
-				}
-				$sql = "SELECT name,brand FROM inventory";
-				$result = $conn->query($sql);
-
-				if($result->num_rows > 0)
-				 {
-				while ($row = $result->fetch_assoc())
-				{
-					echo "<tr><td>".$row["name"]."</td><td>".$row["brand"]."</td></tr>";
-				}
-				echo "</table>";
-				} //end if for each row
-				else
-				{
-					echo "no results in table";
-				}       
-				$conn->close();
-			?>
-                       <!-- <tr class="row100 body">
-			 	
-                           <td class="cellMod">Like a butterfly</td>
+			 <tr class="row100 body">
+                          <td class="cellMod">Like a butterfly</td>
                           <td class="cellMod">Boxing</td>
                           <td class="cellMod">9:00 AM - 11:00 AM</td>
                           <td class="cellMod">Aaron Chapman</td>
                           <td class="cellMod">10</td>
                           <td class="cellMod"><button id="addBtn"><i class="fa fa-plus"></i></button></td>
-                        </tr>-->
+                        </tr>
                       </tbody>
                     </table>
                   </div>

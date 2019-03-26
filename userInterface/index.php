@@ -47,7 +47,7 @@
               <h2 class="navInfoTitle"> Business ID: </h2>
                 <h3 class="navInfoData"> <?php echo $bzid; ?> </h3>
               <h2 class="navInfoTitle"> Company Address: </h2>
-                <h3 class="navInfoData"> <?php echo "$street $city, $state $zipcode"; ?>, NJ 07522 </h3>
+                <h3 class="navInfoData"> <?php echo "$street $city, $state $zipcode"; ?></h3>
               <h2 class="navInfoTitle"> Email: </h2>
                 <h3 class="navInfoData"> <?php echo $email; ?> </h3>
               <!--<h2 class="navInfoTitle"> Last Login: </h2>
@@ -55,10 +55,14 @@
             </article>
           </section>
           <section class="logoutButnC">
-            <a href="../phpFiles/logout.php"><img src="images/logout.png" title="logoutBtn" alt="logoutBtn" id="logoutButnD"></a>
+            <a href="../phpFiles/logout.php">
+	         <img src="images/logout.png" title="logoutBtn" alt="logoutBtn" id="logoutButnD">
+	    </a>
           </section>
           <section class="logoiShopC">
+          <a href="index.php">
             <img src="images/ishop.png" title="iShopLogo" alt="iShopLogo" id="logoiShopD">
+          </a>
           </section>
         </div>
 

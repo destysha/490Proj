@@ -159,7 +159,7 @@
 		</div>
 		
 <br><br>
-<h1>Table With Delete Option</h1><br><br>
+<h1 class="headers">Table With Delete Option</h1><br><br>
 <?php  if(isset($_SESSION['msg'])): ?>
 	<div class="msg">
 	  <?php
@@ -169,7 +169,7 @@
 	</div>
 <?php endif ?>
 
-<!--NEW TABLE WITH DELETE OPTION: ATTEMPT #1 -->
+	<!--NEW TABLE WITH DELETE OPTION: ATTEMPT #1 -->
 	  <div class="del-table">
 	    <table class="fixed_header">
 		<thead>
@@ -197,7 +197,7 @@
 		</tbody>
 	    </table>
 		<br><br><br>
-		<h1>FIll Out Form</h1>
+		<h1 class="headers">FIll Out Form</h1>
 
 		<form method="post" action="delete.php" class="updateForm">
 		<input type="hidden" name="id" value="<?php echo $id;  ?>">

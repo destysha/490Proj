@@ -102,29 +102,7 @@
             <h1> <a href="index.php"><img src="images/ishop.png" class="logoiShopD" width="200px"> </a> </h1>
           </div>
 
-                <div class="table100 ver3 m-b-110">
-                  <div class="table100-head">
-                    <table>
-                      <thead>
-                        <?php
-                  	$conn = mysqli_connect("localhost","user1","user1pass","ishopdb");
-                        if($conn->connect_error)
-                        {
-                                die("connection error:".$conn->connect_error);
-                        }
-                        $sql = "SELECT name,brand FROM inventory";
-                        $result = $conn->query($sql);
-
-                        if($result->num_rows > 0)
-                         {
-                        while ($row = $result->fetch_assoc())
-                        {
-                                echo "<tr class="row100 head"><td>".$row["name"]."</td><td>".$row["brand"]."</td></tr>";
-                        }
-                      </thead>
-                    </table>
-                  </div>
-
+     	  <!--
                   <div class="table100-body js-pscroll">
                     <table>
                       <tbody>
@@ -139,7 +117,7 @@
                       </tbody>
                     </table>
                   </div>
-                </div>
+                </div>-->
 		
 		<h1>ISHOP INVENTORY FROM DB </h1>
                     <table class="fixed_header">

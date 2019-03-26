@@ -96,7 +96,7 @@
             <a href="#"><img src="images/logout.png" title="logoutBtn" alt="logoutBtn" id="logoutButnD"></a>
           </section>
           <section class="logoiShopC">
-            <a href="index.html"><img src="images/ishop.png" id="logoiShopD"> </a>
+            <a href="index.php"><img src="images/ishop.png" id="logoiShopD"> </a>
           </section>
         </div>
 

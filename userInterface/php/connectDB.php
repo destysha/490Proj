@@ -22,7 +22,7 @@
       while($row = $result->fetch_assoc())
       {
         $bzname  = $row[ "bzname" ];
-        $bzid    = $row[ "bzid" ];
+        $bzid    = $row[ "businessID" ];
         $street  = $row[ "street" ];
         $city    = $row[ "city" ];
         $zipcode = $row[ "zipcode" ];
@@ -36,6 +36,6 @@
       echo "<br><br>No rows retrieved<br><br>";
     }
 
-    $connectDB->close();
+ //   $connectDB->close();
 
 ?>

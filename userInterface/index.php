@@ -1,11 +1,14 @@
 <?php
+	session_start();
+	$username = $_SESSION ["username"];
+
 	include (" php/connectDB.php ");
 ?>
 
 <!DOCTYPE html>
 <html>
   <head>
-    <title> <?php echo $bzname; ?> | Main page </title>
+    <title> <?php echo $username; ?> | Main page </title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="css/main.css">
 
@@ -32,11 +35,13 @@
 
         <div id="mySidenav" class="sidenav">
           <div class="busName">
-            <h1> <?php echo $bzname; ?> </h1>
+            <h1> <?php echo $username; ?> </h1>
           </div>
           <section id="navInfo">
             <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-            <button class="button" style="vertical-align:middle"><span>Inventory </span></button>
+            <a href="businessInv.php" class="buinv">
+		<button class="button" style="vertical-align:middle"><span>Inventory </span></button>
+	    </a>
 
             <article id="companyInfo">
               <h2 class="navInfoTitle"> Business ID: </h2>
@@ -61,7 +66,7 @@
         <!--                            MAIN CONTENT                         -->
         <section id="main">
           <div class="nameInContent">
-            <h1> <a href="index.html"><img src="images/ishop.png" width="200px"> </a> </h1>
+            <h1> <a href="index.php"><img src="images/ishop.png" width="200px"> </a> </h1>
           </div>
 
           <div id="button-container">
@@ -72,7 +77,7 @@
             </div>
             <div>
               <button class="bttn">
-                <a href="ishopInv.html">
+                <a href="ishopInv.php">
                   <img src="images/add-remove.png">
                 </a>
               </button>
@@ -91,9 +96,8 @@
       </div>
       <!--                               END OF MAIN CONTENT                 -->
 
-      <!-- The Modal -->
+      <!-- The Map Modal -->
       <div id="myModal" class="modal">
-
         <!-- Modal content -->
         <div class="modal-content">
           <span class="close">&times;</span>
@@ -104,7 +108,19 @@
               width="100%" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
           </section>
         </div>
+      </div>
+	    
+      <!-- The widget modal -->
+      <div id="wModal" class="wmodal">
+        <!-- Widget Modal content -->
+        <div class="wmodal-content">
+          <span class="wclose">&times;</span>
+          <p class="pFR">Food Safety Notification Recalls</p>
 
+          <div class="wContent">
+            <!--<iframe src="https://www.foodsafety.gov/recalls/widget/widget.html" width="167" height="380" alt="Food Safety Widget" title="Food Safety Widget" frameborder="0">&nbsp;</iframe>-->
+          </div>
+        </div>
       </div>
 
     </div>

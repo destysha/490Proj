@@ -44,7 +44,7 @@ body, html {
   font-family: monospace;
   color: white;
   font-size: 18px;
-  padding: 40px 10px;
+  padding: 30px 10px;
   margin: auto;
   text-align: center;
 }
@@ -70,10 +70,6 @@ body, html {
 
 #companyInfo{
   padding: 35px 0 !important;
-}
-
-#buinv{
-  padding: 0 !important;
 }
 
 .navInfoTitle{
@@ -112,6 +108,7 @@ body, html {
   bottom: 55px;
   width: 150px;
   left: 50px;
+height:100px;
 }
 }
 .logoiShopD {
@@ -119,6 +116,7 @@ body, html {
   bottom: 0px;
   width: 80px;
   left: 50px;
+height:100px;
 }
 
 .sidenav {
@@ -330,19 +328,12 @@ body, html {
 /***************************************************************/
 
 
-/************************** INVENTORY **************************/
-#addDelBtn{
+/************************** BUTTON *****************************/
+#addBtn{
   color:white;
 }
 .cellMod{
-  padding: 20px;
-  width: 150px;
-}
-#row{
-  padding-left: 30px;
-}
-.recall{
-  color: red !important;
+  padding: 10px;
 }
 /***************************************************************/
 
@@ -369,3 +360,6 @@ body, html {
   }
   /*#main {margin-left: px;}*/
 }
+
+/**********************************************/
+

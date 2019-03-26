@@ -1,8 +1,5 @@
-<?php
-	include (" php/connectDB.php ");
-?>
-
 <!DOCTYPE html>
+
 <html>
   <head>
     <title> iShop | Inventory </title>
@@ -23,6 +20,8 @@
   <!--===============================================================================================-->
   	<link rel="stylesheet" type="text/css" href="css/util.css">
   	<link rel="stylesheet" type="text/css" href="css/inventory.css">
+	<link rel="stylesheet" type="text/css" href="tablestyle.css">
+	<script src"https://code.jquery.com/jquery-3.3.1.min.js"></script>
   <!--===============================================================================================-->
   </head>
 
@@ -46,75 +45,125 @@
 
         <div id="mySidenav" class="sidenav">
           <div class="busName">
-            <h1> <?php echo $bzname; ?> </h1>
+            <!-- TO BE CHANGED USING PHP FROM SESSION -->
+            <h1> <img src="images/ishop.png" id="logoiShopD"></h1>
           </div>
           <section id="navInfo">
             <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-            <button class="button" style="vertical-align:middle"><span>Inventory </span></button>
+            <button class="button" style="vertical-align:middle">
+              <a href="businessInv.php">
+                <span>Inventory </span>
+              </a>
+              </button>
 
             <article id="companyInfo">
               <h2 class="navInfoTitle"> Business ID: </h2>
-                <h3 class="navInfoData"> <?php echo $bzid; ?> </h3>
+                <h3 class="navInfoData"> BU0003 </h3>
               <h2 class="navInfoTitle"> Company Address: </h2>
-                <h3 class="navInfoData"> <?php echo "$street $city, $state $zipcode"; ?>, NJ 07522 </h3>
+                <h3 class="navInfoData"> 46 Oxford Street Paterson, NJ 07522 </h3>
               <h2 class="navInfoTitle"> Email: </h2>
-                <h3 class="navInfoData"> <?php echo $email; ?> </h3>
-              <!--<h2 class="navInfoTitle"> Last Login: </h2>
-                <h3 class="navInfoData"> March 30, 2019 at 12:30PM</h3> -->
+                <h3 class="navInfoData"> companyemail@email.com </h3>
+              <h2 class="navInfoTitle"> Last Login: </h2>
+                <h3 class="navInfoData"> March 30, 2019 at 12:30PM</h3>
             </article>
           </section>
           <section class="logoutButnC">
-            <a href="../phpFiles/logout.php">
-	        <img src="images/logout.png" title="logoutBtn" alt="logoutBtn" id="logoutButnD">
-	    </a>
+            <a href="#"><img src="images/logout.png" title="logoutBtn" alt="logoutBtn" id="logoutButnD"></a>
           </section>
           <section class="logoiShopC">
-            <img src="images/ishop.png" title="iShopLogo" alt="iShopLogo" id="logoiShopD">
+            <a href="index.php"><img src="images/ishop.png" id="logoiShopD"> </a>
           </section>
         </div>
+
+
 
 
         <!--                            MAIN CONTENT                         -->
         <section id="main">
           <div class="nameInContent">
-            <h1> <a href="index.html"><img src="images/ishop.png" width="200px"> </a> </h1>
+            <!-- TO BE CHANGED USING PHP FROM SESSION -->
+            <h1> <a href="index.php"><img src="images/ishop.png" class="logoiShopD"> </a> </h1>
           </div>
 
-          <div class="table100 ver3 m-b-110">
-            <div class="table100-head">
-              <table>
-                <thead>
-                  <tr class="row100 head">
-                    <th class="cellMod">ADD</th>
-                    <th class="cellMod">NAME</th>
-                    <th class="cellMod">BRAND</th>
-                    <th class="cellMod">UPC14</th>
-                  </tr>
-                </thead>
-              </table>
-            </div>
+                <div class="table100 ver3 m-b-110">
+                  <div class="table100-head">
+                    <table>
+                      <thead>
+                        <tr class="row100 head">
+                          <th class="cell100 column1">GRP_ID</th>
+                          <th class="cell100 column2">UPC14</th>
+                          <th class="cell100 column3">UPC12</th>
+                          <th class="cell100 column4">BRAND</th>
+                          <th class="cell100 column5">NAME</th>
+                          <th class="cell100 column5">ADD</th>
+                        </tr>
+                      </thead>
+                    </table>
+                  </div>
 
-            <div class="table100-body js-pscroll">
-              <table>
-                <tbody>
-                  <tr class="row100 body">
-                    <td class="cellMod" id="row"><button id="addDelBtn"><i class="fa fa-plus"></i></button></td>
-                    <td class="cellMod" id="row">Rice</td>
-                    <td class="cellMod" id="row">Jasmine</td>
-                    <td class="cellMod" id="row">5755858678</td>
-                  </tr>
+                  <div class="table100-body js-pscroll">
+                    <table>
+                      <tbody>
+                        <tr class="row100 body">
+                          <td class="cellMod">Like a butterfly</td>
+                          <td class="cellMod">Boxing</td>
+                          <td class="cellMod">9:00 AM - 11:00 AM</td>
+                          <td class="cellMod">Aaron Chapman</td>
+                          <td class="cellMod">10</td>
+                          <td class="cellMod"><button id="addBtn"><i class="fa fa-plus"></i></button></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+		
+		<h1>ISHOP INVENTORY FROM DB </h1>
+                    <table class="fixed_header">
+                        <tr>
+                          <th>PRODUCT</th>
+                          <th>BRAND</th>
+                        </tr>
+                        <?php
+                  $conn = mysqli_connect("localhost","user1","user1pass","ishopdb");
+                        if($conn->connect_error)
+                        {
+                                die("connection error:".$conn->connect_error);
+                        }
+                        $sql = "SELECT name,brand FROM inventory";
+                        $result = $conn->query($sql);
 
-                  <tr class="row100 body">
-                    <td class="cellMod" id="row"><button id="addDelBtn"><i class="fa fa-plus"></i></button></td>
-                    <td class="cellMod" id="row">Rice</td>
-                    <td class="cellMod" id="row">Jasmine</td>
-                    <td class="cellMod" id="row">5755858678</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-
+                        if($result->num_rows > 0)
+                         {
+                        while ($row = $result->fetch_assoc())
+                        {
+                                echo "<tr><td>".$row["name"]."</td><td>".$row["brand"]."</td></tr>";
+                        }
+                        echo "</table>";
+                } //end if for each row
+                else
+                {
+                        echo "no results in table";
+                }       
+                $conn->close();
+                        ?>
+                    </table>
+	<br><br>
+	
+		echo"<SCRIPT>alert($_GET['msg']);</SCRIPT>";
+	
+	<div>
+		<form class="updateForm" id="updateForm" action="updateInv.php" method="POST">
+		<label for="product">Product</label>
+		<input type="text" name="product" id="product"placeholder="Product" />
+		<label for="brand">Brand</label>
+		<input type="text" name="brand" id="brand"placeholder="Brand" />
+		<label for="qty">Quantity</label>
+                <input type="text" name="qty" id="quantity"placeholder="Quantity" />
+		<input class="myButton"type="submit" name="submit-update" value="Update" onclick= "return chk()">
+		</form><br>
+	</div>
+	<p id="msg"></p>
+        <button class ="myButton" onclick="location.href='businessInv.php';">Back to Your Inventory</button>
 
         </section>
 
@@ -144,6 +193,28 @@
 
 
     	</script>
+	<script>
+		function chk()
+		{
+			var  product=document.getElementById('product').value;
+			var  brand=document.getElementById('brand').value;
+			var  quantity=document.getElementById('quantity').value;
+			var  dataString='product='+product+'&brand='+brand+'&quantity'+quantity;
+			$.ajax({
+				type:"post",
+				url:  "updateInv.php",
+				data:dataString,
+				data:{'product':product},
+				data:{'brand':brand}.
+				data:{'quantity':quantity};
+				cache:false,
+				success: function(html){
+					$('#msg').html(html);
+				}
+			});
+			return false;
+		}
+	</script>
     <!--===============================================================================================-->
   </body>
 </html>

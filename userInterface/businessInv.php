@@ -105,7 +105,7 @@
       <div id="wModal" class="wmodal">
         <!-- Widget Modal content -->
         <div class="wmodal-content">
-          <span class="wclose">&times;</span>
+          <span class="wclose">&times;</span><br>
           <p class="pFR">Food Safety Notification Recalls</p>
 
           <div class="wContent">

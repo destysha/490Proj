@@ -108,7 +108,6 @@
         <!--                            MAIN CONTENT                         -->
         <section id="main">
           <div class="nameInContent">
-            <!-- TO BE CHANGED USING PHP FROM SESSION -->
             <h1> <a href="index.php"><img src="images/ishop.png" class="logoiShopD" width="200px"> </a> </h1>
           </div>
 

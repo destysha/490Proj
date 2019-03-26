@@ -123,7 +123,7 @@
             <h1> <?php echo $bzname; ?> </h1>
           </div>
  		<div class ="inventory" class="animate form">
-		<h1>TABLE OF BUSINESS FROM DB </h1>
+		<!--<h1>TABLE OF BUSINESS FROM DB </h1>-->
 		<br>
                     <table class="fixed_header">
                         <tr>

@@ -1,4 +1,5 @@
 <?php
+    session_start();
 
     ////////////////////////// CONNECT TO DATABASE ///////////////////////////////
     $connectDB = mysqli_connect ( "localhost", "user1", "user1pass", "ishopdb" );
@@ -22,12 +23,20 @@
       while($row = $result->fetch_assoc())
       {
         $bzname  = $row[ "bzname" ];
-        $bzid    = $row[ "businessID" ];
+        $bID     = $row[ "businessID" ];
         $street  = $row[ "street" ];
         $city    = $row[ "city" ];
         $zipcode = $row[ "zipcode" ];
         $state   = $row[ "state" ];
         $email   = $row[ "email" ];
+          
+        $_SESSION ['bzname']  = $row[ "bzname" ];
+        $_SESSION ['bID']     = $row[ "businessID" ];
+        $_SESSION ['street']  = $row[ "street" ];
+        $_SESSION ['city']    = $row[ "city" ];
+        $_SESSION ['zipcode'] = $row[ "zipcode" ];
+        $_SESSION ['state']   = $row[ "state" ];
+        $_SESSION ['email']   = $row[ "email" ];
       }
     }
 

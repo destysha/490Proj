@@ -72,7 +72,7 @@
 
         <div id="mySidenav" class="sidenav">
           <div class="busName">
-          <h1> <?php $bzname; ?> </h1>
+          <h1> <?php echho $bzname; ?> </h1>
           </div>
           <section id="navInfo">
             <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
@@ -107,7 +107,7 @@
         <!--                            MAIN CONTENT                         -->
         <section id="main">
           <div class="nameInContent">
-            <h1> <?php $bzname; ?> </h1>
+            <h1> <?php echo $bzname; ?> </h1>
           </div>
  		<div class ="inventory" class="animate form">
 		<h1>TABLE OF BUSINESS FROM DB </h1>

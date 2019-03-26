@@ -2,7 +2,7 @@
 	session_start();
 	$username = $_SESSION ["username"];
 
-	include (" php/connectDB.php ");
+	include (' php/connectDB.php ');
 ?>
 
 <!DOCTYPE html>
@@ -81,7 +81,7 @@
             </div>
             <div>
               <button class="bttn">
-                <a href="ishopInv.php">iShop
+                <a href="businessInv.php">
                   <img src="images/add-remove.png">
                 </a>
               </button>

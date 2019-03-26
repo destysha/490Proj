@@ -131,7 +131,7 @@
 				 {
 				while ($row = $result->fetch_assoc())
 				{
-					echo "<tr class="row100 body"><td>".$row["name"]."</td><td>".$row["brand"]."</td></tr>";
+					echo "<tr><td>".$row["name"]."</td><td>".$row["brand"]."</td></tr>";
 				}
 				echo "</table>";
 				} //end if for each row

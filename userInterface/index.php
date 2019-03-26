@@ -1,21 +1,22 @@
 <?php
 	session_start();
-	$username = $_SESSION ["username"];
-	$bzname   = $_SESSION ['bzname'];
-        $bID      = $_SESSION ['bID'];
-        $street   = $_SESSION ['street'];
-        $city     = $_SESSION ['city'];
-        $zc       = $_SESSION ['zipcode'];
-        $state    = $_SESSION ['state'];
-        $email    = $_SESSION ['email'];
-
 	include (' php/connectDB.php ');
+	$username = $_SESSION ["username"];
+	$bzname   = $_SESSION ["bzname"];
+        $bID      = $_SESSION ["bID"];
+        $street   = $_SESSION ["street"];
+        $city     = $_SESSION ["city"];
+        $zc       = $_SESSION ["zipcode"];
+        $state    = $_SESSION ["state"];
+        $email    = $_SESSION ["email"];
+
+	
 ?>
 
 <!DOCTYPE html>
 <html>
   <head>
-    <title> <?php echo $username; ?> | Main page </title>
+    <title> <?php echo $bzname; ?> | Main page </title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="css/main.css">
 

@@ -2,25 +2,27 @@
     session_start();
 
     ////////////////////////// CONNECT TO DATABASE ///////////////////////////////
-    $connectDB = mysqli_connect ( "localhost", "user1", "user1pass", "ishopdb" );
+    $connectDB = mysqli_connect('localhost','user1','user1pass','ishopdb');
 
-    if ( $connectDB->connect_error )
+    if($connectDB->connect_error)
     {
-      die ("Failed to connect to database: " . $connectDB->connect_error);
-    }
+       die("Connection error:".$connectDB->connect_error);
+     }
     //////////////////////////////////////////////////////////////////////////////
 
     ///////////////////////////// QUERY TO DATABASE //////////////////////////////
     $username = $_SESSION ['username'];
+	
+    $query = "SELECT * FROM business";
 
-    $query  =  "SELECT * FROM business
-                WHERE username='$username'";
+	 mysqli_query($connectDB,$query);
+    
 
     $result = $connectDB->query($query);
 
     if ( $result->num_rows > 0 )
     {
-      while($row = $result->fetch_assoc())
+      while ($row = $result->fetch_assoc())
       {
         $bzname  = $row[ "bzname" ];
         $bID     = $row[ "businessID" ];

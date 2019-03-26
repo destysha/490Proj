@@ -1,14 +1,23 @@
 <?php 
-	include('delete.php'); 
+	session_start();
+	$username = $_SESSION ["username"];
 
-//get table to updated
+	include('delete.php'); 
+	include('connectDB.php');
+	
+
+	//get table to updated
 	if(isset($_GET['edit'])){
 	  $id = $_GET['edit'];
 	  
 	  $edit_state=true;	
 	  $rec = mysqli_query($conn,"SELECT * FROM businessinv WHERE id=$id ");
+	  $r = mysqli_query($conn,"SELECT * FROM business WHERE username=$username ");
 	  $record = mysqli_fetch_array($rec);
+	  $record2 = mysqli_fetch_array($r);
 	 
+	  $busName = $record2 ['bzname'];
+		
 	  $product = $record['product'];
 	  $brand = $record['brand'];
 	  $qty = $record['qty'];
@@ -19,7 +28,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title> Business Name | Inventory </title>
+    <title> <?php echo $busName ?> | Inventory </title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="css/main.css">
   <!--===============================================================================================-->

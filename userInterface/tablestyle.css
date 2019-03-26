@@ -55,7 +55,7 @@ background-color:#ddd;
 
 .fixed_header tbody{
 display:block;
-width:auto;
+/*width:auto;*/
 overflow:auto;
 height:600px;
 }

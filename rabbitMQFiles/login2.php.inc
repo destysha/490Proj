@@ -82,9 +82,10 @@ private $logindb;
 
 
 function notification($email, $product, $subject, $header, $output){
-        $pull2 = "SELECT businessinv.*, business.businessid FROM businessinv LEFT OUTER JOIN business ON businessinv.businessid = business.businessid";
-        $pull = "SELECT * FROM json";
-        $val = mysqli_query($ishopdb, $pull, $pull2) or die (mysqli_error($ishopdb));
+        $pull2 = "SELECT businessinv.*, business.businessID FROM businessinv LEFT OUTER JOIN business ON businessinv.businessID = business.businessid";
+	$pull = "SELECT * FROM json";
+	$pull3 = "SELECT business.* FROM business LEFT OUTER JOIN businessinv ON business.businessID = businessinv.businessID";
+        $val = mysqli_query($ishopdb, $pull, $pull2, $pull3) or die (mysqli_error($ishopdb));
         $num = mysqli_num_row($val);
         while ($r = mysqli_feth_array($val, MYSQLI_ASSOC)){
                 $pd     = $r['product_description'];

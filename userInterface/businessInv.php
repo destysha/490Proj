@@ -1,22 +1,24 @@
 <?php 
 	session_start();
+	include ("php/connectDB.php");
 	$username = $_SESSION ["username"];
+	$bzname   = $_SESSION ["bzname"];
+        $bID      = $_SESSION ["bID"];
+        $street   = $_SESSION ["street"];
+        $city     = $_SESSION ["city"];
+        $zc       = $_SESSION ["zipcode"];
+        $state    = $_SESSION ["state"];
+        $email    = $_SESSION ["email"];
 
-	include('delete.php'); 
-	include('connectDB.php');
-	
+	include('delete.php');
 
 	//get table to updated
-	if(isset($_GET['edit'])){
+	  if(isset($_GET['edit'])){
 	  $id = $_GET['edit'];
 	  
 	  $edit_state=true;	
 	  $rec = mysqli_query($conn,"SELECT * FROM businessinv WHERE id=$id ");
-	  $r = mysqli_query($conn,"SELECT * FROM business WHERE username=$username ");
 	  $record = mysqli_fetch_array($rec);
-	  $record2 = mysqli_fetch_array($r);
-	 
-	  $busName = $record2 ['bzname'];
 		
 	  $product = $record['product'];
 	  $brand = $record['brand'];
@@ -28,7 +30,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title> <?php echo $busName ?> | Inventory </title>
+    <title> <?php echo $bzname ?> | Inventory </title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="css/main.css">
   <!--===============================================================================================-->
@@ -83,13 +85,13 @@
 
             <article id="companyInfo">
               <h2 class="navInfoTitle"> Business ID: </h2>
-                <h3 class="navInfoData"> BU0003 </h3>
+                <h3 class="navInfoData"> <?php echo "BU00$bID"; ?> </h3>
               <h2 class="navInfoTitle"> Company Address: </h2>
-                <h3 class="navInfoData"> 46 Oxford Street Paterson, NJ 07522 </h3>
+                <h3 class="navInfoData"> <?php echo "$street $city, $state $zc"; ?></h3>
               <h2 class="navInfoTitle"> Email: </h2>
-                <h3 class="navInfoData"> companyemail@email.com </h3>
-              <h2 class="navInfoTitle"> Last Login: </h2>
-                <h3 class="navInfoData"> March 30, 2019 at 12:30PM</h3>
+                <h3 class="navInfoData"> <?php echo $email; ?> </h3>
+              <!--<h2 class="navInfoTitle"> Last Login: </h2>
+                <h3 class="navInfoData"> March 30, 2019 at 12:30PM</h3> -->
             </article>
           </section>
           <section class="logoutButnC">
@@ -106,8 +108,7 @@
         <!--                            MAIN CONTENT                         -->
         <section id="main">
           <div class="nameInContent">
-            <!-- TO BE CHANGED USING PHP FROM SESSION -->
-            <h1> BUSINESS NAME </h1>
+            <h1> <?php $bzname; ?> </h1>
           </div>
  		<div class ="inventory" class="animate form">
 		<h1>TABLE OF BUSINESS FROM DB </h1>
@@ -119,7 +120,7 @@
 			  <th>QTY</th>
                         </tr>
 			<?php
-		$conn = mysqli_connect("localhost","user1","user1pass","ishopdb");
+			$conn = mysqli_connect("localhost","user1","user1pass","ishopdb");
 			if($conn->connect_error)
 			{
 				die("connection error:".$conn->connect_error);

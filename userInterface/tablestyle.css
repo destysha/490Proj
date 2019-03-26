@@ -54,9 +54,9 @@ background-color:#ddd;
 }
 
 .fixed_header tbody{
-display:block;
-/*width:auto;*/
-overflow:auto;
+/*display:block;
+width:auto;
+overflow:auto;*/
 height:600px;
 }
 

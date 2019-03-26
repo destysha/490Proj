@@ -90,8 +90,8 @@ function notification($email, $product, $subject, $header, $output){
                 $pd     = $r['product_description'];
                 $pdn    = $r['product'];
 
-                $pc     = $r['postal_code'];
-                $zip    = $r['zipcode'];
+               // $pc     = $r['postal_code'];
+               // $zip    = $r['zipcode'];
 
                 $rf     = $r['recalling_firm'];
                 $br     = $r['brand'];
@@ -99,7 +99,7 @@ function notification($email, $product, $subject, $header, $output){
                 $res    = $r['reason_for_recall'];
                 $class  = $r['classification'];
 
-                if($zip == $pc){
+               // if($zip == $pc){
                         if($pdn == $pd){
                                 if($br == $rf){
                                         $output	 = " ";
@@ -108,27 +108,30 @@ function notification($email, $product, $subject, $header, $output){
                                                 'Reply-To: ishopforbusiness@gmail.com' . "\r\n" .
                                                 'X-Mailer: PHP/' . phpversion();
 
-                                        $username = $_SESSION['username'];
-					
+                                       // $username = $_SESSION['username'];
+					$username = "business";
 					$output .= "Greetings, ". $username. ". We have founds new recalls that need to be brought to your attention!"
                                         $output .= '$class';
                                         $output .= '$pd';
                                         $output .= '$rf';
                                         $output .= '$pc';
                                         $output .= '$res';
-
-                                        $email = $_SESSION['email'];
+					$email = "hariskido214@gmail.com";
+                                       // $email = $_SESSION['email'];
 					mail($email, $subject, $output, $header);
 					return 1;
-                                }
+				}
+				else{
+					return 0;
+				}
                         }
                         else{
                                 return 0;
                         }
-                }
-                else{
-                        return 0;
-                }
+               // }
+               // else{
+                  //      return 0;
+                //}
         }
 }
 

@@ -128,7 +128,54 @@
                     </table>
                   </div>
                 </div>-->
-		
+		<h1>ISHOP INVENTORY FROM DB </h1>
+                    <table class="fixed_header">
+                        <tr>
+                          <th>PRODUCT</th>
+                          <th>BRAND</th>
+                        </tr>
+                        <?php
+                  	$conn = mysqli_connect("localhost","user1","user1pass","ishopdb");
+                        if($conn->connect_error)
+                        {
+                                die("connection error:".$conn->connect_error);
+                        }
+                        $sql = "SELECT name,brand FROM inventory";
+                        $result = $conn->query($sql);
+
+                        if($result->num_rows > 0)
+                         {
+                        while ($row = $result->fetch_assoc())
+                        {
+                                echo "<tr><td>".$row["name"]."</td><td>".$row["brand"]."</td></tr>";
+                        }
+                        echo "</table>";
+                } //end if for each row
+                else
+                {
+                        echo "no results in table";
+                }       
+                $conn->close();
+                        ?>
+                    </table>
+	<br><br>
+	
+		echo"<SCRIPT>alert($_GET['msg']);</SCRIPT>";
+	
+	<div>
+		<form class="updateForm" id="updateForm" action="updateInv.php" method="POST">
+		<label for="product">Product</label>
+		<input type="text" name="product" id="product"placeholder="Product" />
+		<label for="brand">Brand</label>
+		<input type="text" name="brand" id="brand"placeholder="Brand" />
+		<label for="qty">Quantity</label>
+                <input type="text" name="qty" id="quantity"placeholder="Quantity" />
+		<input class="myButton"type="submit" name="submit-update" value="Update" onclick= "return chk()">
+		</form><br>
+	</div>
+	<p id="msg"></p>
+        <button class ="myButton" onclick="location.href='businessInv.php';">Back to Your Inventory</button>
+
 		
         </section>
 

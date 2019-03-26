@@ -45,7 +45,7 @@ function requestProcessor($request)
 		return doRegister($request['username'],$request['bzname'],$request['street'],$request['city'],$request['state'],$request['zipcode'],$request['email'],$request['password']);
 	case "validate_session":
 		return doValidate($request['sessionId']);
-	case "ishop":
+	case "inventory":
 		return doInventory();
 	}
 	return array("returnCode" =>'0', 'message'=>"Server received request and processed");

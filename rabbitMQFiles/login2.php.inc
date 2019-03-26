@@ -84,7 +84,7 @@ private $logindb;
 public function validateInventory()
 	{
 		
-		$statement = "SELECT name, brand FROM inventory";
+		$statement = "SELECT product, brand FROM businessinv";
 		$response = $this->logindb->query($statement);
 
 		if ($response->num_rows > 0) // ishop inventory full

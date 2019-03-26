@@ -72,7 +72,7 @@
 
         <div id="mySidenav" class="sidenav">
           <div class="busName">
-          <h1> <?php echho $bzname; ?> </h1>
+          <h1> <?php echo $bzname; ?> </h1>
           </div>
           <section id="navInfo">
             <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>

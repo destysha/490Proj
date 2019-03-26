@@ -13,7 +13,8 @@
     ///////////////////////////// QUERY TO DATABASE //////////////////////////////
     $username = $_SESSION ['username'];
 	
-    $query = "SELECT * FROM business";
+    $query = "SELECT * FROM business
+    	      WHERE username = '$username'";
 
 	 mysqli_query($connectDB,$query);
     

@@ -72,14 +72,14 @@
 
 
         <div id="mySidenav" class="sidenav">
-          <div class="busName">
-            <h1> <img src="images/ishop.png" id="logoiShopD"></h1>
+     	  <div class="busName">
+             <h1> <?php echo $bzname; ?> </h1>
           </div>
           <section id="navInfo">
             <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
             <button class="button" style="vertical-align:middle">
               <a href="ishopInv.php">
-                <span>Inventory </span>
+                <span id="invSpan">Inventory </span>
               </a>
             </button>
 

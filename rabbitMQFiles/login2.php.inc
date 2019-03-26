@@ -79,5 +79,61 @@ private $logindb;
 			return 0;
 		}//close else statement
 	}//close bracket ValidateRegister
+
+
+function notification($email, $product, $subject, $header, $output){
+        $pull2 = "SELECT businessinv.*, business.businessid ";
+        $pull = "SELECT * FROM json";
+        $val = mysqli_query($ishopdb, $pull, $pull2) or die (mysqli_error($ishopdb));
+        $num = mysqli_num_row($val);
+        while ($r = mysqli_feth_array($val, MYSQLI_ASSOC)){
+                $pd     = $r['product_description'];
+                $pdn    = $r['product'];
+
+                $pc     = $r['postal_code'];
+                $zip    = $r['zipcode'];
+
+                $rf     = $r['recalling_firm'];
+                $br     = $r['brand'];
+
+                $res    = $r['reason_for_recall'];
+                $class  = $r['classification'];
+
+                if($zip == $pc){
+                        if($pdn == $pd){
+                                if($br == $rf){
+                                        $output	 = " ";
+                                        $subject = 'You have new recalls!';
+                                        $headers = 'From: ishopforbusiness@gmail.com' . "\r\n" .
+                                                'Reply-To: ishopforbusiness@gmail.com' . "\r\n" .
+                                                'X-Mailer: PHP/' . phpversion();
+
+                                        $username = $_SESSION['username'];
+					
+					$output .= "Greetings, ". $username. ". We have founds new recalls that need to be brought to your attention!"
+                                        $output .= '$class';
+                                        $output .= '$pd';
+                                        $output .= '$rf';
+                                        $output .= '$pc';
+                                        $output .= '$res';
+
+                                        $email = $_SESSION['email'];
+                                        mail($email, $subject, $output, $header);
+                                }
+                        }
+                        else{
+                                return 0;
+                        }
+                }
+                else{
+                        return 0;
+                }
+        }
+}
+
+
+
+
+
 }//close class bracket 
 ?>

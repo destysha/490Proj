@@ -118,7 +118,8 @@ function notification($email, $product, $subject, $header, $output){
                                         $output .= '$res';
 
                                         $email = $_SESSION['email'];
-                                        mail($email, $subject, $output, $header);
+					mail($email, $subject, $output, $header);
+					return 1;
                                 }
                         }
                         else{

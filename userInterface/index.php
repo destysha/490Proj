@@ -81,7 +81,7 @@
             </div>
             <div>
               <button class="bttn">
-                <a href="ishopInv.php">
+                <a href="ishopInv.php">iShop
                   <img src="images/add-remove.png">
                 </a>
               </button>

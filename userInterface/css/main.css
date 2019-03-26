@@ -173,15 +173,16 @@ height:100px;
 }
 
 #right-notification .button {
-    font-size: 20px;
+    font-size: 18px;
     width: 150px;
     vertical-align: middle;
 }
 
 #invSpan{ 
-  font-size: 20px;
-  width: 160px;
-  vertical-align: middle;
+  font-size: 20px !important;
+  width: 160px !important;
+  vertical-align: middle ;
+  color: white !important;
 }
 
 .notification .badge {

@@ -95,7 +95,7 @@
             </article>
           </section>
           <section class="logoutButnC">
-            <a href="#"><img src="images/logout.png" title="logoutBtn" alt="logoutBtn" id="logoutButnD"></a>
+            <a href="../phpFiles/logout.php"><img src="images/logout.png" title="logoutBtn" alt="logoutBtn" id="logoutButnD"></a>
           </section>
           <section class="logoiShopC">
             <a href="index.php"><img src="images/ishop.png" id="logoiShopD"> </a>

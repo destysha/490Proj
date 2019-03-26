@@ -1,6 +1,13 @@
 <?php
 	session_start();
 	$username = $_SESSION ["username"];
+	$bzname   = $_SESSION ['bzname'];
+        $bID      = $_SESSION ['bID'];
+        $street   = $_SESSION ['street'];
+        $city     = $_SESSION ['city'];
+        $zc       = $_SESSION ['zipcode'];
+        $state    = $_SESSION ['state'];
+        $email    = $_SESSION ['email'];
 
 	include (' php/connectDB.php ');
 ?>
@@ -35,7 +42,7 @@
 
         <div id="mySidenav" class="sidenav">
           <div class="busName">
-            <h1> <?php echo $username; ?> </h1>
+            <h1> <?php echo $bzname; ?> </h1>
           </div>
           <section id="navInfo">
             <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
@@ -45,9 +52,9 @@
 
             <article id="companyInfo">
               <h2 class="navInfoTitle"> Business ID: </h2>
-                <h3 class="navInfoData"> <?php echo $bzid; ?> </h3>
+                <h3 class="navInfoData"> <?php echo $bID; ?> </h3>
               <h2 class="navInfoTitle"> Company Address: </h2>
-                <h3 class="navInfoData"> <?php echo "$street $city, $state $zipcode"; ?></h3>
+                <h3 class="navInfoData"> <?php echo "$street $city, $state $zc"; ?></h3>
               <h2 class="navInfoTitle"> Email: </h2>
                 <h3 class="navInfoData"> <?php echo $email; ?> </h3>
               <!--<h2 class="navInfoTitle"> Last Login: </h2>

@@ -120,7 +120,7 @@
         <!--                            MAIN CONTENT                         -->
         <section id="main">
           <div class="nameInContent">
-            <h1> <?php echo $bzname; ?> </h1>
+            <h1> <?php echo $bzname; ?> </h1><br>
           </div>
  		<div class ="inventory" class="animate form">
 		<!--<h1>TABLE OF BUSINESS FROM DB </h1>-->
@@ -159,7 +159,7 @@
 		</div>
 		
 <br><br>
-<h1 class="headers">Table With Delete Option</h1><br><br>
+<h1 class="headers">Table With Delete Option</h1><br>
 <?php  if(isset($_SESSION['msg'])): ?>
 	<div class="msg">
 	  <?php

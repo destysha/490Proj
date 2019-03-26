@@ -88,11 +88,12 @@
               </button>
             </div>
             <div>
-              <button class="bttn">
-                <a href="businessInv.php">
-                  <img src="images/add-remove.png">
-                </a>
-              </button>
+              <a href="ishopInv.php">
+              	<button class="bttn">
+                   <img src="images/add-remove.png">
+		</button>	   
+              </a>
+              
             </div>
             <div>
               <button id="myBtn" class="bttn">
@@ -126,7 +127,7 @@
       <div id="wModal" class="wmodal">
         <!-- Widget Modal content -->
         <div class="wmodal-content">
-          <span class="wclose">&times;</span>
+          <span class="wclose">&times;</span><br>
           <p class="pFR">Food Safety Notification Recalls</p>
 
           <div class="wContent">

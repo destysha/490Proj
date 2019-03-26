@@ -53,7 +53,7 @@
 
             <article id="companyInfo">
               <h2 class="navInfoTitle"> Business ID: </h2>
-                <h3 class="navInfoData"> <?php echo $bID; ?> </h3>
+                <h3 class="navInfoData"> <?php echo "BU00$bID"; ?> </h3>
               <h2 class="navInfoTitle"> Company Address: </h2>
                 <h3 class="navInfoData"> <?php echo "$street $city, $state $zc"; ?></h3>
               <h2 class="navInfoTitle"> Email: </h2>

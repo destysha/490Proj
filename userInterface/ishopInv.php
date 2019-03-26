@@ -1,3 +1,7 @@
+<?php
+	include (" php/connectDB.php ");
+?>
+
 <!DOCTYPE html>
 
 <html>
@@ -34,7 +38,7 @@
 
           <span id="right-notification">
             <a href="#" class="notification">
-              <button class="button">
+              <button class="button" id="bWidget">
                 <span>Notifications </span>
               </button>
               <span class="badge">3</span>
@@ -42,10 +46,23 @@
           </span>
         </div>
 
+        <!-- The widget modal -->
+        <div id="wModal" class="wmodal">
+
+          <!-- Widget Modal content -->
+          <div class="wmodal-content">
+            <span class="wclose">&times;</span><br>
+            <p class="pFR">Food Safety Notification Recalls</p>
+
+            <div class="wContent">
+              <!--<iframe src="https://www.foodsafety.gov/recalls/widget/widget.html" width="167" height="380" alt="Food Safety Widget" title="Food Safety Widget" frameborder="0">&nbsp;</iframe>-->
+            </div>
+          </div>
+        </div>
+
 
         <div id="mySidenav" class="sidenav">
           <div class="busName">
-            <!-- TO BE CHANGED USING PHP FROM SESSION -->
             <h1> <img src="images/ishop.png" id="logoiShopD"></h1>
           </div>
           <section id="navInfo">
@@ -54,17 +71,17 @@
               <a href="businessInv.php">
                 <span>Inventory </span>
               </a>
-              </button>
+            </button>
 
-            <article id="companyInfo">
+ 	    <article id="companyInfo">
               <h2 class="navInfoTitle"> Business ID: </h2>
-                <h3 class="navInfoData"> BU0003 </h3>
+                <h3 class="navInfoData"> <?php echo $bzid; ?> </h3>
               <h2 class="navInfoTitle"> Company Address: </h2>
-                <h3 class="navInfoData"> 46 Oxford Street Paterson, NJ 07522 </h3>
+                <h3 class="navInfoData"> <?php echo "$street $city, $state $zipcode"; ?></h3>
               <h2 class="navInfoTitle"> Email: </h2>
-                <h3 class="navInfoData"> companyemail@email.com </h3>
-              <h2 class="navInfoTitle"> Last Login: </h2>
-                <h3 class="navInfoData"> March 30, 2019 at 12:30PM</h3>
+                <h3 class="navInfoData"> <?php echo $email; ?> </h3>
+              <!--<h2 class="navInfoTitle"> Last Login: </h2>
+                <h3 class="navInfoData"> March 30, 2019 at 12:30PM</h3> -->
             </article>
           </section>
           <section class="logoutButnC">
@@ -82,21 +99,28 @@
         <section id="main">
           <div class="nameInContent">
             <!-- TO BE CHANGED USING PHP FROM SESSION -->
-            <h1> <a href="index.php"><img src="images/ishop.png" class="logoiShopD"> </a> </h1>
+            <h1> <a href="index.php"><img src="images/ishop.png" class="logoiShopD" width="200px"> </a> </h1>
           </div>
 
                 <div class="table100 ver3 m-b-110">
                   <div class="table100-head">
                     <table>
                       <thead>
-                        <tr class="row100 head">
-                          <th class="cell100 column1">GRP_ID</th>
-                          <th class="cell100 column2">UPC14</th>
-                          <th class="cell100 column3">UPC12</th>
-                          <th class="cell100 column4">BRAND</th>
-                          <th class="cell100 column5">NAME</th>
-                          <th class="cell100 column5">ADD</th>
-                        </tr>
+                        <?php
+                  	$conn = mysqli_connect("localhost","user1","user1pass","ishopdb");
+                        if($conn->connect_error)
+                        {
+                                die("connection error:".$conn->connect_error);
+                        }
+                        $sql = "SELECT name,brand FROM inventory";
+                        $result = $conn->query($sql);
+
+                        if($result->num_rows > 0)
+                         {
+                        while ($row = $result->fetch_assoc())
+                        {
+                                echo "<tr class="row100 head"><td>".$row["name"]."</td><td>".$row["brand"]."</td></tr>";
+                        }
                       </thead>
                     </table>
                   </div>

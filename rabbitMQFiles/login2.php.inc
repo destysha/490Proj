@@ -79,5 +79,18 @@ private $logindb;
 			return 0;
 		}//close else statement
 	}//close bracket ValidateRegister
+
+
+	public function getInfo()
+	{
+		$statement = "SELECT username FROM business WHERE businessID= '1'";
+		$response = $this->logindb->query($statement);
+
+		//Response is and array format so we do this loop
+		//reponse is hholding a value called user1 at the moment	
+		foreach($response as $ans){
+			return $ans;
+		}
+	}
 }//close class bracket 
 ?>

@@ -1,6 +1,13 @@
 <?php
 	session_start();
-	include ("php/connectDB.php");
+require ('../rabbitMQFiles/testRabbitMQClient.php');
+
+
+$res = info();
+	foreach($res as $ans)
+	{echo"YOUR RETURN $ans  end";}
+//include ("php/connectDB.php");
+//	echo"$response";
 	$username = $_SESSION ["username"];
 	$bzname   = $_SESSION ["bzname"];
         $bID      = $_SESSION ["bID"];
@@ -76,7 +83,9 @@
 
 
         <!--                            MAIN CONTENT                         -->
-        <section id="main">
+<h1><?php echo $res;  ?></h1>
+	
+	<section id="main">
           <div class="nameInContent">
             <h1> <a href="index.php"><img src="images/ishop.png" width="200px"> </a> </h1>
           </div>

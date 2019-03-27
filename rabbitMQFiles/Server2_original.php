@@ -21,12 +21,6 @@ function doRegister($username,$bzname,$street,$city,$state,$zipcode,$email,$pass
 	return $register->validateRegister($username,$bzname,$street,$city,$state,$zipcode,$email,$password);
 }
 
-function doInfo()
-{
-	$info = new loginDB();
-	return $info->getInfo();
-}
-
 function requestProcessor($request)
 {
   	echo "received request".PHP_EOL;
@@ -42,9 +36,6 @@ function requestProcessor($request)
       		return doLogin($request['username'],$request['password']);
 	case "register":
 		return doRegister($request['username'],$request['bzname'],$request['street'],$request['city'],$request['state'],$request['zipcode'],$request['email'],$request['password']);
-	
-	case "info":
-		return doInfo();
 	case "validate_session":
 		return doValidate($request['sessionId']);
 	}

@@ -1,7 +1,7 @@
 <?php
 
- $email =  "sp2235@njit.edu";
-   $username  = "Shaiddy";
+ $email =  "hariskido214@gmail.com";
+   $username  = "haris";
 
 
 notification ($email, $username);
@@ -47,12 +47,13 @@ function notification($email, $username){
 		$bus += [$pdn => $br];
 	}
 	
-	
+$counter = 0;	
 	foreach($bus as $key=>$value){
 		foreach($busInv as $key2=>$value2){
 			echo "$key and $key2 are the  key pair".PHP_EOL;
 			if ($key == $key2){
 				echo "THERES A MATCH".PHP_EOL;
+				$counter++;
 			}
 			else{
 				echo "No MATCH".PHP_EOL;
@@ -61,12 +62,14 @@ function notification($email, $username){
 		}
 	}
 
-
+echo "$counter hello thihs is counter".PHP_EOL;
 		echo "HEY".PHP_EOL;
                // if($zip == $pc){
-                        if($pdn == $pd){
+	//		$counter = 0;
+			if($pdn == $pd){
 					echo "$pdn here";
-                                if($br == $rf){
+					if($br == $rf){
+					//	$counter++;
 						echo "or here";
                                         $output  = " ";
                                         $subject = 'You have new recalls!';
@@ -94,7 +97,8 @@ function notification($email, $username){
                         }
                         else{
                                 return 0;
-                        }
+			}
+			
                // }
                // else{
                   //      return 0;

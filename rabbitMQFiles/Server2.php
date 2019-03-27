@@ -21,10 +21,10 @@ function doRegister($username,$bzname,$street,$city,$state,$zipcode,$email,$pass
 	return $register->validateRegister($username,$bzname,$street,$city,$state,$zipcode,$email,$password);
 }
 
-function doInfo()
+function doInfo($username)
 {
 	$info = new loginDB();
-	return $info->getInfo();
+	return $info->getInfo($username);
 }
 
 function requestProcessor($request)
@@ -44,7 +44,7 @@ function requestProcessor($request)
 		return doRegister($request['username'],$request['bzname'],$request['street'],$request['city'],$request['state'],$request['zipcode'],$request['email'],$request['password']);
 	
 	case "info":
-		return doInfo();
+		return doInfo($request['username']);
 	case "validate_session":
 		return doValidate($request['sessionId']);
 	}

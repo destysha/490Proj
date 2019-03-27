@@ -1,7 +1,7 @@
 <?php 
 	session_start();
-	include ("php/connectDB.php");
-	$username = $_SESSION ["username"];
+	include ("php/connectDB2.php");
+/*	$username = $_SESSION ["username"];
 	$bzname   = $_SESSION ["bzname"];
         $bID      = $_SESSION ["bID"];
         $street   = $_SESSION ["street"];
@@ -9,7 +9,7 @@
         $zc       = $_SESSION ["zipcode"];
         $state    = $_SESSION ["state"];
         $email    = $_SESSION ["email"];
-
+ */
 	include('delete.php');
 
 	//get table to updated

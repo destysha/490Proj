@@ -81,16 +81,21 @@ private $logindb;
 	}//close bracket ValidateRegister
 
 
-	public function getInfo()
+	public function getInfo($username)
 	{
-		$statement = "SELECT username FROM business WHERE businessID= '1'";
+		$uname = $this->logindb->real_escape_string($username);
+		$statement = "SELECT * FROM business WHERE username = '$uname'";
 		$response = $this->logindb->query($statement);
-
+		
 		//Response is and array format so we do this loop
 		//reponse is hholding a value called user1 at the moment	
-		foreach($response as $ans){
-			return $ans;
+		
+		foreach($response as $ans)
+		{
+			$username =  $ans;
 		}
+		return $username;
+
 	}
 }//close class bracket 
 ?>

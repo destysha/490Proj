@@ -56,15 +56,13 @@ function register ( $username,$street,$city,$state,$email,$password  )
 
 
 
-function info()
+function info($username)
 {
 	$client = new rabbitMQClient("testRabbitMQ.ini","testServer");
 	$request3 = array();
 	$request3['type'] ="info";
-
+	$request3['username'] = $username;
 	$response = $client->send_request($request3);
-	echo "client received response for info-Haris: ".PHP_EOL;
-
                 return $response;
 }
 

@@ -1,22 +1,8 @@
 <?php
 	session_start();
-require ('../rabbitMQFiles/testRabbitMQClient.php');
+//require ('../rabbitMQFiles/testRabbitMQClient.php');
 
-
-$res = info();
-	foreach($res as $ans)
-	{echo"YOUR RETURN $ans  end";}
-//include ("php/connectDB.php");
-//	echo"$response";
-	$username = $_SESSION ["username"];
-	$bzname   = $_SESSION ["bzname"];
-        $bID      = $_SESSION ["bID"];
-        $street   = $_SESSION ["street"];
-        $city     = $_SESSION ["city"];
-        $zc       = $_SESSION ["zipcode"];
-        $state    = $_SESSION ["state"];
-        $email    = $_SESSION ["email"];
-
+include ("php/connectDB2.php");
 	
 ?>
 

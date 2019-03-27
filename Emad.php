@@ -1,7 +1,7 @@
 <?php
 
- $email =  "sp2235@njit.edu";
-   $username  = "Shaiddy";
+ $email =  "emadtirmizi@gmail.com";
+   $username  = "Emad";
 
 
 notification ($email, $username);
@@ -9,7 +9,7 @@ notification ($email, $username);
 
 function notification($email, $username){
 
- $ishop =  mysqli_connect("localhost","user1","user1pass","ishopdb");
+ $ishop =  mysqli_connect("localhost","root","","ishopdb");
    
   
 
@@ -24,7 +24,8 @@ function notification($email, $username){
 	
 	$busInv = array();
 	$bus = array();
-
+	
+	$counter = 0;
 	while ($r = mysqli_fetch_array($val, MYSQLI_ASSOC)){
                 $pd     = $r['product_description'];
                 
@@ -52,6 +53,7 @@ function notification($email, $username){
 		foreach($busInv as $key2=>$value2){
 			echo "$key and $key2 are the  key pair".PHP_EOL;
 			if ($key == $key2){
+				$counter++;
 				echo "THERES A MATCH".PHP_EOL;
 			}
 			else{
@@ -61,7 +63,7 @@ function notification($email, $username){
 		}
 	}
 
-
+		echo "$counter".PHP_EOL;
 		echo "HEY".PHP_EOL;
                // if($zip == $pc){
                         if($pdn == $pd){

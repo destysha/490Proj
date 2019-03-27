@@ -9,7 +9,7 @@
 
   	$sessionId = session_id();
 
-  	//echo "<br>The session ID is $sessionId<br>";
+  	echo "<br>The session ID is $sessionId<br>";
 
 	$_SESSION = array( );    //make $_SESSION empty
 	session_destroy( );      //kills server data on session

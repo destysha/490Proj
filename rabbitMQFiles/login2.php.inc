@@ -97,5 +97,28 @@ private $logindb;
 		return $username;
 
 	}
+
+	public function getinvB($username)
+        {
+                $uname = $this->logindb->real_escape_string($username);
+                $statement = "SELECT * FROM businessinv WHERE username = '$uname'";
+                $response = $this->logindb->mysqli_query($statement);
+		
+		$array = array('Ha','AH','EM','SH');
+		foreach($array as $a)
+		{
+			return $a;
+			echo"$a";
+		}	
+                //Response is and array format so we do this loop
+              //c  while ($row = mysqli_fetch_assoc($response))
+	//c	{
+			
+	//c		return $row;
+	//c	}
+	
+			
+        }
+
 }//close class bracket 
 ?>

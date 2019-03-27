@@ -66,4 +66,15 @@ function info($username)
                 return $response;
 }
 
+function fetchInv($username,$sql)
+{
+        $client = new rabbitMQClient("testRabbitMQ.ini","testServer");
+        $request4 = array();
+        $request4['type'] ="inv";
+	$request4['username'] = $username;
+	$request4['sql']=$sql;
+        $response = $client->send_request($request4);
+                return $response;
+}
+
 ?>

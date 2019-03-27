@@ -1,7 +1,8 @@
 <?php 
 	session_start();
-	include ("php/connectDB2.php");
-/*	$username = $_SESSION ["username"];
+//	include ("php/connectDB2.php");
+/*
+	$username = $_SESSION ["username"];
 	$bzname   = $_SESSION ["bzname"];
         $bID      = $_SESSION ["bID"];
         $street   = $_SESSION ["street"];
@@ -10,7 +11,29 @@
         $state    = $_SESSION ["state"];
         $email    = $_SESSION ["email"];
  */
-	include('delete.php');
+require ('../rabbitMQFiles/testRabbitMQClient.php');
+$username = $_SESSION ['username'];
+
+/////Getting all info related to users account based on whos logged in ..session///////
+
+$res = info($username);
+        $ans = array();
+        foreach ($res as $i)
+        {
+//              echo"<br>".$i."<br>";
+                array_push($ans,$i);
+        }
+        $bID = $ans[0];
+        $user = $ans[1]; 
+        $bzname =$ans[2]; 
+        $street = $ans[3];  
+        $city = $ans[4]; 
+        $state = $ans[5]; 
+        $zipcode = $ans[6]; 
+	$email = $ans[7];
+
+
+//	include('delete.php');
 
 	//get table to updated
 	  if(isset($_GET['edit'])){
@@ -123,7 +146,42 @@
             <h1> <?php echo $bzname; ?> </h1><br>
           </div>
  		<div class ="inventory" class="animate form">
-		<!--<h1>TABLE OF BUSINESS FROM DB </h1>-->
+		
+
+		<!--March 27 Haris -->
+	<?php
+//		require ('../rabbitMQFiles/testRabbitMQClient.php');
+//		$username = $_SESSION ['username'];
+		
+		$sql = "SELECT product,brand,qty FROM businessinv WHERE businessID = '$bID'";
+		$record = fetchInv($username,$sql);
+
+		$html = "<table class = 'fixed_header'>";
+		$html .= "<thead>";
+		  $html .="<tr class='trS'>";
+			$html .="<th class='thS'>Product</th>";
+			$html .="<th class='thS'>Brand</th>";
+			$html .="<th class='thS'>Qty</th>";
+		  $html .="</tr>";
+		$html .="</thead>";
+			$count = 1;
+			foreach ($record as $aR)
+			{
+				$html .="<td class='thS'>";
+				foreach($aR as $key => $row)
+				{
+					$html .="<td class='thS'>".$row."</td>";
+				}
+				$html .= "</tr>";
+				$count +=1;
+			}
+			$html .="</table>";
+			echo $html;
+
+	?>
+
+		
+	<!--<h1>TABLE OF BUSINESS FROM DB </h1>-->
 		<br>
                     <table class="fixed_header">
                         <tr>

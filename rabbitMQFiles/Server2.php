@@ -27,6 +27,26 @@ function doInfo($username)
 	return $info->getInfo($username);
 }
 
+function getInv($username,$sql)
+{
+	$db = mysqli_connect("localhost","user1","user1pass","ishopdb");
+	$runQ = mysqli_query($db,$sql);
+	$queryBack = mysqli_num_rows($runQ);
+
+	if ($queryBack > 0 )
+	{
+		while($row = mysqli_fetch_assoc($runQ))
+		{
+			$temp[] = $row;
+		}
+		print_r($temp);
+		return $temp;
+	}
+//	$inv = new loginDB();
+//        return $inv->getinvB($username);
+}
+
+
 function requestProcessor($request)
 {
   	echo "received request".PHP_EOL;
@@ -45,6 +65,8 @@ function requestProcessor($request)
 	
 	case "info":
 		return doInfo($request['username']);
+	case "inv":
+                return getInv($request['username'],$request['sql']);
 	case "validate_session":
 		return doValidate($request['sessionId']);
 	}

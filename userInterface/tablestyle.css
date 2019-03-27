@@ -65,9 +65,19 @@ width:auto;
 overflow:auto;
 height:400px;
 }
-
+.tBS{
+display:block;
+width:auto;
+overflow:auto;
+height:400px;
+}
 .fixed_header thead tr{
 display:block;
+}
+
+.trS{
+display:block;
+
 }
 
 .fixed_header thead{
@@ -76,6 +86,13 @@ color:#fff;
 }
 
 .fixed_header th, .fixed_header td{
+padding:5px;
+text-align:center;
+width:250px;
+border: 1px solid #ddd;
+}
+
+.thS{
 padding:5px;
 text-align:center;
 width:250px;

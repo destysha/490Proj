@@ -1,6 +1,7 @@
 <?php
 	session_start();
-	include ("php/connectDB.php");
+	include ("php/connectDB2.php");
+/*
 	$username = $_SESSION ["username"];
 	$bzname   = $_SESSION ["bzname"];
         $bID      = $_SESSION ["bID"];
@@ -9,7 +10,7 @@
         $zc       = $_SESSION ["zipcode"];
         $state    = $_SESSION ["state"];
         $email    = $_SESSION ["email"];
-	
+ */	
 ?>
 
 <!DOCTYPE html>

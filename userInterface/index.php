@@ -1,15 +1,8 @@
 <?php
 	session_start();
-	include ("php/connectDB.php");
-	$username = $_SESSION ["username"];
-	$bzname   = $_SESSION ["bzname"];
-        $bID      = $_SESSION ["bID"];
-        $street   = $_SESSION ["street"];
-        $city     = $_SESSION ["city"];
-        $zc       = $_SESSION ["zipcode"];
-        $state    = $_SESSION ["state"];
-        $email    = $_SESSION ["email"];
+//require ('../rabbitMQFiles/testRabbitMQClient.php');
 
+include ("php/connectDB2.php");
 	
 ?>
 
@@ -76,7 +69,8 @@
 
 
         <!--                            MAIN CONTENT                         -->
-        <section id="main">
+	
+	<section id="main">
           <div class="nameInContent">
             <h1> <a href="index.php"><img src="images/ishop.png" width="200px"> </a> </h1>
           </div>

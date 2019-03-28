@@ -1,26 +1,31 @@
 <?php
 
-   $email 	=  "shaiddyperez@gmail.com";
-   $username    =  "Shaiddy";
+  
+ 
 
 
-notification ($email, $username);
+notification ();
 
 
-function notification($email, $username){
+function notification(){
 
 	$ishop =  mysqli_connect("localhost","user1","user1pass","ishopdb");
 
         $pull2 = "SELECT businessinv.*, business.businessID FROM businessinv LEFT OUTER JOIN business ON businessinv.businessID = business.businessID";
         $pull = "SELECT * FROM json";
-        $pull3 = "SELECT business.* FROM business LEFT OUTER JOIN businessinv ON business.businessID = businessinv.businessID";
+	$recip = "SELECT business.email, business.businessID FROM business LEFT OUTER JOIN businessinv ON business.businessID = businessinv.businessID";
+	$rsql = mysqli_query($ishop, $recip) or die (mysqli_error($ishop));
         $val = mysqli_query($ishop, $pull) or die (mysqli_error($ishop));
         $num = mysqli_num_rows($val);
 	$val2 = mysqli_query($ishop, $pull2) or die (mysqli_error($ishop));
-	$num1 = mysqli_num_rows($val2);
+	$num1 = mysqli_num_rows($rsql);
+	$num3 = mysqli_num_rows($val3);
 	
-	
+	$femail=array();
+	$IDs = array();
 	$json = array();
+	$recL = array();
+	$sent2 = array();
 	$busInv = array();        
 	$matches = array();
 
@@ -36,12 +41,21 @@ function notification($email, $username){
                 
 		$json += [$pd=>$rf];
 	}
+	
+	while ($s = mysqli_fetch_array($rsql, MYSQLI_ASSOC)){
+		$businessID	= $s['businessID'];
+		$email		= $s['email'];
+		$recL += [$businessID=>$email];
+	}
 
 	while ($t = mysqli_fetch_array($val2,MYSQLI_ASSOC)){
 
 		$pdn    = $t['product'];
 		$br     = $t['brand'];
 		$busInv += [$pdn=>$br];
+
+		$id	= $t['businessID'];
+		$IDs	+= [$id=>$br];
 	}
 	
 	
@@ -64,6 +78,38 @@ function notification($email, $username){
 			}
 		}
 	}
+	
+	foreach($recL as $key3=>$value3){
+		foreach($IDs as $key4=>$value4){
+			foreach($matches as $key5=>$value5){
+				if ($key3 == $key4){
+					if ($value4==$value5){
+						$sent2 += [$key3=>$value3];
+						$femail = array_keys($sent2);
+					}
+					else{
+						continue;
+					}
+                        	}
+                        	else{
+                                	continue;
+				}
+			}
+                }
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 //echo "$counter hello thihs is counter".PHP_EOL;
@@ -82,7 +128,7 @@ function notification($email, $username){
 
                                        // $username = $_SESSION['username'];
                                        
-                                        $output .= "\n\nGreetings,  $username,\n\n". "We have founds new recalls that need to be brought to your attention!\n\n";
+                                        $output .= "\n\nGreetings,  Business,\n\n". "We have founds new recalls that need to be brought to your attention!\n\n";
                                         $cnt = 0;
 					foreach($matches  as $key=>$value)
 					{	
@@ -91,22 +137,11 @@ function notification($email, $username){
               				}
                                        // $email = $_SESSION['email'];
 					echo "$output\n";
-                                        mail($email, $subject, $output, $headers);
-					echo "\nMail Sent!".PHP_EOL;
-//                                        return 1;
-  //                              }
-    //                            else{
-      //                                  return 0;
-        //                        }
-          //              }
-            //            else{
-              //                  return 0;
-		//	}
-			
-               // }
-               // else{
-                  //      return 0;
-                //}
+						$sender = implode(',',$femail);
+						$email = "
+						mail($sender, $subject, $output, $headers);
+						echo "\n Mail Sent!".PHP_EOL;
+					}
 }
 
 ?>

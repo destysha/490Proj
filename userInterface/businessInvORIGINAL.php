@@ -1,6 +1,6 @@
-<?php
+<?php 
 	session_start();
-	include ("php/connectDB2.php");
+//	include ("php/connectDB2.php");
 /*
 	$username = $_SESSION ["username"];
 	$bzname   = $_SESSION ["bzname"];
@@ -10,14 +10,65 @@
         $zc       = $_SESSION ["zipcode"];
         $state    = $_SESSION ["state"];
         $email    = $_SESSION ["email"];
- */	
+ */
+require ('../rabbitMQFiles/testRabbitMQClient.php');
+$username = $_SESSION ['username'];
+
+/////Getting all info related to users account based on whos logged in ..session///////
+
+$res = info($username);
+        $ans = array();
+        foreach ($res as $i)
+        {
+//              echo"<br>".$i."<br>";
+                array_push($ans,$i);
+        }
+        $bID = $ans[0];
+        $user = $ans[1]; 
+        $bzname =$ans[2]; 
+        $street = $ans[3];  
+        $city = $ans[4]; 
+        $state = $ans[5]; 
+        $zipcode = $ans[6]; 
+	$email = $ans[7];
+
+
+//	include('delete.php');
+/*
+	if(isset($_POST['update']))
+	{
+		$product = $_POST['product'];
+		$brand = $_POST['brand'];
+		$qty = $_POST['qty'];
+	
+		require ('../rabbitMQFiles/testRabbitMQClient.php');
+		$re = update($product,$brand,$qty,$bID);
+		echo"$re".PHP_EOL;
+
+	}
+
+ */
+
+
+	//get table to updated
+	  if(isset($_GET['edit'])){
+	  $id = $_GET['edit'];
+	  
+	  $edit_state=true;	
+	  $rec = mysqli_query($conn,"SELECT * FROM businessinv WHERE id=$id AND businessID =$bID");
+	  $record = mysqli_fetch_array($rec);
+		
+	  $product = $record['product'];
+	  $brand = $record['brand'];
+	  $qty = $record['qty'];
+	  $id = $record['id'];
+	}
+
 ?>
-
 <!DOCTYPE html>
-
 <html>
   <head>
-    <title> iShop | Inventory </title>
+    <title> <?php echo $bzname; ?> | Inventory </title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="css/main.css">
   <!--===============================================================================================-->
@@ -36,7 +87,6 @@
   	<link rel="stylesheet" type="text/css" href="css/util.css">
   	<link rel="stylesheet" type="text/css" href="css/inventory.css">
 	<link rel="stylesheet" type="text/css" href="tablestyle.css">
-	<script src"https://code.jquery.com/jquery-3.3.1.min.js"></script>
   <!--===============================================================================================-->
   </head>
 
@@ -44,7 +94,7 @@
     <div class="bgimg">
       <div class="insidebg">
 
-        <div id="topNav-container">
+       <div id="topNav-container">
           <span id="navToggle" onclick="openNav()">&#9776;</span>
 
           <span id="right-notification">
@@ -57,34 +107,18 @@
           </span>
         </div>
 
-        <!-- The widget modal -->
-        <div id="wModal" class="wmodal">
-
-          <!-- Widget Modal content -->
-          <div class="wmodal-content">
-            <span class="wclose">&times;</span><br>
-            <p class="pFR">Food Safety Notification Recalls</p>
-
-            <div class="wContent">
-              <!--<iframe src="https://www.foodsafety.gov/recalls/widget/widget.html" width="167" height="380" alt="Food Safety Widget" title="Food Safety Widget" frameborder="0">&nbsp;</iframe>-->
-            </div>
-          </div>
-        </div>
-
 
         <div id="mySidenav" class="sidenav">
-     	  <div class="busName">
-             <h1> <?php echo $bzname; ?> </h1>
+          <div class="busName">
+          <h1> <?php echo $bzname; ?> </h1>
           </div>
           <section id="navInfo">
             <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-          <a href="businessInv.php">
-	     <button class="button" style="vertical-align:middle">
-	        <span id="invSpan">Inventory </span> 
-	     </button>
-	  </a>
-            
-           
+            <button class="button" style="vertical-align:middle">
+              <a href="businessInv.php">
+                <span id="invSpan">Inventory </span>
+              </a>
+              </button>
 
             <article id="companyInfo">
               <h2 class="navInfoTitle"> Business ID: </h2>
@@ -104,84 +138,126 @@
             <a href="index.php"><img src="images/ishop.png" id="logoiShopD"> </a>
           </section>
         </div>
+	      
+      <!-- The widget modal -->
+      <div id="wModal" class="wmodal">
+        <!-- Widget Modal content -->
+        <div class="wmodal-content">
+          <span class="wclose">&times;</span><br>
+          <p class="pFR">Food Safety Notification Recalls</p>
 
+          <div class="wContent">
+            <!--<iframe src="https://www.foodsafety.gov/recalls/widget/widget.html" width="167" height="380" alt="Food Safety Widget" title="Food Safety Widget" frameborder="0">&nbsp;</iframe>-->
+          </div>
+        </div>
+      </div>
+	
 
 
 
         <!--                            MAIN CONTENT                         -->
         <section id="main">
           <div class="nameInContent">
-            <h1> <a href="index.php"><img src="images/ishop.png" width="200px"> </a> </h1>
+            <h1> <?php echo $bzname; ?> </h1><br>
           </div>
+ 		<div class ="inventory" class="animate form">
+		
 
-     	 
-                  <!--<div class="table100-body js-pscroll">
-                    <table>
-                      <tbody>
-			 <tr class="row100 body">
-                          <td class="cellMod">Like a butterfly</td>
-                          <td class="cellMod">Boxing</td>
-                          <td class="cellMod">9:00 AM - 11:00 AM</td>
-                          <td class="cellMod">Aaron Chapman</td>
-                          <td class="cellMod">10</td>
-                          <td class="cellMod"><button id="addBtn"><i class="fa fa-plus"></i></button></td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-		<h1>ISHOP INVENTORY FROM DB </h1>-->
+		<!--March 27 Haris -->
+	<?php
+//		require ('../rabbitMQFiles/testRabbitMQClient.php');
+//		$username = $_SESSION ['username'];
+		
+		$sql = "SELECT product,brand,qty FROM businessinv WHERE businessID = '$bID'";
+		$record = fetchInv($username,$sql);
+
+		$html = "<table class = 'fixed_header'>";
+		$html .= "<thead>";
+		  $html .="<tr class='trS'>";
+			$html .="<th class='thS'>Product</th>";
+			$html .="<th class='thS'>Brand</th>";
+			$html .="<th class='thS'>Qty</th>";
+		  $html .="</tr>";
+		$html .="</thead>";
+			$count = 1;
+			foreach ($record as $aR)
+			{
+				
+				foreach($aR as $key => $row)
+				{
+					$html .="<td class='thS'>".$row."</td>";
+				}
+				$html .= "</tr>";
+				$count +=1;
+			}
+			$html .="</table>";
+			echo $html;
+
+	?>
+
+		<br><br><br>
+	<!--<h1>TABLE OF BUSINESS FROM DB </h1>     Old Table, New is above this *-->
+	<!--	<br>
                     <table class="fixed_header">
                         <tr>
                           <th>PRODUCT</th>
                           <th>BRAND</th>
+			  <th>QTY</th>
                         </tr>
-                        <?php
-				$conn = mysqli_connect("localhost","user1","user1pass","ishopdb");
-				if($conn->connect_error)
-				{
-					die("connection error:".$conn->connect_error);
-				}
-				$sql = "SELECT name,brand FROM inventory";
-				$result = $conn->query($sql);
+			<?php/* 
+			$conn = mysqli_connect("localhost","user1","user1pass","ishopdb");
+			if($conn->connect_error)
+			{
+				die("connection error:".$conn->connect_error);
+			}
+			$sql = "SELECT * FROM businessinv WHERE businessID = $bID";
+			$result = $conn->query($sql);
 
-				if($result->num_rows > 0)
-				 {
-				while ($row = $result->fetch_assoc())
-				{
-					echo "<tr><td>".$row["name"]."</td><td>".$row["brand"]."</td></tr>";
-				}
-				echo "</table>";
-				} //end if for each row
-				else
-				{
-					echo "no results in table";
-				}       
-				$conn->close();
-                        ?>
-                    </table>
-		    <br><br>
+			if($result->num_rows > 0)
+			 {
+                        while ($row = $result->fetch_assoc())
+                        {
+                                echo "<tr><td>".$row["product"]."</td><td>".$row["brand"]."</td><td>".$row["qty"]."</td></tr>";
+                        }
+                        echo "</table>";
+                } //end if for each row
+                else
+                {
+                        echo "no results in table";
+		}	
+		$conn->close();
+			 */?>
+                    </table><br><br>
+   		<button class="myButton" onclick="location.href='ishopInv.php';">Update Inventory</button>
+		</div>
+-->
+
+<br><br>
+
+<!-- Taken out momentaraly
+
+<h1 class="headers">HARIS FORM UPDATE INV</h1><br>
+<form class="updateForm" method = "POST" action="businessInv.php">
+	<div>
+                    <label>Product</label>
+                     <input type="text" name="product" value="Product">
+		  </div>
+	<div>
+                    <label>Brand</label>
+                     <input type="text" name="brand" value="Brand">
+		  </div>
+	<div>
+                    <label>Qty</label>
+                     <input type="text" name="qty" value="qty">
+                  </div>
 	
-		    echo"<SCRIPT>alert($_GET['msg']);</SCRIPT>";
+	<input type="submit" name="update" value="Update"> <br><br>
+<button class="myButton" name="update"onclick="location.href='businessInv.php';">Update</button>
+</form>	
 
-		<div>
-		<form class="updateForm" id="updateForm" action="updateInv.php" method="POST">
-		<label for="product">Product</label>
-		<input type="text" name="product" id="product"placeholder="Product" />
-		<label for="brand">Brand</label>
-		<input type="text" name="brand" id="brand"placeholder="Brand" />
-		<label for="qty">Quantity</label>
-		<input type="text" name="qty" id="quantity"placeholder="Quantity" />
-		<input class="myButton"type="submit" name="submit-update" value="Update" onclick= "return chk()">
-		</form><br>
-	</div>
-	<p id="msg"></p>
-        <button class ="myButton" onclick="location.href='businessInv.php';">Back to Your Inventory</button>
-
-		
+-->
         </section>
-
-      </div>
+      </div> //these 2 div's are right under opening body tag
     </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
@@ -207,28 +283,6 @@
 
 
     	</script>
-	<script>
-		function chk()
-		{
-			var  product=document.getElementById('product').value;
-			var  brand=document.getElementById('brand').value;
-			var  quantity=document.getElementById('quantity').value;
-			var  dataString='product='+product+'&brand='+brand+'&quantity'+quantity;
-			$.ajax({
-				type:"post",
-				url:  "updateInv.php",
-				data:dataString,
-				data:{'product':product},
-				data:{'brand':brand}.
-				data:{'quantity':quantity};
-				cache:false,
-				success: function(html){
-					$('#msg').html(html);
-				}
-			});
-			return false;
-		}
-	</script>
     <!--===============================================================================================-->
   </body>
 </html>

@@ -90,9 +90,9 @@ function notification($email, $username){
 						$output .= "$cnt: $key, $value\n";
               				}
                                        // $email = $_SESSION['email'];
-					echo "$output\n";
+//					echo "$output\n";
                                         mail($email, $subject, $output, $headers);
-					echo "\nMail Sent!".PHP_EOL;
+//					echo "\nMail Sent!".PHP_EOL;
 					$_SESSION['noti'] = $output;
 					$_SESSION['noticnt'] = $cnt;
 

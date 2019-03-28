@@ -1,13 +1,13 @@
 <?php
 
-   $email 	=  "shaiddyperez@gmail.com";
-   $username    =  "Shaiddy";
+  
+ 
 
 
-notification ($email, $username);
+notification ();
 
 
-function notification($email, $username){
+function notification(){
 
 	$ishop =  mysqli_connect("localhost","user1","user1pass","ishopdb");
 

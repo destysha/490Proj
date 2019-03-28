@@ -1,5 +1,5 @@
 <?php
-
+session_start();
    $email 	=  "shaiddyperez@gmail.com";
    $username    =  "Shaiddy";
 
@@ -93,7 +93,10 @@ function notification($email, $username){
 					echo "$output\n";
                                         mail($email, $subject, $output, $headers);
 					echo "\nMail Sent!".PHP_EOL;
-//                                        return 1;
+					$_SESSION['noti'] = $output;
+					$_SESSION['noticnt'] = $cnt;
+
+					//                                        return 1;
   //                              }
     //                            else{
       //                                  return 0;

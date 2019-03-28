@@ -1,6 +1,8 @@
 <?php
 	session_start();
 //require ('../rabbitMQFiles/testRabbitMQClient.php');
+$cnt = $_SESSION['noticnt'];
+$output = $_SESSION['noti'];
 
 include ("php/connectDB2.php");
 	
@@ -28,7 +30,7 @@ include ("php/connectDB2.php");
               <button class="button" id="bWidget">
                 <span>Notifications </span>
               </button>
-              <span class="badge">3</span>
+	      <span class="badge"><?php echo $cnt;  ?></span>
             </a>
           </span>
         </div>
@@ -125,7 +127,8 @@ include ("php/connectDB2.php");
           <p class="pFR">Food Safety Notification Recalls</p>
 
           <div class="wContent">
-            <!--<iframe src="https://www.foodsafety.gov/recalls/widget/widget.html" width="167" height="380" alt="Food Safety Widget" title="Food Safety Widget" frameborder="0">&nbsp;</iframe>-->
+<?php echo $output; ?>
+<!--<iframe src="https://www.foodsafety.gov/recalls/widget/widget.html" width="167" height="380" alt="Food Safety Widget" title="Food Safety Widget" frameborder="0">&nbsp;</iframe>-->
           </div>
         </div>
       </div>

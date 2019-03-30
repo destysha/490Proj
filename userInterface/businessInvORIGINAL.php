@@ -11,32 +11,6 @@
         $state    = $_SESSION ["state"];
         $email    = $_SESSION ["email"];
  */
-<<<<<<< HEAD
-require ('../rabbitMQFiles/testRabbitMQClient.php');
-$username = $_SESSION ['username'];
-
-/////Getting all info related to users account based on whos logged in ..session///////
-
-$res = info($username);
-        $ans = array();
-        foreach ($res as $i)
-        {
-//              echo"<br>".$i."<br>";
-                array_push($ans,$i);
-        }
-        $bID = $ans[0];
-        $user = $ans[1]; 
-        $bzname =$ans[2]; 
-        $street = $ans[3];  
-        $city = $ans[4]; 
-        $state = $ans[5]; 
-        $zipcode = $ans[6]; 
-	$email = $ans[7];
-
-
-//	include('delete.php');
-=======
-//include('delete.php');
 require ('../rabbitMQFiles/testRabbitMQClient.php');
 $username = $_SESSION ['username'];
 
@@ -75,7 +49,6 @@ $res = info($username);
 
  */
 
->>>>>>> 994fbd85ab760de37dca9b313a348cdce29ad5d5
 
 	//get table to updated
 	  if(isset($_GET['edit'])){
@@ -195,11 +168,7 @@ $res = info($username);
 //		require ('../rabbitMQFiles/testRabbitMQClient.php');
 //		$username = $_SESSION ['username'];
 		
-<<<<<<< HEAD
 		$sql = "SELECT product,brand,qty FROM businessinv WHERE businessID = '$bID'";
-=======
-		$sql = "SELECT product,brand,qty,id FROM businessinv WHERE businessID = '$bID'";
->>>>>>> 994fbd85ab760de37dca9b313a348cdce29ad5d5
 		$record = fetchInv($username,$sql);
 
 		$html = "<table class = 'fixed_header'>";
@@ -208,34 +177,15 @@ $res = info($username);
 			$html .="<th class='thS'>Product</th>";
 			$html .="<th class='thS'>Brand</th>";
 			$html .="<th class='thS'>Qty</th>";
-<<<<<<< HEAD
-=======
-			$html .="<th class='thS'>Action</th>";
->>>>>>> 994fbd85ab760de37dca9b313a348cdce29ad5d5
 		  $html .="</tr>";
 		$html .="</thead>";
 			$count = 1;
 			foreach ($record as $aR)
 			{
-<<<<<<< HEAD
-				$html .="<td class='thS'>";
+				
 				foreach($aR as $key => $row)
 				{
 					$html .="<td class='thS'>".$row."</td>";
-=======
-				$c = 0;
-				foreach($aR as $key => $row)
-				{
-					if($c ==3)
-					{
-						$html.="<td><a href='delete.php?delete=$row'>Delete</a></td>";
-						//$html.="<td class='thS'> <a href='delete.php?delete=".$row.">'DELETE</a></td>";
-					}
-					else{
-						$html .="<td class='thS'>".$row."</td>";
-					}
-					$c++;
->>>>>>> 994fbd85ab760de37dca9b313a348cdce29ad5d5
 				}
 				$html .= "</tr>";
 				$count +=1;
@@ -245,15 +195,9 @@ $res = info($username);
 
 	?>
 
-<<<<<<< HEAD
-		
-	<!--<h1>TABLE OF BUSINESS FROM DB </h1>-->
-		<br>
-=======
 		<br><br><br>
 	<!--<h1>TABLE OF BUSINESS FROM DB </h1>     Old Table, New is above this *-->
 	<!--	<br>
->>>>>>> 994fbd85ab760de37dca9b313a348cdce29ad5d5
                     <table class="fixed_header">
                         <tr>
                           <th>PRODUCT</th>

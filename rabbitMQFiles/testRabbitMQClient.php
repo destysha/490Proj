@@ -77,4 +77,31 @@ function fetchInv($username,$sql)
                 return $response;
 }
 
+<<<<<<< HEAD
+=======
+function update($product,$brand,$qty,$bID)
+{
+	$client = new rabbitMQClient("testRabbitMQ.ini","testServer");
+        $request5 = array();
+	$request5['type'] ="update";
+	$request5['product'] = $product;
+	$request5['brand'] = $brand;
+	$request5['qty'] = $qty;
+	$request5['bID'] = $bID;
+
+	$response = $client->send_request($request5);
+                return $response;
+}
+
+function del($id)
+{
+	$client = new rabbitMQClient("testRabbitMQ.ini","testServer");
+        $request6 = array();
+        $request6['type'] ="delete";
+	$request6['id'] = $id;
+
+	$response = $client->send_request($request6);
+		return $response;
+}
+>>>>>>> 994fbd85ab760de37dca9b313a348cdce29ad5d5
 ?>

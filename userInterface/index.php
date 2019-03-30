@@ -1,9 +1,17 @@
 <?php
 	session_start();
 //require ('../rabbitMQFiles/testRabbitMQClient.php');
+<<<<<<< HEAD
 
 include ("php/connectDB2.php");
 	
+=======
+$cnt = $_SESSION['noticnt'];
+$output = $_SESSION['noti'];
+
+include ("php/connectDB2.php");
+include ("Emad.php");	
+>>>>>>> 994fbd85ab760de37dca9b313a348cdce29ad5d5
 ?>
 
 <!DOCTYPE html>
@@ -28,7 +36,7 @@ include ("php/connectDB2.php");
               <button class="button" id="bWidget">
                 <span>Notifications </span>
               </button>
-              <span class="badge">3</span>
+	      <span class="badge"><?php echo $cnt;  ?></span>
             </a>
           </span>
         </div>
@@ -69,7 +77,10 @@ include ("php/connectDB2.php");
 
 
         <!--                            MAIN CONTENT                         -->
+<<<<<<< HEAD
 <h1><?php echo $res;  ?></h1>
+=======
+>>>>>>> 994fbd85ab760de37dca9b313a348cdce29ad5d5
 	
 	<section id="main">
           <div class="nameInContent">
@@ -125,9 +136,17 @@ include ("php/connectDB2.php");
           <span class="wclose">&times;</span><br>
           <p class="pFR">Food Safety Notification Recalls</p>
 
-          <div class="wContent">
-            <!--<iframe src="https://www.foodsafety.gov/recalls/widget/widget.html" width="167" height="380" alt="Food Safety Widget" title="Food Safety Widget" frameborder="0">&nbsp;</iframe>-->
-          </div>
+          <section class="wContent">
+		
+			
+			<?php
+				
+				//header('Content-type: text/plain');
+				 echo nl2br( "$output",false );
+			?>
+
+
+          </section>
         </div>
       </div>
 

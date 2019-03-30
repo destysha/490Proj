@@ -1,5 +1,4 @@
 <?php
-<<<<<<< HEAD
 	session_start();
 	include ("php/connectDB.php");
         $username = $_SESSION ["username"];
@@ -37,33 +36,27 @@
 	
 	//update records 
 	if(isset($_POST["update"]))
-=======
-session_start();
-
-require ('../rabbitMQFiles/testRabbitMQClient.php');
-$username = $_SESSION ['username'];
-
-$res = info($username);
-        $ans = array();
-        foreach ($res as $i)
-        {
-//              echo"<br>".$i."<br>";
-                array_push($ans,$i);
-        }
-        $bID = $ans[0];
-        $user = $ans[1];
-        $bzname =$ans[2];
-        $street = $ans[3];
-        $city = $ans[4];
-        $state = $ans[5];
-        $zipcode = $ans[6];
-	$email = $ans[7];
-
-	if(isset($_GET['delete']))
->>>>>>> 994fbd85ab760de37dca9b313a348cdce29ad5d5
 	{
-		$id = $_GET['delete'];
-		$del = del($id);
+		$product = mysqli_real_escape_string($conn,$_POST['product']);
+		$brand = mysqli_real_escape_string($conn,$_POST['brand']);
+		$qty = mysqli_real_escape_string($conn,$_POST['qty']);
+		$id = mysqli_real_escape_string($conn,$_POST['id']);
+
+		mysqli_query($conn,"UPDATE businessinv SET product='$product',brand='$brand',qty='$qty' WHERE id=$id AND businessID = $bID");
+		$_SESSION['msg'] = " You updated successfully";
 		header('location:businessInv.php');
 	}
+
+	//delete row
+	if(isset($_GET['del']))
+	{
+		$id = $_GET['del'];
+		mysqli_query($conn,"DELETE FROM businessinv WHERE id=$id  AND businessID=$bID");
+		$_SESSION['msg'] = " Deleted Row ";
+                header('location:businessInv.php');
+
+	}	
+
+	//get info  from database table to display what user inserted
+	$list = mysqli_query($conn,"SELECT * FROM businessinv WHERE businessID = $bID");
 ?>

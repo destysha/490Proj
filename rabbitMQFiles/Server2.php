@@ -47,6 +47,28 @@ function getInv($username,$sql)
 }
 
 
+<<<<<<< HEAD
+=======
+function doUpdate($product,$brand,$qty,$bID)
+{
+	$db = mysqli_connect("localhost","user1","user1pass","ishopdb");
+	$q = "INSERT INTO businessinv (brand,product,qty,businessID) VALUES('$brand','$product','$qty','$bID')";
+	
+	$Q = mysqli_query($db,$q);
+	$statement = "UPDATED";
+	return 1;
+}
+
+function doDelete($id)
+{
+$db = mysqli_connect("localhost","user1","user1pass","ishopdb");
+        $q = "DELETE * FROM bussinessinv WHERE id = $id";
+
+$Q = mysqli_query($db,$q);
+return 1;
+}
+
+>>>>>>> 994fbd85ab760de37dca9b313a348cdce29ad5d5
 function requestProcessor($request)
 {
   	echo "received request".PHP_EOL;
@@ -66,7 +88,15 @@ function requestProcessor($request)
 	case "info":
 		return doInfo($request['username']);
 	case "inv":
+<<<<<<< HEAD
                 return getInv($request['username'],$request['sql']);
+=======
+		return getInv($request['username'],$request['sql']);
+	case "update":
+		return doUpdate($request['product'],$request['brand'],$request['qty'],$request['bID']);
+	case "delete":
+		return doDelete($request['id']);
+>>>>>>> 994fbd85ab760de37dca9b313a348cdce29ad5d5
 	case "validate_session":
 		return doValidate($request['sessionId']);
 	}

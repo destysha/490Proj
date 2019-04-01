@@ -5,7 +5,7 @@ $cnt = $_SESSION['noticnt'];
 $output = $_SESSION['noti'];
 
 include ("php/connectDB2.php");
-	
+include ("Emad.php");	
 ?>
 
 <!DOCTYPE html>
@@ -126,10 +126,17 @@ include ("php/connectDB2.php");
           <span class="wclose">&times;</span><br>
           <p class="pFR">Food Safety Notification Recalls</p>
 
-          <div class="wContent">
-<?php echo $output; ?>
-<!--<iframe src="https://www.foodsafety.gov/recalls/widget/widget.html" width="167" height="380" alt="Food Safety Widget" title="Food Safety Widget" frameborder="0">&nbsp;</iframe>-->
-          </div>
+          <section class="wContent">
+		
+			
+			<?php
+				
+				//header('Content-type: text/plain');
+				 echo nl2br( "$output",false );
+			?>
+
+
+          </section>
         </div>
       </div>
 

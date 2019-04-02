@@ -39,13 +39,11 @@ function getInv($username,$sql)
 		{
 			$temp[] = $row;
 		}
-		print_r($temp);
+//		print_r($temp);
 		return $temp;
 	}
-//	$inv = new loginDB();
-//        return $inv->getinvB($username);
-}
 
+}
 
 function doUpdate($product,$brand,$qty,$bID)
 {
@@ -60,10 +58,47 @@ function doUpdate($product,$brand,$qty,$bID)
 function doDelete($id)
 {
 $db = mysqli_connect("localhost","user1","user1pass","ishopdb");
-        $q = "DELETE * FROM bussinessinv WHERE id = $id";
-
+        $q = "DELETE FROM businessinv WHERE id = $id";
+	 echo "received request to Delete ID: $id".PHP_EOL;
 $Q = mysqli_query($db,$q);
 return 1;
+}
+
+function getIshop($ql)
+{
+	$db = mysqli_connect("localhost","user1","user1pass","ishopdb");
+	echo "received request to get Ishop inventory".PHP_EOL;
+	$qq = mysqli_query($db,$ql);
+	
+	 $Back = mysqli_num_rows($qq);
+
+        if ($Back > 0 )
+        {
+                while($row = mysqli_fetch_assoc($qq))
+                {
+                        $tem[] = $row;
+                }
+//		print_r($tem);
+                return $tem;
+	}
+}
+
+function getOp($que)
+{
+	 $db = mysqli_connect("localhost","user1","user1pass","ishopdb");
+        echo "received Request FOR OPT's".PHP_EOL;
+        $Q = mysqli_query($db,$que);
+	$co = 30;
+//	$co = mysqli_num_rows($Q);
+	if($co > 0)
+	{
+		while ($row = mysqli_fetch_assoc($Q))
+		{
+			$T[] = $row;
+//			print_r($T).PHP_EOL;
+		}
+		return $T;
+	}
 }
 
 function requestProcessor($request)
@@ -90,6 +125,10 @@ function requestProcessor($request)
 		return doUpdate($request['product'],$request['brand'],$request['qty'],$request['bID']);
 	case "delete":
 		return doDelete($request['id']);
+	case "Ishop":
+                return getIshop($request['sql']);
+	 case "Op":
+                return getOp($request['que']);
 	case "validate_session":
 		return doValidate($request['sessionId']);
 	}

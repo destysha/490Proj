@@ -1,16 +1,11 @@
 <?php
 	session_start();
-	include ("php/connectDB2.php");
-/*
-	$username = $_SESSION ["username"];
-	$bzname   = $_SESSION ["bzname"];
-        $bID      = $_SESSION ["bID"];
-        $street   = $_SESSION ["street"];
-        $city     = $_SESSION ["city"];
-        $zc       = $_SESSION ["zipcode"];
-        $state    = $_SESSION ["state"];
-        $email    = $_SESSION ["email"];
- */	
+	//include ("php/connectDB2.php");
+	include ("Emad.php");
+//	require ('../rabbitMQFiles/testRabbitMQClient.php');
+
+	$cnt = $_SESSION['noticnt'];
+	$output = $_SESSION['noti'];	
 ?>
 
 <!DOCTYPE html>
@@ -52,7 +47,7 @@
               <button class="button" id="bWidget">
                 <span>Notifications </span>
               </button>
-              <span class="badge">3</span>
+              <span class="badge"><?php echo $cnt;  ?></span>
             </a>
           </span>
         </div>
@@ -66,7 +61,11 @@
             <p class="pFR">Food Safety Notification Recalls</p>
 
             <div class="wContent">
-              <!--<iframe src="https://www.foodsafety.gov/recalls/widget/widget.html" width="167" height="380" alt="Food Safety Widget" title="Food Safety Widget" frameborder="0">&nbsp;</iframe>-->
+              <?php
+                                
+                    //header('Content-type: text/plain');
+                    echo nl2br( "$output",false );
+              ?>
             </div>
           </div>
         </div>
@@ -115,55 +114,9 @@
           </div>
 
      	 
-                  <!--<div class="table100-body js-pscroll">
-                    <table>
-                      <tbody>
-			 <tr class="row100 body">
-                          <td class="cellMod">Like a butterfly</td>
-                          <td class="cellMod">Boxing</td>
-                          <td class="cellMod">9:00 AM - 11:00 AM</td>
-                          <td class="cellMod">Aaron Chapman</td>
-                          <td class="cellMod">10</td>
-                          <td class="cellMod"><button id="addBtn"><i class="fa fa-plus"></i></button></td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-		<h1>ISHOP INVENTORY FROM DB </h1>-->
-                    <table class="fixed_header">
-                        <tr>
-                          <th>PRODUCT</th>
-                          <th>BRAND</th>
-                        </tr>
-                        <?php
-				$conn = mysqli_connect("localhost","user1","user1pass","ishopdb");
-				if($conn->connect_error)
-				{
-					die("connection error:".$conn->connect_error);
-				}
-				$sql = "SELECT name,brand FROM inventory";
-				$result = $conn->query($sql);
-
-				if($result->num_rows > 0)
-				 {
-				while ($row = $result->fetch_assoc())
-				{
-					echo "<tr><td>".$row["name"]."</td><td>".$row["brand"]."</td></tr>";
-				}
-				echo "</table>";
-				} //end if for each row
-				else
-				{
-					echo "no results in table";
-				}       
-				$conn->close();
-                        ?>
-                    </table>
-		    <br><br>
-	
-		    echo"<SCRIPT>alert($_GET['msg']);</SCRIPT>";
-
+                  <!--<h1>ISHOP INVENTORY FROM DB </h1>-->
+          
+<!-- FORM FOR UPDATE
 		<div>
 		<form class="updateForm" id="updateForm" action="updateInv.php" method="POST">
 		<label for="product">Product</label>
@@ -174,11 +127,89 @@
 		<input type="text" name="qty" id="quantity"placeholder="Quantity" />
 		<input class="myButton"type="submit" name="submit-update" value="Update" onclick= "return chk()">
 		</form><br>
-	</div>
+		</div>
 	<p id="msg"></p>
+-->
         <button class ="myButton" onclick="location.href='businessInv.php';">Back to Your Inventory</button>
 
+<!--MAKING A NEW TABLE OF ISHOP INV COMING FROM RABBITMQ-->
+<br><br><br><h1>THIS IS RABBITMQ TABLE</h1><br><br>
+		<?php
+			require ('../rabbitMQFiles/testRabbitMQClient.php');
+			$ql = "SELECT product,brand FROM businessinv";
+			$record = getIshop($ql);
+			
+			$html .= "<table class='fixed_header'>";
+       	                $html .= "<thead>";
+               	        $html .="<tr class='trS'>";
+                     	   $html .="<th class='thS'>Product</th>";
+                           $html .="<th class='thS'>Brand</th>";
+                  	$html .="</tr>";
+                $html .="</thead>";
+                        $count = 1;
+                        foreach ($record as $aR)
+                        {
+                                foreach($aR as $key => $row)
+                                {
+                                       $html .="<td class='thS'>".$row."</td>";
+                                       
+                                }
+                                $html .= "</tr>";
+                                $count +=1;
+                        }
+                        $html .="</table>";
+                        echo $html;
+		/*
+			echo"<br><br><br><br><h1>Select What to put into your inventory</h1>";
+		*/
+	/*Testing to get dropdown instead of manual inserts*/
+		/*
+			$que = "SELECT upc12,upc14 FROM inventory";
+			$op = getOp($que);
 		
+		
+			echo"<select class='selectgrp' STYLE='font-family : monospace; font-size:20px;'>";
+			foreach($op as $combo)
+			{	
+				$count = 1;
+				foreach($combo as $part)
+				{
+					if($count == 1)
+					{
+						$count += 1 ;
+						echo" <optgroup STYLE='font-size:20px;' class='opt' label='$part'>";
+				
+					}
+					else{
+						echo" <option class='opt' value='$part'>".$part."</option>";
+					}
+				}
+			}						
+			echo"</select>";
+		
+			echo"<select class='selectgrp' STYLE='font-family : monospace; font-size:20px;'>";
+
+			foreach($op as $combo)
+                        {       
+                                $count = 1;
+                                foreach($combo as $part)
+                                {
+                                        if($count == 1)
+                                        {
+                                                $count += 1 ;
+                                                echo" <optgroup STYLE='font-size:20px;' class='opt' label='$part'>";
+                                
+                                        }
+                                        else{
+                                                echo" <option class='opt' value='$part'>".$part."</option>";
+                                        }
+                                }
+                        }                                               
+                        echo"</select>";
+			*/
+		?>
+	
+			
         </section>
 
       </div>

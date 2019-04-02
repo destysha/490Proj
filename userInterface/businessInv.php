@@ -1,5 +1,9 @@
 <?php 
 	session_start();
+	include ("Emad.php");
+	$cnt = $_SESSION['noticnt'];
+	$output = $_SESSION['noti'];
+
 //	include ("php/connectDB2.php");
 /*
 	$username = $_SESSION ["username"];
@@ -50,7 +54,7 @@ $res = info($username);
 
  */
 
-
+/*
 	//get table to updated
 	  if(isset($_GET['edit'])){
 	  $id = $_GET['edit'];
@@ -64,7 +68,7 @@ $res = info($username);
 	  $qty = $record['qty'];
 	  $id = $record['id'];
 	}
-
+*/
 ?>
 <!DOCTYPE html>
 <html>
@@ -103,7 +107,7 @@ $res = info($username);
               <button class="button" id="bWidget">
                 <span>Notifications </span>
               </button>
-              <span class="badge">3</span>
+              <span class="badge"><?php echo $cnt;  ?></span>
             </a>
           </span>
         </div>
@@ -148,7 +152,10 @@ $res = info($username);
           <p class="pFR">Food Safety Notification Recalls</p>
 
           <div class="wContent">
-            <!--<iframe src="https://www.foodsafety.gov/recalls/widget/widget.html" width="167" height="380" alt="Food Safety Widget" title="Food Safety Widget" frameborder="0">&nbsp;</iframe>-->
+            <?php           
+                    //header('Content-type: text/plain');
+                    echo nl2br( "$output",false );
+            ?>
           </div>
         </div>
       </div>
@@ -189,7 +196,7 @@ $res = info($username);
 				{
 					if($c ==3)
 					{
-						$html.="<td><a href='delete.php?delete=$row'>Delete</a></td>";
+						$html.="<td><a href='delete.php?delete=".$row."'>Delete</a></td>";
 						//$html.="<td class='thS'> <a href='delete.php?delete=".$row.">'DELETE</a></td>";
 					}
 					else{
@@ -204,6 +211,8 @@ $res = info($username);
 			echo $html;
 
 	?>
+<br><br>
+			<button class="myButton" onclick="location.href='ishopInv.php';">Update Inventory</button>
 
 		<br><br><br>
 	<!--<h1>TABLE OF BUSINESS FROM DB </h1>     Old Table, New is above this *-->

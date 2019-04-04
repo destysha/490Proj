@@ -1,71 +1,12 @@
 <?php 
 	session_start();
-//	include ("php/connectDB2.php");
-/*
-	$username = $_SESSION ["username"];
-	$bzname   = $_SESSION ["bzname"];
-        $bID      = $_SESSION ["bID"];
-        $street   = $_SESSION ["street"];
-        $city     = $_SESSION ["city"];
-        $zc       = $_SESSION ["zipcode"];
-        $state    = $_SESSION ["state"];
-        $email    = $_SESSION ["email"];
- */
-//include('delete.php');
-require ('../rabbitMQFiles/testRabbitMQClient.php');
-$username = $_SESSION ['username'];
+	$cnt = $_SESSION['noticnt'];
+	$output = $_SESSION['noti'];
 
-/////Getting all info related to users account based on whos logged in ..session///////
-
-$res = info($username);
-        $ans = array();
-        foreach ($res as $i)
-        {
-//              echo"<br>".$i."<br>";
-                array_push($ans,$i);
-        }
-        $bID = $ans[0];
-        $user = $ans[1]; 
-        $bzname =$ans[2]; 
-        $street = $ans[3];  
-        $city = $ans[4]; 
-        $state = $ans[5]; 
-        $zipcode = $ans[6]; 
-	$email = $ans[7];
-
-
-//	include('delete.php');
-/*
-	if(isset($_POST['update']))
-	{
-		$product = $_POST['product'];
-		$brand = $_POST['brand'];
-		$qty = $_POST['qty'];
-	
-		require ('../rabbitMQFiles/testRabbitMQClient.php');
-		$re = update($product,$brand,$qty,$bID);
-		echo"$re".PHP_EOL;
-
-	}
-
- */
-
-
-	//get table to updated
-	  if(isset($_GET['edit'])){
-	  $id = $_GET['edit'];
-	  
-	  $edit_state=true;	
-	  $rec = mysqli_query($conn,"SELECT * FROM businessinv WHERE id=$id AND businessID =$bID");
-	  $record = mysqli_fetch_array($rec);
-		
-	  $product = $record['product'];
-	  $brand = $record['brand'];
-	  $qty = $record['qty'];
-	  $id = $record['id'];
-	}
-
+	include ("php/connectDB2.php");
+	include ("notif.php");	
 ?>
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -103,7 +44,7 @@ $res = info($username);
               <button class="button" id="bWidget">
                 <span>Notifications </span>
               </button>
-              <span class="badge">3</span>
+              <span class="badge"><?php echo $cnt;  ?></span>
             </a>
           </span>
         </div>
@@ -148,7 +89,13 @@ $res = info($username);
           <p class="pFR">Food Safety Notification Recalls</p>
 
           <div class="wContent">
-            <!--<iframe src="https://www.foodsafety.gov/recalls/widget/widget.html" width="167" height="380" alt="Food Safety Widget" title="Food Safety Widget" frameborder="0">&nbsp;</iframe>-->
+  		<article class="notif">	
+			<?php
+				
+				//header('Content-type: text/plain');
+				 echo nl2br( "$output",false );
+			?>
+		</article>
           </div>
         </div>
       </div>
@@ -189,7 +136,7 @@ $res = info($username);
 				{
 					if($c ==3)
 					{
-						$html.="<td><a href='delete.php?delete=$row'>Delete</a></td>";
+						$html.="<td><a href='delete.php?delete=".$row."'>Delete</a></td>";
 						//$html.="<td class='thS'> <a href='delete.php?delete=".$row.">'DELETE</a></td>";
 					}
 					else{
@@ -204,6 +151,8 @@ $res = info($username);
 			echo $html;
 
 	?>
+<br><br>
+			<button class="myButton" onclick="location.href='ishopInv.php';">Update Inventory</button>
 
 		<br><br><br>
 	<!--<h1>TABLE OF BUSINESS FROM DB </h1>     Old Table, New is above this *-->

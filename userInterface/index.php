@@ -1,17 +1,16 @@
 <?php
 	session_start();
-//require ('../rabbitMQFiles/testRabbitMQClient.php');
-$cnt = $_SESSION['noticnt'];
-$output = $_SESSION['noti'];
+	$cnt 	= $_SESSION['noticnt'];
+	$output = $_SESSION['noti'];
 
-include ("php/connectDB2.php");
-include ("Emad.php");	
+	include ("php/connectDB2.php");
+	include ("notif.php");	
 ?>
 
 <!DOCTYPE html>
 <html>
   <head>
-    <title> <?php echo $bzname; ?> | Main page </title>
+    <title> <?php echo "$bzname" ?> | Main page </title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="css/main.css">
 
@@ -87,7 +86,7 @@ include ("Emad.php");
               <a href="ishopInv.php">
               	<button class="bttn">
                    <img src="images/add-remove.png">
-		</button>	   
+		</button>
               </a>
               
             </div>
@@ -127,15 +126,13 @@ include ("Emad.php");
           <p class="pFR">Food Safety Notification Recalls</p>
 
           <section class="wContent">
-		
-			
+	 	<article class="notif">	
 			<?php
 				
 				//header('Content-type: text/plain');
 				 echo nl2br( "$output",false );
 			?>
-
-
+		</article>
           </section>
         </div>
       </div>

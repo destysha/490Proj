@@ -1,8 +1,10 @@
 <?php
-	session_start();
-	$bzname   = $_SESSION["bzname"];
-   	$email 	  = $_SESSION["email"];
-
+	//session_start();
+	//$bzname   = $_SESSION["bzname"];
+   	//$email 	  = $_SESSION["email"];
+	
+	$email  = "shaiddyperez@gmail.com";
+	$bzname = "CHECKING Business";
 	notification ($email, $bzname);
 
 
@@ -73,17 +75,23 @@
 		}
 
 		$output  = " ";
+		$subject = "You have new recalls!";
+		$headers = array('From: shaiddyperez@gmail.com' . "\r\n" );
+		$headers = implode("\r\n", $headers);
+	       
+		$output .= "\n\nGreetings,\n\n". "We have founds new recalls that need to be brought to your attention!\n\n";
 		
 		$cnt = 0;
 		foreach($matches as $key=>$value)
 		{	
 			$cnt++;
-			$output .= "$cnt: $key, $value\n\n";
+			$output .= "$cnt: $key, $value\n";
 		}
-		
-		//echo $output;
 
-		$_SESSION['noti']    = $output;
-		$_SESSION['noticnt'] = $cnt;
+		echo "$output\n";
+
+		mail($email, $subject, $output, $headers);
+
+		echo "\nMail Sent!".PHP_EOL;
 	}
 ?>

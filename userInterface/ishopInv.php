@@ -1,16 +1,10 @@
-<?php
+<?php 
 	session_start();
+	$cnt = $_SESSION['noticnt'];
+	$output = $_SESSION['noti'];
+
 	include ("php/connectDB2.php");
-/*
-	$username = $_SESSION ["username"];
-	$bzname   = $_SESSION ["bzname"];
-        $bID      = $_SESSION ["bID"];
-        $street   = $_SESSION ["street"];
-        $city     = $_SESSION ["city"];
-        $zc       = $_SESSION ["zipcode"];
-        $state    = $_SESSION ["state"];
-        $email    = $_SESSION ["email"];
- */	
+	include ("notif.php");	
 ?>
 
 <!DOCTYPE html>
@@ -52,7 +46,7 @@
               <button class="button" id="bWidget">
                 <span>Notifications </span>
               </button>
-              <span class="badge">3</span>
+              <span class="badge"><?php echo $cnt; ?></span>
             </a>
           </span>
         </div>
@@ -66,7 +60,13 @@
             <p class="pFR">Food Safety Notification Recalls</p>
 
             <div class="wContent">
-              <!--<iframe src="https://www.foodsafety.gov/recalls/widget/widget.html" width="167" height="380" alt="Food Safety Widget" title="Food Safety Widget" frameborder="0">&nbsp;</iframe>-->
+  		<article class="notif">	
+			<?php
+				
+				//header('Content-type: text/plain');
+				 echo nl2br( "$output",false );
+			?>
+		</article>
             </div>
           </div>
         </div>
@@ -142,7 +142,7 @@
 				{
 					die("connection error:".$conn->connect_error);
 				}
-				$sql = "SELECT name,brand FROM inventory";
+				$sql = "SELECT name,brand FROM ishopinv";
 				$result = $conn->query($sql);
 
 				if($result->num_rows > 0)

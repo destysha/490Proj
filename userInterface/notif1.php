@@ -1,5 +1,7 @@
 <?php
 session_start();
+	$username = $_SESSION["username"];
+	
    $email 	=  "hariskido214@gmail.com";
    $username    =  "Haris";
 

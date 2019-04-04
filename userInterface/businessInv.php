@@ -1,6 +1,11 @@
 <?php 
 	session_start();
-	include ("php/connectDB.php");
+	include ("Emad.php");
+	$cnt = $_SESSION['noticnt'];
+	$output = $_SESSION['noti'];
+
+//	include ("php/connectDB2.php");
+/*
 	$username = $_SESSION ["username"];
 	$bzname   = $_SESSION ["bzname"];
         $bID      = $_SESSION ["bID"];
@@ -9,15 +14,53 @@
         $zc       = $_SESSION ["zipcode"];
         $state    = $_SESSION ["state"];
         $email    = $_SESSION ["email"];
+ */
+//include('delete.php');
+require ('../rabbitMQFiles/testRabbitMQClient.php');
+$username = $_SESSION ['username'];
 
-	include('delete.php');
+/////Getting all info related to users account based on whos logged in ..session///////
 
+$res = info($username);
+        $ans = array();
+        foreach ($res as $i)
+        {
+//              echo"<br>".$i."<br>";
+                array_push($ans,$i);
+        }
+        $bID = $ans[0];
+        $user = $ans[1]; 
+        $bzname =$ans[2]; 
+        $street = $ans[3];  
+        $city = $ans[4]; 
+        $state = $ans[5]; 
+        $zipcode = $ans[6]; 
+	$email = $ans[7];
+
+
+//	include('delete.php');
+/*
+	if(isset($_POST['update']))
+	{
+		$product = $_POST['product'];
+		$brand = $_POST['brand'];
+		$qty = $_POST['qty'];
+	
+		require ('../rabbitMQFiles/testRabbitMQClient.php');
+		$re = update($product,$brand,$qty,$bID);
+		echo"$re".PHP_EOL;
+
+	}
+
+ */
+
+/*
 	//get table to updated
 	  if(isset($_GET['edit'])){
 	  $id = $_GET['edit'];
 	  
 	  $edit_state=true;	
-	  $rec = mysqli_query($conn,"SELECT * FROM businessinv WHERE id=$id ");
+	  $rec = mysqli_query($conn,"SELECT * FROM businessinv WHERE id=$id AND businessID =$bID");
 	  $record = mysqli_fetch_array($rec);
 		
 	  $product = $record['product'];
@@ -25,7 +68,7 @@
 	  $qty = $record['qty'];
 	  $id = $record['id'];
 	}
-
+*/
 ?>
 <!DOCTYPE html>
 <html>
@@ -64,7 +107,7 @@
               <button class="button" id="bWidget">
                 <span>Notifications </span>
               </button>
-              <span class="badge">3</span>
+              <span class="badge"><?php echo $cnt;  ?></span>
             </a>
           </span>
         </div>
@@ -109,7 +152,10 @@
           <p class="pFR">Food Safety Notification Recalls</p>
 
           <div class="wContent">
-            <!--<iframe src="https://www.foodsafety.gov/recalls/widget/widget.html" width="167" height="380" alt="Food Safety Widget" title="Food Safety Widget" frameborder="0">&nbsp;</iframe>-->
+            <?php           
+                    //header('Content-type: text/plain');
+                    echo nl2br( "$output",false );
+            ?>
           </div>
         </div>
       </div>
@@ -120,24 +166,70 @@
         <!--                            MAIN CONTENT                         -->
         <section id="main">
           <div class="nameInContent">
-            <h1> <?php echo $bzname; ?> </h1>
+            <h1> <?php echo $bzname; ?> </h1><br>
           </div>
  		<div class ="inventory" class="animate form">
-		<h1>TABLE OF BUSINESS FROM DB </h1>
-		<br>
+		
+
+		<!--March 27 Haris -->
+	<?php
+//		require ('../rabbitMQFiles/testRabbitMQClient.php');
+//		$username = $_SESSION ['username'];
+		
+		$sql = "SELECT product,brand,qty,id FROM businessinv WHERE businessID = '$bID'";
+		$record = fetchInv($username,$sql);
+
+		$html = "<table class = 'fixed_header'>";
+		$html .= "<thead>";
+		  $html .="<tr class='trS'>";
+			$html .="<th class='thS'>Product</th>";
+			$html .="<th class='thS'>Brand</th>";
+			$html .="<th class='thS'>Qty</th>";
+			$html .="<th class='thS'>Action</th>";
+		  $html .="</tr>";
+		$html .="</thead>";
+			$count = 1;
+			foreach ($record as $aR)
+			{
+				$c = 0;
+				foreach($aR as $key => $row)
+				{
+					if($c ==3)
+					{
+						$html.="<td><a href='delete.php?delete=".$row."'>Delete</a></td>";
+						//$html.="<td class='thS'> <a href='delete.php?delete=".$row.">'DELETE</a></td>";
+					}
+					else{
+						$html .="<td class='thS'>".$row."</td>";
+					}
+					$c++;
+				}
+				$html .= "</tr>";
+				$count +=1;
+			}
+			$html .="</table>";
+			echo $html;
+
+	?>
+<br><br>
+			<button class="myButton" onclick="location.href='ishopInv.php';">Update Inventory</button>
+
+		<br><br><br>
+	<!--<h1>TABLE OF BUSINESS FROM DB </h1>     Old Table, New is above this *-->
+	<!--	<br>
                     <table class="fixed_header">
                         <tr>
                           <th>PRODUCT</th>
                           <th>BRAND</th>
 			  <th>QTY</th>
                         </tr>
-			<?php
+			<?php/* 
 			$conn = mysqli_connect("localhost","user1","user1pass","ishopdb");
 			if($conn->connect_error)
 			{
 				die("connection error:".$conn->connect_error);
 			}
-			$sql = "SELECT * FROM businessinv";
+			$sql = "SELECT * FROM businessinv WHERE businessID = $bID";
 			$result = $conn->query($sql);
 
 			if($result->num_rows > 0)
@@ -153,76 +245,36 @@
                         echo "no results in table";
 		}	
 		$conn->close();
-			?>
+			 */?>
                     </table><br><br>
    		<button class="myButton" onclick="location.href='ishopInv.php';">Update Inventory</button>
 		</div>
-		
+-->
+
 <br><br>
-<h1>Table With Delete Option</h1><br><br>
-<?php  if(isset($_SESSION['msg'])): ?>
-	<div class="msg">
-	  <?php
-	  echo $_SESSION['msg'];
-	  unset($_SESSION['msg']);
-	  ?>
-	</div>
-<?php endif ?>
 
-<!--NEW TABLE WITH DELETE OPTION: ATTEMPT #1 -->
-	  <div class="del-table">
-	    <table class="fixed_header">
-		<thead>
-		  <tr>
-			<th>Del_Product</th>
-			<th>Del_Brand</th>
-			<th>Del_Qty</th>
-			<th colspan="2">Del_Action</th>
-		  </tr>
-		</thead>
-		<tbody>
-		  <?php while ($row = mysqli_fetch_array($list)) { ?>
-			<tr>
-			   <td><?php echo $row['product']; ?></td>
-			   <td><?php echo $row['brand']; ?></td>
-			   <td><?php echo $row['qty']; ?></td>
-			   <td>
-                                <a href="businessInv.php?edit=<?php echo $row['id'];  ?>">Edit</a>
-                           </td>
-			   <td>
-                                <a href="delete.php?del=<?php echo $row['id'];?>">Delete</a>
-                           </td>
-			</tr>
-		  <?php } ?>
-		</tbody>
-	    </table>
-		<br><br><br>
-		<h1>FIll Out Form</h1>
+<!-- Taken out momentaraly
 
-		<form method="post" action="delete.php" class="updateForm">
-		<input type="hidden" name="id" value="<?php echo $id;  ?>">
-		  <div>
-		    <label>Product</label>
-		     <input type="text" name="product" value="<?php echo $product; ?>">
+<h1 class="headers">HARIS FORM UPDATE INV</h1><br>
+<form class="updateForm" method = "POST" action="businessInv.php">
+	<div>
+                    <label>Product</label>
+                     <input type="text" name="product" value="Product">
 		  </div>
-		  <div>
+	<div>
                     <label>Brand</label>
-                      <input type="text" name="brand" value="<?php echo $brand; ?>">
-                  </div>
-		  <div>
+                     <input type="text" name="brand" value="Brand">
+		  </div>
+	<div>
                     <label>Qty</label>
-                      <input type="text" name="qty" value="<?php echo $qty; ?>">
+                     <input type="text" name="qty" value="qty">
                   </div>
+	
+	<input type="submit" name="update" value="Update"> <br><br>
+<button class="myButton" name="update"onclick="location.href='businessInv.php';">Update</button>
+</form>	
 
-		  <div>
-	              <?php  if ($edit_state == false): ?>
-			<button class="myButton" type="submit" name="save">Save</button>
-		      <?php  else: ?>
-			<button class="myButton" type="submit" name="update">Update</button>
-		      <?php  endif?>
-                  </div>
-		</form>
-	  </div>		
+-->
         </section>
       </div> //these 2 div's are right under opening body tag
     </div>

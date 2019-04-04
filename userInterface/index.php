@@ -1,22 +1,17 @@
 <?php
 	session_start();
-	include ("php/connectDB.php");
-	$username = $_SESSION ["username"];
-	$bzname   = $_SESSION ["bzname"];
-        $bID      = $_SESSION ["bID"];
-        $street   = $_SESSION ["street"];
-        $city     = $_SESSION ["city"];
-        $zc       = $_SESSION ["zipcode"];
-        $state    = $_SESSION ["state"];
-        $email    = $_SESSION ["email"];
+$cnt = $_SESSION['noticnt'];
+$output = $_SESSION['noti'];
 
-	
+include ("php/connectDB2.php");
+include ("Emad.php");	
+
 ?>
 
 <!DOCTYPE html>
 <html>
   <head>
-    <title> <?php echo $bzname; ?> | Main page </title>
+    <title> <?php echo "$bzname" ?> | Main page </title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="css/main.css">
 
@@ -35,7 +30,7 @@
               <button class="button" id="bWidget">
                 <span>Notifications </span>
               </button>
-              <span class="badge">3</span>
+	      <span class="badge"><?php echo $cnt;  ?></span>
             </a>
           </span>
         </div>
@@ -76,7 +71,8 @@
 
 
         <!--                            MAIN CONTENT                         -->
-        <section id="main">
+	
+	<section id="main">
           <div class="nameInContent">
             <h1> <a href="index.php"><img src="images/ishop.png" width="200px"> </a> </h1>
           </div>
@@ -91,7 +87,7 @@
               <a href="ishopInv.php">
               	<button class="bttn">
                    <img src="images/add-remove.png">
-		</button>	   
+		</button>
               </a>
               
             </div>
@@ -130,9 +126,17 @@
           <span class="wclose">&times;</span><br>
           <p class="pFR">Food Safety Notification Recalls</p>
 
-          <div class="wContent">
-            <!--<iframe src="https://www.foodsafety.gov/recalls/widget/widget.html" width="167" height="380" alt="Food Safety Widget" title="Food Safety Widget" frameborder="0">&nbsp;</iframe>-->
-          </div>
+          <section class="wContent">
+		
+			
+			<?php
+				
+				//header('Content-type: text/plain');
+				 echo nl2br( "$output",false );
+			?>
+
+
+          </section>
         </div>
       </div>
 

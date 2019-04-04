@@ -1,51 +1,30 @@
 <?php
-	session_start();
-	
-	$product = "";
-	$brand = "";
-	$qty = "";
-	$id = 0;
+session_start();
 
-	$conn = mysqli_connect('localhost','user1','user1pass','ishop');
+require ('../rabbitMQFiles/testRabbitMQClient.php');
+$username = $_SESSION ['username'];
 
-	if(isset($_POST['save']))
+$res = info($username);
+        $ans = array();
+        foreach ($res as $i)
+        {
+//              echo"<br>".$i."<br>";
+                array_push($ans,$i);
+        }
+        $bID = $ans[0];
+        $user = $ans[1];
+        $bzname =$ans[2];
+        $street = $ans[3];
+        $city = $ans[4];
+        $state = $ans[5];
+        $zipcode = $ans[6];
+	$email = $ans[7];
+
+	if(isset($_GET['delete']))
 	{
-	  $product = $_POST['product'];
-	  $brand = $_POST['brand'];
-          $qty = $_POST['qty'];
-	
-	  $edit_state = false;
-
-	  $query = "INSERT INTO bzinventory(user,product,brand,qty)  VALUES('','$product','$brand','$qty')";
-	  mysqli_query($conn,$query);
-	
-	  $_SESSION['msg'] = "Product Saved";
-	  header('location:businessInv.php');
-	}
-	
-	//update records 
-	if(isset($_POST["update"]))
-	{
-		$product = mysqli_real_escape_string($conn,$_POST['product']);
-		$brand = mysqli_real_escape_string($conn,$_POST['brand']);
-		$qty = mysqli_real_escape_string($conn,$_POST['qty']);
-		$id = mysqli_real_escape_string($conn,$_POST['id']);
-
-		mysqli_query($conn,"UPDATE bzinventory SET product='$product',brand='$brand',qty='$qty' WHERE id=$id");
-		$_SESSION['msg'] = " You updated successfully";
+		$id = $_GET['delete'];
+	echo"$id".PHP_EOL;
+		$del = del($id);
 		header('location:businessInv.php');
 	}
-
-	//delete row
-	if(isset($_GET['del']))
-	{
-		$id = $_GET['del'];
-		mysqli_query($conn,"DELETE FROM bzinventory WHERE id=$id");
-		$_SESSION['msg'] = " Deleted Row ";
-                header('location:businessInv.php');
-
-	}	
-
-	//get info  from database table to display what user inserted
-	$list = mysqli_query($conn,"SELECT * FROM bzinventory");
 ?>

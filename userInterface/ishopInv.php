@@ -1,9 +1,15 @@
 <?php
-	include (" php/connectDB.php ");
-	include (" getIshop.inc.php");
+	session_start();
+	//include ("php/connectDB2.php");
+	include ("Emad.php");
+//	require ('../rabbitMQFiles/testRabbitMQClient.php');
+
+	$cnt = $_SESSION['noticnt'];
+	$output = $_SESSION['noti'];	
 ?>
 
 <!DOCTYPE html>
+
 <html>
   <head>
     <title> iShop | Inventory </title>
@@ -24,6 +30,8 @@
   <!--===============================================================================================-->
   	<link rel="stylesheet" type="text/css" href="css/util.css">
   	<link rel="stylesheet" type="text/css" href="css/inventory.css">
+	<link rel="stylesheet" type="text/css" href="tablestyle.css">
+	<script src"https://code.jquery.com/jquery-3.3.1.min.js"></script>
   <!--===============================================================================================-->
   </head>
 
@@ -36,28 +44,52 @@
 
           <span id="right-notification">
             <a href="#" class="notification">
-              <button class="button">
+              <button class="button" id="bWidget">
                 <span>Notifications </span>
               </button>
-              <span class="badge">3</span>
+              <span class="badge"><?php echo $cnt;  ?></span>
             </a>
           </span>
         </div>
 
+        <!-- The widget modal -->
+        <div id="wModal" class="wmodal">
+
+          <!-- Widget Modal content -->
+          <div class="wmodal-content">
+            <span class="wclose">&times;</span><br>
+            <p class="pFR">Food Safety Notification Recalls</p>
+
+            <div class="wContent">
+              <?php
+                                
+                    //header('Content-type: text/plain');
+                    echo nl2br( "$output",false );
+              ?>
+            </div>
+          </div>
+        </div>
+
 
         <div id="mySidenav" class="sidenav">
-          <div class="busName">
-            <h1> <?php echo $bzname; ?> </h1>
+     	  <div class="busName">
+             <h1> <?php echo $bzname; ?> </h1>
           </div>
           <section id="navInfo">
             <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-            <button class="button" style="vertical-align:middle"><span>Inventory </span></button>
+          <a href="businessInv.php">
+	     <button class="button" style="vertical-align:middle">
+	        <span id="invSpan">Inventory </span> 
+	     </button>
+	  </a>
+            
+           
 
             <article id="companyInfo">
               <h2 class="navInfoTitle"> Business ID: </h2>
-                <h3 class="navInfoData"> <?php echo $bzid; ?> </h3>
+                <h3 class="navInfoData"> <?php echo "BU00$bID"; ?> </h3>
               <h2 class="navInfoTitle"> Company Address: </h2>
-                <h3 class="navInfoData"> <?php echo "$street $city, $state $zipcode"; ?>, NJ 07522 </h3>
+                <h3 class="navInfoData"> <?php echo "$street $city, $state $zc"; ?></h3>
               <h2 class="navInfoTitle"> Email: </h2>
                 <h3 class="navInfoData"> <?php echo $email; ?> </h3>
               <!--<h2 class="navInfoTitle"> Last Login: </h2>
@@ -65,12 +97,14 @@
             </article>
           </section>
           <section class="logoutButnC">
-            <a href="#"><img src="images/logout.png" title="logoutBtn" alt="logoutBtn" id="logoutButnD"></a>
+            <a href="../phpFiles/logout.php"><img src="images/logout.png" title="logoutBtn" alt="logoutBtn" id="logoutButnD"></a>
           </section>
           <section class="logoiShopC">
-            <img src="images/ishop.png" title="iShopLogo" alt="iShopLogo" id="logoiShopD">
+            <a href="index.php"><img src="images/ishop.png" id="logoiShopD"> </a>
           </section>
         </div>
+
+
 
 
         <!--                            MAIN CONTENT                         -->
@@ -79,22 +113,103 @@
             <h1> <a href="index.php"><img src="images/ishop.png" width="200px"> </a> </h1>
           </div>
 
-       <h1>ISHOP INVENTORY FROM DB </h1>
-           <table class="fixed_header">
-                <tr>
-                  <th>PRODUCT</th>
-                  <th>BRAND</th>
-                </tr>
-                   <?php
-                        while ($row = $response->fetch_assoc())
-                        {
-                                echo "<tr><td>".$row["name"]."</td><td>".$row["brand"]."</td></tr>";
-                        }
-                        echo "</table>";
-                        ?>
-           </table>
-       
+     	 
+                  <!--<h1>ISHOP INVENTORY FROM DB </h1>-->
+          
+<!-- FORM FOR UPDATE
+		<div>
+		<form class="updateForm" id="updateForm" action="updateInv.php" method="POST">
+		<label for="product">Product</label>
+		<input type="text" name="product" id="product"placeholder="Product" />
+		<label for="brand">Brand</label>
+		<input type="text" name="brand" id="brand"placeholder="Brand" />
+		<label for="qty">Quantity</label>
+		<input type="text" name="qty" id="quantity"placeholder="Quantity" />
+		<input class="myButton"type="submit" name="submit-update" value="Update" onclick= "return chk()">
+		</form><br>
+		</div>
+	<p id="msg"></p>
+-->
+        <button class ="myButton" onclick="location.href='businessInv.php';">Back to Your Inventory</button>
 
+<!--MAKING A NEW TABLE OF ISHOP INV COMING FROM RABBITMQ-->
+<br><br><br><h1>THIS IS RABBITMQ TABLE</h1><br><br>
+		<?php
+			require ('../rabbitMQFiles/testRabbitMQClient.php');
+			$ql = "SELECT name,brand FROM ishopinv";
+			$record = getIshop($ql);
+			
+			$html .= "<table class='fixed_header'>";
+       	                $html .= "<thead>";
+               	        $html .="<tr class='trS'>";
+                     	   $html .="<th class='thS'>Product</th>";
+                           $html .="<th class='thS'>Brand</th>";
+                  	$html .="</tr>";
+                $html .="</thead>";
+                        $count = 1;
+                        foreach ($record as $aR)
+                        {
+                                foreach($aR as $key => $row)
+                                {
+                                       $html .="<td class='thS'>".$row."</td>";
+                                       
+                                }
+                                $html .= "</tr>";
+                                $count +=1;
+                        }
+                        $html .="</table>";
+                        echo $html;
+		/*
+			echo"<br><br><br><br><h1>Select What to put into your inventory</h1>";
+		*/
+	/*Testing to get dropdown instead of manual inserts*/
+		/*
+			$que = "SELECT upc12,upc14 FROM inventory";
+			$op = getOp($que);
+		
+		
+			echo"<select class='selectgrp' STYLE='font-family : monospace; font-size:20px;'>";
+			foreach($op as $combo)
+			{	
+				$count = 1;
+				foreach($combo as $part)
+				{
+					if($count == 1)
+					{
+						$count += 1 ;
+						echo" <optgroup STYLE='font-size:20px;' class='opt' label='$part'>";
+				
+					}
+					else{
+						echo" <option class='opt' value='$part'>".$part."</option>";
+					}
+				}
+			}						
+			echo"</select>";
+		
+			echo"<select class='selectgrp' STYLE='font-family : monospace; font-size:20px;'>";
+
+			foreach($op as $combo)
+                        {       
+                                $count = 1;
+                                foreach($combo as $part)
+                                {
+                                        if($count == 1)
+                                        {
+                                                $count += 1 ;
+                                                echo" <optgroup STYLE='font-size:20px;' class='opt' label='$part'>";
+                                
+                                        }
+                                        else{
+                                                echo" <option class='opt' value='$part'>".$part."</option>";
+                                        }
+                                }
+                        }                                               
+                        echo"</select>";
+			*/
+		?>
+	
+			
         </section>
 
       </div>
@@ -123,6 +238,28 @@
 
 
     	</script>
+	<script>
+		function chk()
+		{
+			var  product=document.getElementById('product').value;
+			var  brand=document.getElementById('brand').value;
+			var  quantity=document.getElementById('quantity').value;
+			var  dataString='product='+product+'&brand='+brand+'&quantity'+quantity;
+			$.ajax({
+				type:"post",
+				url:  "updateInv.php",
+				data:dataString,
+				data:{'product':product},
+				data:{'brand':brand}.
+				data:{'quantity':quantity};
+				cache:false,
+				success: function(html){
+					$('#msg').html(html);
+				}
+			});
+			return false;
+		}
+	</script>
     <!--===============================================================================================-->
   </body>
 </html>

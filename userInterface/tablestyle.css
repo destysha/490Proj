@@ -1,3 +1,16 @@
+select{
+ width: 400px; text-align-last:center;
+}
+.selectgrp{
+	display:block;
+	margin:0 auto;
+	width:70%;
+}
+.opt{
+	font-size:40px;
+	color:blue;
+	
+}
 //navbar styling for Search
 .topnav{
 overflow:hidden;
@@ -36,9 +49,15 @@ text-align:center;
 font-family:"Trebuchet MS",Arial,Helvetica,sans-serif;
 }
 
+.headers{
+	font-size: 24px;
+	color:green;
+	text-align: center;
+}
+
 
 .fixed_header{
-width: 500px;
+width: auto;
 table-layout:fixed;
 border-collapse:collapse;
 border:1px solid;
@@ -55,13 +74,23 @@ background-color:#ddd;
 
 .fixed_header tbody{
 display:block;
-width:100%;
+width:auto;
 overflow:auto;
-height:100px;
+height:400px;
 }
-
+.tBS{
+display:block;
+width:auto;
+overflow:auto;
+height:400px;
+}
 .fixed_header thead tr{
 display:block;
+}
+
+.trS{
+display:block;
+
 }
 
 .fixed_header thead{
@@ -70,6 +99,13 @@ color:#fff;
 }
 
 .fixed_header th, .fixed_header td{
+padding:5px;
+text-align:center;
+width:250px;
+border: 1px solid #ddd;
+}
+
+.thS{
 padding:5px;
 text-align:center;
 width:250px;

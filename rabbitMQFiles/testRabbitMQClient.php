@@ -101,26 +101,4 @@ function del($id)
 	$response = $client->send_request($request6);
 		return $response;
 }
-
-function getIshop($ql)
-{
-	$client = new rabbitMQClient("testRabbitMQ.ini","testServer");
-        $request7 = array();
-        $request7['type'] ="Ishop";
-        $request7['sql'] = $ql;
-
-        $response = $client->send_request($request7);
-                return $response;
-}
-
-function getOp($que)
-{
-	$client = new rabbitMQClient("testRabbitMQ.ini","testServer");
-        $request8 = array();
-        $request8['type'] ="Op";
-        $request8['que'] = $que;
-
-        $response = $client->send_request($request8);
-                return $response;
-}
 ?>

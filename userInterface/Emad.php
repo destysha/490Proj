@@ -1,7 +1,7 @@
 <?php
 session_start();
-   $email 	=  "hariskido214@gmail.com";
-   $username    =  "Haris";
+   $email 	=  "shaiddyperez@gmail.com";
+   $username    =  "Your Local Business";
 
 
 notification ($email, $username);
@@ -54,7 +54,6 @@ function notification($email, $username){
 				
 				++$counter;
 				$matches += [$value2=>$key2];
-//uncommented print below to see matches in terminal when running file manually
 //				print "$counter: $value2, $key2 \n";
 
 			}
@@ -78,7 +77,7 @@ function notification($email, $username){
 //						echo "or here";
                                         $output  = " ";
                                         $subject = "You have new recalls!";
-                                        $headers = array('From: hariskido214@gmail.com' . "\r\n" );
+                                        $headers = array('From: shaiddyperez@gmail.com' . "\r\n" );
 					$headers = implode("\r\n", $headers);
 
                                        // $username = $_SESSION['username'];

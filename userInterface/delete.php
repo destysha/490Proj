@@ -23,7 +23,6 @@ $res = info($username);
 	if(isset($_GET['delete']))
 	{
 		$id = $_GET['delete'];
-	echo"$id".PHP_EOL;
 		$del = del($id);
 		header('location:businessInv.php');
 	}

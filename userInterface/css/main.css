@@ -7,12 +7,6 @@ body, html {
   margin: 0;
 }
 
-.notif{
-  color: red;
-  padding: 30px 30px;
-  font-weight: bold;
-}
-
 .bgimg {
   background-image: linear-gradient(rgba(0, 0, 0, 0.5),
                     rgba(0, 0, 0, 0.5)),
@@ -283,7 +277,7 @@ height:100px;
   float: right;
   font-size: 28px;
   font-weight: bold;
-  margin-top: 7%;
+  margin-top: 4%;
   margin-right: 10px;
 }
 

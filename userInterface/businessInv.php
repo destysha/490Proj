@@ -1,12 +1,75 @@
 <?php 
 	session_start();
+	include ("Emad.php");
 	$cnt = $_SESSION['noticnt'];
 	$output = $_SESSION['noti'];
 
-	include ("php/connectDB2.php");
-	include ("notif.php");	
-?>
+//	include ("php/connectDB2.php");
+/*
+	$username = $_SESSION ["username"];
+	$bzname   = $_SESSION ["bzname"];
+        $bID      = $_SESSION ["bID"];
+        $street   = $_SESSION ["street"];
+        $city     = $_SESSION ["city"];
+        $zc       = $_SESSION ["zipcode"];
+        $state    = $_SESSION ["state"];
+        $email    = $_SESSION ["email"];
+ */
+//include('delete.php');
+require ('../rabbitMQFiles/testRabbitMQClient.php');
+$username = $_SESSION ['username'];
 
+/////Getting all info related to users account based on whos logged in ..session///////
+
+$res = info($username);
+        $ans = array();
+        foreach ($res as $i)
+        {
+//              echo"<br>".$i."<br>";
+                array_push($ans,$i);
+        }
+        $bID = $ans[0];
+        $user = $ans[1]; 
+        $bzname =$ans[2]; 
+        $street = $ans[3];  
+        $city = $ans[4]; 
+        $state = $ans[5]; 
+        $zipcode = $ans[6]; 
+	$email = $ans[7];
+
+
+//	include('delete.php');
+/*
+	if(isset($_POST['update']))
+	{
+		$product = $_POST['product'];
+		$brand = $_POST['brand'];
+		$qty = $_POST['qty'];
+	
+		require ('../rabbitMQFiles/testRabbitMQClient.php');
+		$re = update($product,$brand,$qty,$bID);
+		echo"$re".PHP_EOL;
+
+	}
+
+ */
+
+/*
+	//get table to updated
+	  if(isset($_GET['edit'])){
+	  $id = $_GET['edit'];
+	  
+	  $edit_state=true;	
+	  $rec = mysqli_query($conn,"SELECT * FROM businessinv WHERE id=$id AND businessID =$bID");
+	  $record = mysqli_fetch_array($rec);
+		
+	  $product = $record['product'];
+	  $brand = $record['brand'];
+	  $qty = $record['qty'];
+	  $id = $record['id'];
+	}
+*/
+?>
 <!DOCTYPE html>
 <html>
   <head>
@@ -89,13 +152,10 @@
           <p class="pFR">Food Safety Notification Recalls</p>
 
           <div class="wContent">
-  		<article class="notif">	
-			<?php
-				
-				//header('Content-type: text/plain');
-				 echo nl2br( "$output",false );
-			?>
-		</article>
+            <?php           
+                    //header('Content-type: text/plain');
+                    echo nl2br( "$output",false );
+            ?>
           </div>
         </div>
       </div>

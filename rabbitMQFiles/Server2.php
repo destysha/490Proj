@@ -100,6 +100,20 @@ function getOp($que)
 		return $T;
 	}
 }
+function doAdd($id,$bID)
+{
+	$db = mysqli_connect("localhost","user1","user1pass","ishopdb");
+        echo "adding product".PHP_EOL;
+	$que = "SELECT brand,name FROM ishopinv WHERE grp_id = '$id'";
+	$query = mysqli_query($db,$que);
+		$Q = mysqli_fetch_array($query);
+	$bra = $Q['brand'];
+	$pro = $Q['name'];
+	echo" $pro : $bra".PHP_EOL;
+	$que2 ="INSERT INTO businessinv (brand,product,qty,businessID) VALUES('$bra','$pro','1','$bID')";
+	$query2 = mysqli_query($db,$que2) or die($db->error);
+	echo"updated business inventory".PHP_EOL;
+}
 
 function requestProcessor($request)
 {
@@ -129,6 +143,8 @@ function requestProcessor($request)
                 return getIshop($request['sql']);
 	 case "Op":
                 return getOp($request['que']);
+	case "add":
+                return doAdd($request['grp_id'],$request['bID']);
 	case "validate_session":
 		return doValidate($request['sessionId']);
 	}

@@ -18,7 +18,16 @@ $res = info($username);
         $zipcode = $ans[6]; 
         $email = $ans[7];
 
+if(isset($_GET['add']))
+        {
+                $id = $_GET['add'];
+        echo"$id".PHP_EOL;
+                $update = add($id,$bID);
+                header('location:ishopInv.php');
+        }
 
+
+/*
 $product = $_POST['product'];
 $brand = $_POST['brand'];
 $qty   = $_POST['qty'];
@@ -26,7 +35,7 @@ $qty   = $_POST['qty'];
 
 
 $Update = update($product,$brand,$qty,$bID);
-
+*/
 
 /*$conn = mysqli_connect("localhost","user1","user1pass","ishopdb");
       if($conn->connect_error)
@@ -39,4 +48,4 @@ $msg="Updated Inventory!";
  */
 //try to alert user with msg
 	header('location:ishopInv.php');
-?>
+

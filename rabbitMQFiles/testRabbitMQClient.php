@@ -123,4 +123,14 @@ function getOp($que)
         $response = $client->send_request($request8);
                 return $response;
 }
+function add($id,$bID)
+{
+	$client = new rabbitMQClient("testRabbitMQ.ini","testServer");
+        $request9 = array();
+        $request9['type'] ="add";
+	$request9['grp_id'] = $id;
+	$request9['bID'] = $bID;
+	$response = $client->send_request($request9);
+                return $response;
+}
 ?>

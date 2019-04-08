@@ -1,39 +1,56 @@
+#!/usr/bin/php
 <?php
-session_start();
-require('../rabbitMQFiles/testRabbitMQClient.php');
- //will have register client function
 
-//will hold values for logging
-$logs = array();
+//session_start();
+require('../rabbitMQFiles/testRabbitMQClient.php');     //will have register client function
 
-$username = $_POST['usernamesignup'];
-$street = $_POST['streetsignup']; 
-$city = $_POST['citysignup'];
-$state = $_POST['statesignup'];
-$email = $_POST['emailsignup'];
-$password1 = $_POST['passwordsignup'];
-$password = $_POST['passwordsignup_confirm'];
-$response = register($username,$street,$city,$state,$email,$password);
-	//make a logging funtion for this
-	if ( $password1 != $password)
+$logs = array();     //will hold values for logging
+
+$username 	= $_POST['usernamesignup'];
+$bzname   	= $_POST['bznamesignup'];
+$street		= $_POST['streetsignup']; 
+$city 		= $_POST['citysignup'];
+$state 		= $_POST['statesignup'];
+$zipcode	= $_POST['zipcodesignup'];
+$email 		= $_POST['emailsignup'];
+$password1 	= $_POST['passwordsignup'];
+$password 	= $_POST['passwordsignup_confirm'];
+
+if ( $password1 != $password)
+        {
+           array_push($logs,$username,$password);
+           require("registeredN.inc.php");
+           //echo"Sorry passwords didn't match";
+                exit();
+        }
+else
 	{
-                array_push($logs,$username,$password);
-                require("registeredN.inc.php");
-                echo"Sorry passwords didn't match";
-		exit();
+	    $response = register($username,$bzname,$street,$city,$state,$zipcode,$email,$password);
+
+		if ($response != false)
+		{
+	    	  header('location:../index.php?register=success');
+		}
+		else
+		{
+		  header('location:../index.php?register=nosuccess');
+		}
 	}
 
-        if($response != false){ #account was registered successfully
+        if($response != false)
+	{ #account was registered successfully
                 array_push($logs,$username,$email,$password);
 		require("registeredY.inc.php");     
                 echo"Created User successfully!!";
         }
-        else{ //account Already exist
+        else
+	{ //account Already exist
         	array_push($logs,$username);
 		require("registeredN.inc.php");
                 echo"Sorry username already exists";
         }
-	
+//header('location:../index.php/#toregister?register=nosubmit');
+  //       exit();
 
 /*
 //check if user clicked Register button

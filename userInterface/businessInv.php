@@ -100,9 +100,6 @@
         </div>
       </div>
 	
-
-
-
         <!--                            MAIN CONTENT                         -->
         <section id="main">
           <div class="nameInContent">

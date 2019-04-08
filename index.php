@@ -27,7 +27,7 @@
 			<div id="login" class="animate form">
                             <form  action="phpFiles/login.php" method="POST" autocomplete="on">
 
-                                <h1 id="company">iShop Online Store Haris</h1>
+                                <h1 id="company">iShop Online Store</h1>
                                 <h1 class="titles">Log in</h1>
 			<!--Error messages go here-->
 			<?php
@@ -40,6 +40,14 @@
                                 elseif (strpos($fullUrl,"login=nosubmit")==true)
                                 {
                                         echo "<h3 class='error'>YOU DID NOT CLICK SUBMIT ! </h3>"; 
+                                }
+				elseif (strpos($fullUrl,"register=nosuccess")==true)
+                                {
+                                        echo "<h3 class='error'>Sorry, Could not Register ! </h3>";
+                                }
+				elseif (strpos($fullUrl,"register=success")==true)
+                                {
+                                        echo "<h3 class='error'>Account Register ! </h3>";
                                 }
        				 //end first method
 			?>
@@ -72,7 +80,21 @@
 
                             <form  action="phpFiles/register.php" method="POST" autocomplete="on">       
 		         <h1 class="titles">Sign up </h1>
-                                <p>
+                                 <!--Error messages go here-->
+                        <?php
+                                //first method
+                                $fullUrl = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+                                if (strpos($fullUrl,"register=success")==true)
+                                {
+                                        echo "<h3 class='error'> Username Registered </h3>";
+                                }
+                                elseif (strpos($fullUrl,"register=nosuccess")==true)
+                                {
+                                        echo "<h3 class='error'>Sorry, Could not Register ! </h3>";
+                                }
+                                 //end first method
+                        ?>
+				<p>
                                     <label for="usernamesignup" class="uname" data-icon="u">Your username</label>
                                     <input id="usernamesignup" name="usernamesignup" required="required" type="text" placeholder="mysuperusername690" />
                                 </p>

@@ -3,7 +3,7 @@ session_start();
 
 require ('../rabbitMQFiles/testRabbitMQClient.php');
 $username = $_SESSION ['username'];
-
+/*
 $res = info($username);
         $ans = array();
         foreach ($res as $i)
@@ -19,7 +19,7 @@ $res = info($username);
         $state = $ans[5];
         $zipcode = $ans[6];
 	$email = $ans[7];
-
+*/
 	if(isset($_GET['delete']))
 	{
 		$id = $_GET['delete'];

@@ -1,4 +1,3 @@
-#!/usr/bin/php
 <?php
 	require_once('path.inc');
 	require_once('get_host_info.inc');
@@ -31,28 +30,26 @@
 
 	}
 
-function register ( $username,$street,$city,$state,$email,$password  )
+function register ($username,$bzname,$street,$city,$state,$zipcode,$email,$password  )
 	{
 		$request2 = array();
 		$request2['type'] = "register";
 		$request2['username'] = $username;
+		$request2['bzname'] = $bzname;
 		$request2['street'] = $street;
 		$request2['city'] = $city;
 		$request2['state'] = $state;
+		$request2['zipcode'] = $zipcode;
 		$request2['email'] = $email;
 		$request2['password'] = $password;
-		//$request2['message'] = $answer;
 
 		$client = new rabbitMQClient("testRabbitMQ.ini","testServer");
 		$response = $client->send_request($request2);
 		
+		echo "client received response for registration: ".PHP_EOL;
 
-		echo "client received response: ".PHP_EOL;
-
-		
 		return $response;
-
-}
+	}
 
 
 
@@ -76,21 +73,7 @@ function fetchInv($username,$sql)
         $response = $client->send_request($request4);
                 return $response;
 }
-/*
-function update($product,$brand,$qty,$bID)
-{
-	$client = new rabbitMQClient("testRabbitMQ.ini","testServer");
-        $request5 = array();
-	$request5['type'] ="update";
-	$request5['product'] = $product;
-	$request5['brand'] = $brand;
-	$request5['qty'] = $qty;
-	$request5['bID'] = $bID;
 
-	$response = $client->send_request($request5);
-                return $response;
-}
-*/
 function update($bID,$grp_id)
 {
         $client = new rabbitMQClient("testRabbitMQ.ini","testServer");

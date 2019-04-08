@@ -27,7 +27,7 @@
 			<div id="login" class="animate form">
                             <form  action="phpFiles/login.php" method="POST" autocomplete="on">
 
-                                <h1 id="company">iShop Online Store</h1>
+                                <h1 id="company">iShop Online Store Haris</h1>
                                 <h1 class="titles">Log in</h1>
 			<!--Error messages go here-->
 			<?php

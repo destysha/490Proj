@@ -1,10 +1,20 @@
 <?php
 	session_start();
-	//include ("php/connectDB2.php");
-	include ("Emad.php");
+        $cnt = $_SESSION['noticnt'];
+        $output = $_SESSION['noti'];
 
-	$cnt = $_SESSION['noticnt'];
-	$output = $_SESSION['noti'];	
+//        include ("php/connectDB2.php");
+        include ("notif.php");	
+/*
+   $bID     =  $_SESSION ['bID'];
+   $bzname  =  $_SESSION ['bzname'];
+   $street  =  $_SESSION ['street'];
+   $city    =  $_SESSION ['city'];
+   $state   =  $_SESSION ['state'];
+   $zipcode =  $_SESSION ['zipcode'];
+   $email   =  $_SESSION ['email'];
+   $username = $_SESSION ['username'];
+*/
 ?>
 
 <!DOCTYPE html>
@@ -116,10 +126,12 @@
 <!--MAKING A NEW TABLE OF ISHOP INV COMING FROM RABBITMQ-->
 <br><br><br><h1 class="heading">Ishop Inventory</h1><br><br>
 		<?php
+			
 			require ('../rabbitMQFiles/testRabbitMQClient.php');
 			$ql = "SELECT name,brand,grp_id FROM ishopinv";
 			$record = getIshop($ql);
 			
+		
 			$html .= "<table class='fixed_header'>";
        	                $html .= "<thead>";
                	        $html .="<tr class='trS'>";

@@ -1,11 +1,10 @@
 <?php
 	session_start();
-$cnt = $_SESSION['noticnt'];
-$output = $_SESSION['noti'];
+	$cnt 	= $_SESSION['noticnt'];
+	$output = $_SESSION['noti'];
 
-include ("php/connectDB2.php");
-include ("Emad.php");	
-
+	include ("php/connectDB2.php");
+	include ("notif.php");	
 ?>
 
 <!DOCTYPE html>
@@ -127,15 +126,13 @@ include ("Emad.php");
           <p class="pFR">Food Safety Notification Recalls</p>
 
           <section class="wContent">
-		
-			
+	 	<article class="notif">	
 			<?php
 				
 				//header('Content-type: text/plain');
 				 echo nl2br( "$output",false );
 			?>
-
-
+		</article>
           </section>
         </div>
       </div>

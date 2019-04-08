@@ -76,7 +76,7 @@ function fetchInv($username,$sql)
         $response = $client->send_request($request4);
                 return $response;
 }
-
+/*
 function update($product,$brand,$qty,$bID)
 {
 	$client = new rabbitMQClient("testRabbitMQ.ini","testServer");
@@ -89,6 +89,20 @@ function update($product,$brand,$qty,$bID)
 
 	$response = $client->send_request($request5);
                 return $response;
+}
+*/
+function update($bID,$grp_id)
+{
+        $client = new rabbitMQClient("testRabbitMQ.ini","testServer");
+        $request5 = array();
+        $request5['type'] ="update";
+        $request5['bID'] = $bID;
+	$request5['grp_id'] = $grp_id;
+
+        $response = $client->send_request($request5);
+
+//                return $response;
+
 }
 
 function del($id)
@@ -121,16 +135,6 @@ function getOp($que)
         $request8['que'] = $que;
 
         $response = $client->send_request($request8);
-                return $response;
-}
-function add($id,$bID)
-{
-	$client = new rabbitMQClient("testRabbitMQ.ini","testServer");
-        $request9 = array();
-        $request9['type'] ="add";
-	$request9['grp_id'] = $id;
-	$request9['bID'] = $bID;
-	$response = $client->send_request($request9);
                 return $response;
 }
 ?>

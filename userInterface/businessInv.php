@@ -1,75 +1,12 @@
 <?php 
 	session_start();
-	include ("Emad.php");
 	$cnt = $_SESSION['noticnt'];
 	$output = $_SESSION['noti'];
 
-//	include ("php/connectDB2.php");
-/*
-	$username = $_SESSION ["username"];
-	$bzname   = $_SESSION ["bzname"];
-        $bID      = $_SESSION ["bID"];
-        $street   = $_SESSION ["street"];
-        $city     = $_SESSION ["city"];
-        $zc       = $_SESSION ["zipcode"];
-        $state    = $_SESSION ["state"];
-        $email    = $_SESSION ["email"];
- */
-//include('delete.php');
-require ('../rabbitMQFiles/testRabbitMQClient.php');
-$username = $_SESSION ['username'];
-
-/////Getting all info related to users account based on whos logged in ..session///////
-
-$res = info($username);
-        $ans = array();
-        foreach ($res as $i)
-        {
-//              echo"<br>".$i."<br>";
-                array_push($ans,$i);
-        }
-        $bID = $ans[0];
-        $user = $ans[1]; 
-        $bzname =$ans[2]; 
-        $street = $ans[3];  
-        $city = $ans[4]; 
-        $state = $ans[5]; 
-        $zipcode = $ans[6]; 
-	$email = $ans[7];
-
-
-//	include('delete.php');
-/*
-	if(isset($_POST['update']))
-	{
-		$product = $_POST['product'];
-		$brand = $_POST['brand'];
-		$qty = $_POST['qty'];
-	
-		require ('../rabbitMQFiles/testRabbitMQClient.php');
-		$re = update($product,$brand,$qty,$bID);
-		echo"$re".PHP_EOL;
-
-	}
-
- */
-
-/*
-	//get table to updated
-	  if(isset($_GET['edit'])){
-	  $id = $_GET['edit'];
-	  
-	  $edit_state=true;	
-	  $rec = mysqli_query($conn,"SELECT * FROM businessinv WHERE id=$id AND businessID =$bID");
-	  $record = mysqli_fetch_array($rec);
-		
-	  $product = $record['product'];
-	  $brand = $record['brand'];
-	  $qty = $record['qty'];
-	  $id = $record['id'];
-	}
-*/
+	include ("php/connectDB2.php");
+	include ("notif.php");	
 ?>
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -152,10 +89,13 @@ $res = info($username);
           <p class="pFR">Food Safety Notification Recalls</p>
 
           <div class="wContent">
-            <?php           
-                    //header('Content-type: text/plain');
-                    echo nl2br( "$output",false );
-            ?>
+  		<article class="notif">	
+			<?php
+				
+				//header('Content-type: text/plain');
+				 echo nl2br( "$output",false );
+			?>
+		</article>
           </div>
         </div>
       </div>
@@ -211,70 +151,10 @@ $res = info($username);
 			echo $html;
 
 	?>
-<br><br>
+		<br><br>
 			<button class="myButton" onclick="location.href='ishopInv.php';">Update Inventory</button>
 
 		<br><br><br>
-	<!--<h1>TABLE OF BUSINESS FROM DB </h1>     Old Table, New is above this *-->
-	<!--	<br>
-                    <table class="fixed_header">
-                        <tr>
-                          <th>PRODUCT</th>
-                          <th>BRAND</th>
-			  <th>QTY</th>
-                        </tr>
-			<?php/* 
-			$conn = mysqli_connect("localhost","user1","user1pass","ishopdb");
-			if($conn->connect_error)
-			{
-				die("connection error:".$conn->connect_error);
-			}
-			$sql = "SELECT * FROM businessinv WHERE businessID = $bID";
-			$result = $conn->query($sql);
-
-			if($result->num_rows > 0)
-			 {
-                        while ($row = $result->fetch_assoc())
-                        {
-                                echo "<tr><td>".$row["product"]."</td><td>".$row["brand"]."</td><td>".$row["qty"]."</td></tr>";
-                        }
-                        echo "</table>";
-                } //end if for each row
-                else
-                {
-                        echo "no results in table";
-		}	
-		$conn->close();
-			 */?>
-                    </table><br><br>
-   		<button class="myButton" onclick="location.href='ishopInv.php';">Update Inventory</button>
-		</div>
--->
-
-<br><br>
-
-<!-- Taken out momentaraly
-
-<h1 class="headers">HARIS FORM UPDATE INV</h1><br>
-<form class="updateForm" method = "POST" action="businessInv.php">
-	<div>
-                    <label>Product</label>
-                     <input type="text" name="product" value="Product">
-		  </div>
-	<div>
-                    <label>Brand</label>
-                     <input type="text" name="brand" value="Brand">
-		  </div>
-	<div>
-                    <label>Qty</label>
-                     <input type="text" name="qty" value="qty">
-                  </div>
-	
-	<input type="submit" name="update" value="Update"> <br><br>
-<button class="myButton" name="update"onclick="location.href='businessInv.php';">Update</button>
-</form>	
-
--->
         </section>
       </div> //these 2 div's are right under opening body tag
     </div>

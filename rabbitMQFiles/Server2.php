@@ -45,14 +45,20 @@ function getInv($username,$sql)
 
 }
 
-function doUpdate($product,$brand,$qty,$bID)
+function doUpdate($bID,$grp_id)
 {
 	$db = mysqli_connect("localhost","user1","user1pass","ishopdb");
-	$q = "INSERT INTO businessinv (brand,product,qty,businessID) VALUES('$brand','$product','$qty','$bID')";
+        $q1 = "SELECT * FROM ishopinv WHERE grp_id = '$grp_id'";        
+        $Q = mysqli_query($db,$q1);
+		
+	$com =  mysqli_fetch_array($Q)	;
+	$pro = $com['name'];
+	$bra = $com['brand'];	
+        $qty = "1";
 	
-	$Q = mysqli_query($db,$q);
-	$statement = "UPDATED";
-	return 1;
+	$q2 = "INSERT INTO businessinv (brand,product,qty,businessID) VALUES('$bra','$pro','$qty','$bID')";
+	$Q2 = mysqli_query($db,$q2);
+	echo" Added- ' $bra: $pro ' To businessinv".PHP_EOL;
 }
 
 function doDelete($id)
@@ -100,20 +106,6 @@ function getOp($que)
 		return $T;
 	}
 }
-function doAdd($id,$bID)
-{
-	$db = mysqli_connect("localhost","user1","user1pass","ishopdb");
-        echo "adding product".PHP_EOL;
-	$que = "SELECT brand,name FROM ishopinv WHERE grp_id = '$id'";
-	$query = mysqli_query($db,$que);
-		$Q = mysqli_fetch_array($query);
-	$bra = $Q['brand'];
-	$pro = $Q['name'];
-	echo" $pro : $bra".PHP_EOL;
-	$que2 ="INSERT INTO businessinv (brand,product,qty,businessID) VALUES('$bra','$pro','1','$bID')";
-	$query2 = mysqli_query($db,$que2) or die($db->error);
-	echo"updated business inventory".PHP_EOL;
-}
 
 function requestProcessor($request)
 {
@@ -135,16 +127,14 @@ function requestProcessor($request)
 		return doInfo($request['username']);
 	case "inv":
 		return getInv($request['username'],$request['sql']);
-	case "update":
-		return doUpdate($request['product'],$request['brand'],$request['qty'],$request['bID']);
+	 case "update":
+              return doUpdate($request['bID'],$request['grp_id']);
 	case "delete":
 		return doDelete($request['id']);
 	case "Ishop":
                 return getIshop($request['sql']);
 	 case "Op":
                 return getOp($request['que']);
-	case "add":
-                return doAdd($request['grp_id'],$request['bID']);
 	case "validate_session":
 		return doValidate($request['sessionId']);
 	}

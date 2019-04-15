@@ -1,14 +1,8 @@
 <?php
-	//session_start();
-	//$bzname   = $_SESSION["bzname"];
-   	//$email 	  = $_SESSION["email"];
-	
-	$email  = "shaiddyperez@gmail.com";
-	$bzname = "CHECKING Business";
-	notification ($email, $bzname);
+	notification ();
 
 
-	function notification($email, $bzname)
+	function notification()
 	{
 
 		$ishop =  mysqli_connect("localhost","user1","user1pass","ishopdb");
@@ -74,6 +68,65 @@
 			}
 		}
 
+	foreach($matches as $key=>$value)
+	{
+		//get ID from matches
+		$get = "SELECT businessID FROM businessinv WHERE $product = $key"
+		$getid = mysqli_query($ishop, $get) or die (mysqli_error($ishop));
+		//put id in array
+		while ($i = mysqli_fetch_array($getid, MYSQLI_ASSOC))
+                {
+			$id     = $i['businessID'];
+			$IDs	+= [$id=>$key];
+
+
+		}
+		//use id array to get emails
+		$gemail = "SELECT email FROM business WHERE $businessID = $id"
+		$getemail = mysqli_query($ishop, $gemail) or die (mysqli_error($ishop));
+		while ($e = mysqli_fetch_array($getemail, MYSQLI_ASSOC))
+		{
+			$email	=	$e['email'];
+			$emails	+=	$email;
+		}
+	}
+	foreach($email as $emails)
+	{
+
+		$output  = " ";
+                $subject = "You have new recalls!";
+                $headers = array('From: emadtirmizi@gmail.com' . "\r\n" );
+                $headers = implode("\r\n", $headers);
+
+                $output .= "\n\nGreetings,\n\n". "We have founds new recalls that need to be brought to your attention!\n\n";
+
+                $cnt = 0;
+                foreach($IDs as $id=>$value1)
+		{
+			foreach($matches as $key=>$value2)
+			{
+				if($value1==$key)
+				{
+					
+					$cnt++;
+					$output .= "$cnt: $key, $value2\n";
+				}
+				else
+				{
+                                        continue;
+                                        //echo "Nothing to see here".PHP_EOL;
+                                }
+
+			}
+		}
+
+                echo "$output\n";
+
+                mail($email, $subject, $output, $headers);
+
+                echo "\nMail Sent!".PHP_EOL;
+	}
+/*
 		$output  = " ";
 		$subject = "You have new recalls!";
 		$headers = array('From: shaiddyperez@gmail.com' . "\r\n" );
@@ -93,5 +146,6 @@
 		mail($email, $subject, $output, $headers);
 
 		echo "\nMail Sent!".PHP_EOL;
+ */
 	}
 ?>

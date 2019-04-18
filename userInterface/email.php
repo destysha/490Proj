@@ -1,14 +1,9 @@
+#!/usr/bin/php
 <?php
-	//session_start();
-	//$bzname   = $_SESSION["bzname"];
-   	//$email 	  = $_SESSION["email"];
-	
-	$email  = "shaiddyperez@gmail.com";
-	$bzname = "CHECKING Business";
-	notification ($email, $bzname);
+	notification ();
 
 
-	function notification($email, $bzname)
+	function notification()
 	{
 
 		$ishop =  mysqli_connect("localhost","user1","user1pass","ishopdb");
@@ -51,7 +46,7 @@
 			$busInv += [$pdn=>$br];
 		}
 		
-		
+	  /*
 		$counter = 0;	
 		foreach($busInv as $key=>$value)
 		{
@@ -63,9 +58,11 @@
 					//echo "THERES A MATCH".PHP_EOL;
 					++$counter;
 					$matches += [$value2=>$key2];
-					//uncommented print below to see matches in terminal when running file manually
-					//print "$counter: $value2, $key2 \n";
+					
+					//print "$counter: $value2, $key2 \n";i
+				        //echo "$value2 and $key2".PHP_EOL;
 				}
+
 				else
 				{
 					continue;
@@ -74,24 +71,107 @@
 			}
 		}
 
-		$output  = " ";
-		$subject = "You have new recalls!";
-		$headers = array('From: shaiddyperez@gmail.com' . "\r\n" );
-		$headers = implode("\r\n", $headers);
-	       
-		$output .= "\n\nGreetings,\n\n". "We have founds new recalls that need to be brought to your attention!\n\n";
-		
-		$cnt = 0;
-		foreach($matches as $key=>$value)
-		{	
-			$cnt++;
-			$output .= "$cnt: $key, $value\n";
+		foreach($matches as $value2 => $key2)
+		{
+			//echo"$value2 and $key2".PHP_EOL;
 		}
+         
+          */
+		//gets emails per business
+		$emailsInBus   = array();
+		$matchedProd   = array();
+		$busNames      = array();
+		$numEmails     = 0;
 
-		echo "$output\n";
+		//Get Emails	
+		$statem = "SELECT email, businessID, bzname FROM business";
+                $do     = mysqli_query($ishop, $statem) or die (mysqli_error($ishop));
+		
+		while($row = mysqli_fetch_array($do,MYSQLI_ASSOC))
+		{	
+			//return data/info;
+			$email 	      = $row['email'];
+			$bid   	      = $row['businessID'];
+			$busName      = $row['bzname'];
+			$emailsInBus += [$bid=>$email];
+			array_push($busNames, $busName);
 
-		mail($email, $subject, $output, $headers);
+			$numEmails++;	
+		}
+		
+		//echo "\n\nEmails in total is $numEmails\n\n\n";
+		
+		$cntName = 0;
+		
+		$keys = array_keys($busNames);
 
-		echo "\nMail Sent!".PHP_EOL;
-	}
+		foreach($emailsInBus as $i=>$e)
+		{	
+			$listOfProd = array();
+			$numProd    = 0;
+			
+			//echo "$busNames[$cntName] is the name\n";
+			
+				
+			//print "The email is $e\n";
+		
+			$st2 = "SELECT product, brand FROM businessinv WHERE businessID = '$i'";
+
+			//print "The business id is BU00$i\n\n";
+
+			$do2 = mysqli_query($ishop, $st2) or die (mysqli_error($ishop));
+			
+			if (!$do2){echo"Can't do query".PHP_EOL;}
+			
+			while($r = mysqli_fetch_array($do2))
+			{
+				$prod        = $r['product'];
+				$brand       = $r['brand'];
+				$listOfProd += [$prod=>$brand];
+			}
+		
+
+			$output  = " ";
+
+			$output .= "\n\nGreetings $busNames[$cntName],\n\n". "We have founds new recalls that need to be brought to your attention!\n\n\n";
+			print "\n\nGreetings $busNames[$cntName],\n\n". "We have founds new recalls that need to be brought to your attention!\n\n\n";
+
+			foreach($listOfProd as $prodPerBus=>$value1)
+			{
+				foreach($json as $jsonProd=>$value2)
+				{
+					if($prodPerBus==$jsonProd)
+					{
+						$numProd++;
+						$matchedProd += [$prodPerBus=>$jsonProd];
+						print "$numProd: $value2 --> $jsonProd\n";
+					        $output .= "$numProd: $value2 --> $jsonProd\n";
+					}
+
+				}
+			}
+
+			
+               		$subject = "You have new recalls!";
+               		$headers = array('From: shaiddyperez@gmail.com' . "\r\n" );
+               		$headers = implode("\r\n", $headers);
+
+             		$output .= "\n\nWe will update your recalls and send you notification in a weekly basis\n";
+
+			print "\n\nWe will update your recalls and send you notification in a weekly basis.\n";
+
+			print "\nThank you for being an important piece at iShop for Business.\n";
+
+			$output .= "\nThank  you for being an important piece at iShop for Business.\n";
+
+                	mail($e, $subject, $output, $headers);
+			
+			echo "\n\n*****************************************************************************************\n\n";
+
+			//echo "\nEmail sent to $e\n\n";
+			//echo "\nEmail Sent!\n\n".PHP_EOL;
+			$cntName++;
+		}
+	}	
+			
 ?>

@@ -8,12 +8,7 @@
 
 	function login ( $username, $password  )
 	{
-		$client = new rabbitMQClient("testRabbitMQ.ini","masterServer");
-		
-		if(!$client)
-		{
-		  $client = new rabbitMQClient("testRabbitMQ.ini","slaveServer");
-		}
+		$client = new rabbitMQClient("testRabbitMQ.ini","testServer");
 
 		$request = array();
 		$request['type'] = "login";
@@ -25,6 +20,11 @@
 		//$response = $client->publish($request);
 
 		echo "client received response: ".PHP_EOL;
+		
+		//print_r($response);
+		//echo "\n\n";
+
+		//echo $argv[0]." END".PHP_EOL;
 		
 		return $response;
 
@@ -43,12 +43,7 @@ function register ($username,$bzname,$street,$city,$state,$zipcode,$email,$passw
 		$request2['email'] = $email;
 		$request2['password'] = $password;
 
-		$client = new rabbitMQClient("testRabbitMQ.ini","masterServer");
-
-                if(!$client)
-                {
-                  $client = new rabbitMQClient("testRabbitMQ.ini","slaveServer");
-                }
+		$client = new rabbitMQClient("testRabbitMQ.ini","testServer");
 		$response = $client->send_request($request2);
 		
 		echo "client received response for registration: ".PHP_EOL;
@@ -60,30 +55,18 @@ function register ($username,$bzname,$street,$city,$state,$zipcode,$email,$passw
 
 function info($username)
 {
-	$client = new rabbitMQClient("testRabbitMQ.ini","masterServer");
-
-                if(!$client)
-                {
-                  $client = new rabbitMQClient("testRabbitMQ.ini","slaveServer");
-                }
-
+	$client = new rabbitMQClient("testRabbitMQ.ini","testServer");
 	$request3 = array();
 	$request3['type'] ="info";
 	$request3['username'] = $username;
-
 	$response = $client->send_request($request3);
                 return $response;
 }
 
 function fetchInv($username,$sql)
 {
-        $client = new rabbitMQClient("testRabbitMQ.ini","masterServer");
-
-                if(!$client)
-                {
-                  $client = new rabbitMQClient("testRabbitMQ.ini","slaveServer");
-                }
-	$request4 = array();
+        $client = new rabbitMQClient("testRabbitMQ.ini","testServer");
+        $request4 = array();
         $request4['type'] ="inv";
 	$request4['username'] = $username;
 	$request4['sql']=$sql;
@@ -93,14 +76,8 @@ function fetchInv($username,$sql)
 
 function update($bID,$grp_id)
 {
- 	$client = new rabbitMQClient("testRabbitMQ.ini","masterServer");
-
-                if(!$client)
-                {
-                  $client = new rabbitMQClient("testRabbitMQ.ini","slaveServer");
-                }       
-
-	$request5 = array();
+        $client = new rabbitMQClient("testRabbitMQ.ini","testServer");
+        $request5 = array();
         $request5['type'] ="update";
         $request5['bID'] = $bID;
 	$request5['grp_id'] = $grp_id;
@@ -113,14 +90,8 @@ function update($bID,$grp_id)
 
 function del($id)
 {
-	$client = new rabbitMQClient("testRabbitMQ.ini","masterServer");
-
-                if(!$client)
-                {
-                  $client = new rabbitMQClient("testRabbitMQ.ini","slaveServer");
-                }	
-
-	$request6 = array();
+	$client = new rabbitMQClient("testRabbitMQ.ini","testServer");
+        $request6 = array();
         $request6['type'] ="delete";
 	$request6['id'] = $id;
 
@@ -130,14 +101,8 @@ function del($id)
 
 function getIshop($ql)
 {
-	$client = new rabbitMQClient("testRabbitMQ.ini","masterServer");
-
-                if(!$client)
-                {
-                  $client = new rabbitMQClient("testRabbitMQ.ini","slaveServer");
-                }       
-
-	$request7 = array();
+	$client = new rabbitMQClient("testRabbitMQ.ini","testServer");
+        $request7 = array();
         $request7['type'] ="Ishop";
         $request7['sql'] = $ql;
 
@@ -147,14 +112,8 @@ function getIshop($ql)
 
 function getOp($que)
 {
-	$client = new rabbitMQClient("testRabbitMQ.ini","masterServer");
-
-                if(!$client)
-                {
-                  $client = new rabbitMQClient("testRabbitMQ.ini","slaveServer");
-                }     
-
-	$request8 = array();
+	$client = new rabbitMQClient("testRabbitMQ.ini","testServer");
+        $request8 = array();
         $request8['type'] ="Op";
         $request8['que'] = $que;
 

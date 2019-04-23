@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if  `timeout 5 ping 10.0.2.14 &>/dev/null` 
+if  `timeout 5 ping 10.0.2.16 &>/dev/null` 
 	then 
 	echo "Working"
 
